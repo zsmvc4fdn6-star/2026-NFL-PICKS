@@ -1,0 +1,1341 @@
+<title>26' NFL PICK'EM TRACKER</title>
+<style>
+  :root {
+    --bg: #f2f2f1;
+    --surface: #ffffff;
+    --surface-2: #e7e7e5;
+    --line: #d7d7d4;
+    --text: #17181a;
+    --muted: #6c6e70;
+    --accent: #17181a;
+    --accent-ink: #ffffff;
+    --gold: #a9822f;
+    --gold-bg: #f4ecd8;
+    --brick: #a1402a;
+    --brick-bg: #f6e6e0;
+    --pending: #8c8d8a;
+    --pending-bg: #e9e9e6;
+    --shadow: 0 1px 2px rgba(20, 20, 20, 0.06), 0 8px 24px -12px rgba(20, 20, 20, 0.18);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111213;
+      --surface: #1b1c1e;
+      --surface-2: #26272a;
+      --line: #38393c;
+      --text: #f1f1ef;
+      --muted: #9a9b9d;
+      --accent: #f1f1ef;
+      --accent-ink: #111213;
+      --gold: #d9b25b;
+      --gold-bg: #35301f;
+      --brick: #e08265;
+      --brick-bg: #3a251e;
+      --pending: #9a9b9d;
+      --pending-bg: #29292c;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 8px 24px -12px rgba(0, 0, 0, 0.55);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111213;
+    --surface: #1b1c1e;
+    --surface-2: #26272a;
+    --line: #38393c;
+    --text: #f1f1ef;
+    --muted: #9a9b9d;
+    --accent: #f1f1ef;
+    --accent-ink: #111213;
+    --gold: #d9b25b;
+    --gold-bg: #35301f;
+    --brick: #e08265;
+    --brick-bg: #3a251e;
+    --pending: #9a9b9d;
+    --pending-bg: #29292c;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 8px 24px -12px rgba(0, 0, 0, 0.55);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 28px 20px 80px;
+  }
+  .masthead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+  h1 {
+    font-family: "Arial Narrow", "Helvetica Neue Condensed", Impact, sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: clamp(28px, 5vw, 38px);
+    font-weight: 800;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .masthead .tag {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 26px;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 14px 12px;
+    box-shadow: var(--shadow);
+  }
+  .stat .num {
+    font-variant-numeric: tabular-nums;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .stat .label {
+    margin-top: 6px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .stat.accent .num { color: var(--accent); }
+
+  .week-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  select#weekSelect {
+    font: inherit;
+    font-weight: 700;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--text);
+  }
+  button {
+    font: inherit;
+    cursor: pointer;
+  }
+  .btn {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .btn:hover { border-color: var(--accent); }
+  .btn.primary {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+  }
+  .spacer { flex: 1; }
+
+  .day-group { margin-bottom: 20px; }
+  .day-label {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 8px 2px;
+    font-weight: 700;
+  }
+
+  .game {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--home-color, var(--line));
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px 16px;
+    align-items: center;
+  }
+  .matchup { display: flex; flex-direction: column; gap: 8px; }
+  .teams { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .team-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1.5px solid var(--line);
+    background: var(--surface-2);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 6px 14px 6px 6px;
+    font-weight: 700;
+    font-size: 14px;
+    min-width: 130px;
+    text-align: left;
+  }
+  .team-btn.picked {
+    border-color: var(--team-color, var(--accent));
+    box-shadow: inset 0 0 0 1.5px var(--team-color, var(--accent));
+  }
+  .team-badge {
+    flex: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8.5px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    background: conic-gradient(var(--team-color, var(--muted)) 0deg 180deg, var(--team-color2, var(--muted)) 180deg 360deg);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+    color: var(--team-ink, #fff);
+  }
+  .at { color: var(--muted); font-size: 12px; font-weight: 600; }
+  .meta {
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .meta .net { font-weight: 700; color: var(--text); }
+
+  .result-col { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  .pill {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .pill.pending { background: var(--pending-bg); color: var(--pending); }
+  .pill.correct { background: var(--gold-bg); color: var(--gold); }
+  .pill.incorrect { background: var(--brick-bg); color: var(--brick); }
+  .result-actions { display: flex; gap: 6px; }
+  .mini-btn {
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--muted);
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .mini-btn.active-win { background: var(--gold-bg); color: var(--gold); border-color: var(--gold); }
+  .mini-btn.active-lose { background: var(--brick-bg); color: var(--brick); border-color: var(--brick); }
+
+  .history, .standings {
+    margin-top: 34px;
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+  }
+  .history h2, .standings h2 {
+    font-family: "Arial Narrow", "Helvetica Neue Condensed", Impact, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 18px;
+    margin: 0;
+  }
+  .standings-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .standings-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 2px 0 16px;
+  }
+  table.hist { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.hist th, table.hist td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    font-variant-numeric: tabular-nums;
+  }
+  table.hist th { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .overflow { overflow-x: auto; }
+
+  .standing-row {
+    display: grid;
+    grid-template-columns: 150px 1fr 52px;
+    align-items: center;
+    gap: 12px;
+    padding: 5px 0;
+  }
+  .standing-team {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    min-width: 0;
+  }
+  .standing-team span.name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .standing-bar {
+    position: relative;
+    height: 14px;
+    border-radius: 4px;
+    background: var(--surface-2);
+    display: flex;
+    overflow: hidden;
+  }
+  .standing-fill-win {
+    height: 100%;
+    background: var(--seg-color, var(--accent));
+    border-radius: 4px 0 0 4px;
+  }
+  .standing-fill-loss {
+    height: 100%;
+    background: var(--brick);
+    opacity: 0.55;
+    margin-left: 2px;
+    border-radius: 0 4px 4px 0;
+  }
+  .standing-fill-correct {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 4px 0 0 4px;
+  }
+  .standing-fill-incorrect {
+    height: 100%;
+    background: var(--brick);
+    margin-left: 2px;
+    border-radius: 0 4px 4px 0;
+  }
+  .standing-record {
+    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: right;
+    color: var(--muted);
+  }
+  .standings-legend {
+    display: flex;
+    gap: 16px;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .standings-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .standings-legend i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+  .standings-legend i.win { background: var(--accent); }
+  .standings-legend i.loss { background: var(--brick); opacity: 0.55; }
+  .standings-legend i.correct { background: var(--gold); }
+  .standings-legend i.incorrect { background: var(--brick); }
+  .standings table.hist { display: none; }
+  .standings.table-mode table.hist { display: table; }
+  .standings.table-mode .standings-legend,
+  .standings.table-mode #standingsChart,
+  .standings.table-mode #accuracyChart { display: none; }
+
+  @media (max-width: 560px) {
+    .standing-row { grid-template-columns: 84px 1fr 40px; gap: 8px; }
+    .standing-team { gap: 6px; }
+    .team-btn { min-width: 0; padding: 6px 10px 6px 6px; font-size: 13px; }
+    .team-badge { width: 22px; height: 22px; font-size: 8px; }
+    .teams { gap: 6px; }
+  }
+
+  .add-form {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    display: none;
+    box-shadow: var(--shadow);
+  }
+  .add-form.open { display: block; }
+  .add-form .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .add-form label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .add-form input {
+    width: 100%;
+    font: inherit;
+    padding: 7px 9px;
+    border-radius: 7px;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--text);
+  }
+  .add-form .row-actions { margin-top: 12px; display: flex; gap: 8px; justify-content: flex-end; }
+
+  .empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 40px 20px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 560px) {
+    .stat-row { grid-template-columns: repeat(2, 1fr); }
+    .game { grid-template-columns: 1fr; }
+    .result-col { align-items: flex-start; flex-direction: row; justify-content: space-between; }
+  }
+</style>
+
+<div class="wrap">
+  <div class="masthead">
+    <h1>2026 Picks</h1>
+    <div class="tag">2026 Season · Straight-Up Tracker</div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat accent"><div class="num" id="statPct">—</div><div class="label">Correct %</div></div>
+    <div class="stat"><div class="num" id="statRecord">0-0</div><div class="label">Overall Record</div></div>
+    <div class="stat"><div class="num" id="statWeekRecord">0-0</div><div class="label">This Week</div></div>
+    <div class="stat"><div class="num" id="statPending">0</div><div class="label">Pending</div></div>
+  </div>
+
+  <div class="week-bar">
+    <select id="weekSelect"></select>
+    <button class="btn" id="addGameToggle">+ Add Game</button>
+    <div class="spacer"></div>
+    <button class="btn" id="addWeekBtn">+ New Week</button>
+  </div>
+
+  <div class="add-form" id="addForm">
+    <div class="grid">
+      <div><label>Away Team</label><input id="fAway" placeholder="e.g. Dallas Cowboys"></div>
+      <div><label>Home Team</label><input id="fHome" placeholder="e.g. New York Giants"></div>
+      <div><label>Date</label><input id="fDate" type="date"></div>
+      <div><label>Time (ET)</label><input id="fTime" placeholder="e.g. 8:20 PM"></div>
+      <div><label>Watch On</label><input id="fNetwork" placeholder="e.g. NBC"></div>
+    </div>
+    <div class="row-actions">
+      <button class="btn" id="cancelAdd">Cancel</button>
+      <button class="btn primary" id="saveAdd">Save Game</button>
+    </div>
+  </div>
+
+  <div id="gamesArea"></div>
+
+  <div class="history">
+    <h2>Week by Week</h2>
+    <div class="overflow">
+      <table class="hist">
+        <thead><tr><th>Week</th><th>Record</th><th>Pct</th></tr></thead>
+        <tbody id="histBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="standings" id="standingsSection">
+    <div class="standings-head">
+      <h2>Predicted Records by Team</h2>
+      <button class="btn" id="standingsToggle">View as Table</button>
+    </div>
+    <div class="standings-sub">How often you picked each team to win vs. lose, across every game on their schedule.</div>
+    <div class="standings-legend">
+      <span><i class="win"></i>Picked to win</span>
+      <span><i class="loss"></i>Picked to lose</span>
+    </div>
+    <div id="standingsChart"></div>
+    <div class="overflow">
+      <table class="hist">
+        <thead><tr><th>Team</th><th>Predicted Record</th><th>Win %</th></tr></thead>
+        <tbody id="standingsBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="standings" id="accuracySection">
+    <div class="standings-head">
+      <h2>Pick Accuracy by Team</h2>
+      <button class="btn" id="accuracyToggle">View as Table</button>
+    </div>
+    <div class="standings-sub">Of the games you've called for each team, how many you actually got right.</div>
+    <div class="standings-legend">
+      <span><i class="correct"></i>Correct</span>
+      <span><i class="incorrect"></i>Incorrect</span>
+    </div>
+    <div id="accuracyChart"></div>
+    <div class="overflow">
+      <table class="hist">
+        <thead><tr><th>Team</th><th>Record</th><th>Accuracy</th></tr></thead>
+        <tbody id="accuracyBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var STORE_KEY = 'gridiron-picks-v1';
+
+  var TEAM_INFO = {
+    'Arizona Cardinals': { abbr: 'ARI', color: '#97233F', color2: '#000000' },
+    'Atlanta Falcons': { abbr: 'ATL', color: '#A71930', color2: '#000000' },
+    'Baltimore Ravens': { abbr: 'BAL', color: '#241773', color2: '#9E7C0C' },
+    'Buffalo Bills': { abbr: 'BUF', color: '#00338D', color2: '#C60C30' },
+    'Carolina Panthers': { abbr: 'CAR', color: '#0085CA', color2: '#101820' },
+    'Chicago Bears': { abbr: 'CHI', color: '#0B162A', color2: '#C83803' },
+    'Cincinnati Bengals': { abbr: 'CIN', color: '#FB4F14', color2: '#000000' },
+    'Cleveland Browns': { abbr: 'CLE', color: '#311D00', color2: '#FF3C00' },
+    'Dallas Cowboys': { abbr: 'DAL', color: '#041E42', color2: '#869397' },
+    'Denver Broncos': { abbr: 'DEN', color: '#FB4F14', color2: '#002244' },
+    'Detroit Lions': { abbr: 'DET', color: '#0076B6', color2: '#B0B7BC' },
+    'Green Bay Packers': { abbr: 'GB', color: '#203731', color2: '#FFB612' },
+    'Houston Texans': { abbr: 'HOU', color: '#03202F', color2: '#A71930' },
+    'Indianapolis Colts': { abbr: 'IND', color: '#002C5F', color2: '#A2AAAD' },
+    'Jacksonville Jaguars': { abbr: 'JAX', color: '#101820', color2: '#006778' },
+    'Kansas City Chiefs': { abbr: 'KC', color: '#E31837', color2: '#FFB81C' },
+    'Las Vegas Raiders': { abbr: 'LV', color: '#000000', color2: '#A5ACAF' },
+    'Los Angeles Chargers': { abbr: 'LAC', color: '#0080C6', color2: '#FFC20E' },
+    'Los Angeles Rams': { abbr: 'LAR', color: '#003594', color2: '#FFA300' },
+    'Miami Dolphins': { abbr: 'MIA', color: '#008E97', color2: '#FC4C02' },
+    'Minnesota Vikings': { abbr: 'MIN', color: '#4F2683', color2: '#FFC62F' },
+    'New England Patriots': { abbr: 'NE', color: '#002244', color2: '#C60C30' },
+    'New Orleans Saints': { abbr: 'NO', color: '#000000', color2: '#D3BC8D' },
+    'New York Giants': { abbr: 'NYG', color: '#0B2265', color2: '#A71930' },
+    'New York Jets': { abbr: 'NYJ', color: '#125740', color2: '#000000' },
+    'Philadelphia Eagles': { abbr: 'PHI', color: '#004C54', color2: '#A5ACAF' },
+    'Pittsburgh Steelers': { abbr: 'PIT', color: '#FFB612', color2: '#101820' },
+    'San Francisco 49ers': { abbr: 'SF', color: '#AA0000', color2: '#B3995D' },
+    'Seattle Seahawks': { abbr: 'SEA', color: '#002244', color2: '#69BE28' },
+    'Tampa Bay Buccaneers': { abbr: 'TB', color: '#D50A0A', color2: '#34302B' },
+    'Tennessee Titans': { abbr: 'TEN', color: '#0C2340', color2: '#4B92DB' },
+    'Washington Commanders': { abbr: 'WAS', color: '#5A1414', color2: '#FFB612' }
+  };
+
+  function teamInfo(name) {
+    return TEAM_INFO[name] || { abbr: (name || '?').slice(0, 3).toUpperCase(), color: '#6b7268', color2: '#8f918e' };
+  }
+
+  function textOnColor(hex) {
+    var h = hex.replace('#', '');
+    var r = parseInt(h.substring(0, 2), 16);
+    var g = parseInt(h.substring(2, 4), 16);
+    var b = parseInt(h.substring(4, 6), 16);
+    var luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    return luminance > 0.6 ? '#141712' : '#ffffff';
+  }
+
+  var SEASON_GAMES = {
+    1: [
+      { away: 'New England Patriots', home: 'Seattle Seahawks', date: '2026-09-09', time: '8:20 PM', network: 'NBC' },
+      { away: 'San Francisco 49ers', home: 'Los Angeles Rams', date: '2026-09-10', time: '8:35 PM', network: 'Netflix' },
+      { away: 'Chicago Bears', home: 'Carolina Panthers', date: '2026-09-13', time: '1:00 PM', network: 'FOX' },
+      { away: 'Tampa Bay Buccaneers', home: 'Cincinnati Bengals', date: '2026-09-13', time: '1:00 PM', network: 'FOX' },
+      { away: 'New Orleans Saints', home: 'Detroit Lions', date: '2026-09-13', time: '1:00 PM', network: 'FOX' },
+      { away: 'Buffalo Bills', home: 'Houston Texans', date: '2026-09-13', time: '1:00 PM', network: 'CBS' },
+      { away: 'Baltimore Ravens', home: 'Indianapolis Colts', date: '2026-09-13', time: '1:00 PM', network: 'CBS' },
+      { away: 'Cleveland Browns', home: 'Jacksonville Jaguars', date: '2026-09-13', time: '1:00 PM', network: 'CBS' },
+      { away: 'Atlanta Falcons', home: 'Pittsburgh Steelers', date: '2026-09-13', time: '1:00 PM', network: 'FOX' },
+      { away: 'New York Jets', home: 'Tennessee Titans', date: '2026-09-13', time: '1:00 PM', network: 'CBS' },
+      { away: 'Arizona Cardinals', home: 'Los Angeles Chargers', date: '2026-09-13', time: '4:25 PM', network: 'CBS' },
+      { away: 'Miami Dolphins', home: 'Las Vegas Raiders', date: '2026-09-13', time: '4:25 PM', network: 'FOX' },
+      { away: 'Green Bay Packers', home: 'Minnesota Vikings', date: '2026-09-13', time: '4:25 PM', network: 'CBS' },
+      { away: 'Washington Commanders', home: 'Philadelphia Eagles', date: '2026-09-13', time: '4:25 PM', network: 'FOX' },
+      { away: 'Dallas Cowboys', home: 'New York Giants', date: '2026-09-13', time: '8:20 PM', network: 'NBC' },
+      { away: 'Denver Broncos', home: 'Kansas City Chiefs', date: '2026-09-14', time: '8:15 PM', network: 'ESPN' }
+    ],
+    2: [
+      { away: 'Detroit Lions', home: 'Buffalo Bills', date: '2026-09-17', time: '8:15 PM', network: 'Prime Video' },
+      { away: 'Carolina Panthers', home: 'Atlanta Falcons', date: '2026-09-20', time: '1:00 PM', network: 'FOX' },
+      { away: 'New Orleans Saints', home: 'Baltimore Ravens', date: '2026-09-20', time: '1:00 PM', network: 'CBS' },
+      { away: 'Minnesota Vikings', home: 'Chicago Bears', date: '2026-09-20', time: '1:00 PM', network: 'FOX' },
+      { away: 'Cincinnati Bengals', home: 'Houston Texans', date: '2026-09-20', time: '1:00 PM', network: 'CBS' },
+      { away: 'Pittsburgh Steelers', home: 'New England Patriots', date: '2026-09-20', time: '1:00 PM', network: 'CBS' },
+      { away: 'Green Bay Packers', home: 'New York Jets', date: '2026-09-20', time: '1:00 PM', network: 'FOX' },
+      { away: 'Cleveland Browns', home: 'Tampa Bay Buccaneers', date: '2026-09-20', time: '1:00 PM', network: 'CBS' },
+      { away: 'Philadelphia Eagles', home: 'Tennessee Titans', date: '2026-09-20', time: '1:00 PM', network: 'FOX' },
+      { away: 'Jacksonville Jaguars', home: 'Denver Broncos', date: '2026-09-20', time: '4:05 PM', network: 'CBS' },
+      { away: 'Las Vegas Raiders', home: 'Los Angeles Chargers', date: '2026-09-20', time: '4:05 PM', network: 'CBS' },
+      { away: 'Seattle Seahawks', home: 'Arizona Cardinals', date: '2026-09-20', time: '4:25 PM', network: 'FOX' },
+      { away: 'Washington Commanders', home: 'Dallas Cowboys', date: '2026-09-20', time: '4:25 PM', network: 'FOX' },
+      { away: 'Miami Dolphins', home: 'San Francisco 49ers', date: '2026-09-20', time: '4:25 PM', network: 'FOX' },
+      { away: 'Indianapolis Colts', home: 'Kansas City Chiefs', date: '2026-09-20', time: '8:20 PM', network: 'NBC' },
+      { away: 'New York Giants', home: 'Los Angeles Rams', date: '2026-09-21', time: '8:15 PM', network: 'ESPN' }
+    ],
+    3: [
+      { away: 'Atlanta Falcons', home: 'Green Bay Packers', date: '2026-09-24', time: '8:15 PM', network: 'Prime Video' },
+      { away: 'Los Angeles Chargers', home: 'Buffalo Bills', date: '2026-09-27', time: '1:00 PM', network: 'FOX' },
+      { away: 'Carolina Panthers', home: 'Cleveland Browns', date: '2026-09-27', time: '1:00 PM', network: 'FOX' },
+      { away: 'New York Jets', home: 'Detroit Lions', date: '2026-09-27', time: '1:00 PM', network: 'FOX' },
+      { away: 'Houston Texans', home: 'Indianapolis Colts', date: '2026-09-27', time: '1:00 PM', network: 'CBS' },
+      { away: 'New England Patriots', home: 'Jacksonville Jaguars', date: '2026-09-27', time: '1:00 PM', network: 'CBS' },
+      { away: 'Kansas City Chiefs', home: 'Miami Dolphins', date: '2026-09-27', time: '1:00 PM', network: 'CBS' },
+      { away: 'Tennessee Titans', home: 'New York Giants', date: '2026-09-27', time: '1:00 PM', network: 'CBS' },
+      { away: 'Cincinnati Bengals', home: 'Pittsburgh Steelers', date: '2026-09-27', time: '1:00 PM', network: 'CBS' },
+      { away: 'Seattle Seahawks', home: 'Washington Commanders', date: '2026-09-27', time: '1:00 PM', network: 'FOX' },
+      { away: 'Arizona Cardinals', home: 'San Francisco 49ers', date: '2026-09-27', time: '4:05 PM', network: 'FOX' },
+      { away: 'Minnesota Vikings', home: 'Tampa Bay Buccaneers', date: '2026-09-27', time: '4:05 PM', network: 'FOX' },
+      { away: 'Las Vegas Raiders', home: 'New Orleans Saints', date: '2026-09-27', time: '4:25 PM', network: 'CBS' },
+      { away: 'Baltimore Ravens', home: 'Dallas Cowboys', date: '2026-09-27', time: '4:25 PM', network: 'CBS' },
+      { away: 'Los Angeles Rams', home: 'Denver Broncos', date: '2026-09-27', time: '8:20 PM', network: 'NBC' },
+      { away: 'Philadelphia Eagles', home: 'Chicago Bears', date: '2026-09-28', time: '8:15 PM', network: 'ESPN' }
+    ],
+    4: [
+      { away: 'Pittsburgh Steelers', home: 'Cleveland Browns', date: '2026-10-01', time: '8:15 PM', network: 'Prime Video' },
+      { away: 'Indianapolis Colts', home: 'Washington Commanders', date: '2026-10-04', time: '9:30 AM', network: 'NFL Network' },
+      { away: 'Tennessee Titans', home: 'Baltimore Ravens', date: '2026-10-04', time: '1:00 PM', network: 'CBS' },
+      { away: 'New England Patriots', home: 'Buffalo Bills', date: '2026-10-04', time: '1:00 PM', network: 'CBS' },
+      { away: 'New York Jets', home: 'Chicago Bears', date: '2026-10-04', time: '1:00 PM', network: 'FOX' },
+      { away: 'Jacksonville Jaguars', home: 'Cincinnati Bengals', date: '2026-10-04', time: '1:00 PM', network: 'CBS' },
+      { away: 'Dallas Cowboys', home: 'Houston Texans', date: '2026-10-04', time: '1:00 PM', network: 'FOX' },
+      { away: 'Arizona Cardinals', home: 'New York Giants', date: '2026-10-04', time: '1:00 PM', network: 'CBS' },
+      { away: 'Los Angeles Rams', home: 'Philadelphia Eagles', date: '2026-10-04', time: '1:00 PM', network: 'FOX' },
+      { away: 'Green Bay Packers', home: 'Tampa Bay Buccaneers', date: '2026-10-04', time: '1:00 PM', network: 'FOX' },
+      { away: 'Miami Dolphins', home: 'Minnesota Vikings', date: '2026-10-04', time: '4:05 PM', network: 'FOX' },
+      { away: 'Kansas City Chiefs', home: 'Las Vegas Raiders', date: '2026-10-04', time: '4:25 PM', network: 'CBS' },
+      { away: 'Los Angeles Chargers', home: 'Seattle Seahawks', date: '2026-10-04', time: '4:25 PM', network: 'CBS' },
+      { away: 'Denver Broncos', home: 'San Francisco 49ers', date: '2026-10-04', time: '4:25 PM', network: 'CBS' },
+      { away: 'Detroit Lions', home: 'Carolina Panthers', date: '2026-10-04', time: '8:20 PM', network: 'NBC' },
+      { away: 'Atlanta Falcons', home: 'New Orleans Saints', date: '2026-10-05', time: '8:15 PM', network: 'ESPN' }
+    ],
+    5: [
+      { away: 'Tampa Bay Buccaneers', home: 'Dallas Cowboys', date: '2026-10-08', time: '8:15 PM', network: 'Prime Video' },
+      { away: 'Philadelphia Eagles', home: 'Jacksonville Jaguars', date: '2026-10-11', time: '9:30 AM', network: 'NFL Network' },
+      { away: 'Cincinnati Bengals', home: 'Miami Dolphins', date: '2026-10-11', time: '1:00 PM', network: 'FOX' },
+      { away: 'Las Vegas Raiders', home: 'New England Patriots', date: '2026-10-11', time: '1:00 PM', network: 'CBS' },
+      { away: 'Minnesota Vikings', home: 'New Orleans Saints', date: '2026-10-11', time: '1:00 PM', network: 'FOX' },
+      { away: 'Cleveland Browns', home: 'New York Jets', date: '2026-10-11', time: '1:00 PM', network: 'CBS' },
+      { away: 'Indianapolis Colts', home: 'Pittsburgh Steelers', date: '2026-10-11', time: '1:00 PM', network: 'CBS' },
+      { away: 'Houston Texans', home: 'Tennessee Titans', date: '2026-10-11', time: '1:00 PM', network: 'CBS' },
+      { away: 'New York Giants', home: 'Washington Commanders', date: '2026-10-11', time: '1:00 PM', network: 'FOX' },
+      { away: 'Denver Broncos', home: 'Los Angeles Chargers', date: '2026-10-11', time: '4:05 PM', network: 'CBS' },
+      { away: 'Detroit Lions', home: 'Arizona Cardinals', date: '2026-10-11', time: '4:25 PM', network: 'FOX' },
+      { away: 'Chicago Bears', home: 'Green Bay Packers', date: '2026-10-11', time: '4:25 PM', network: 'FOX' },
+      { away: 'San Francisco 49ers', home: 'Seattle Seahawks', date: '2026-10-11', time: '4:25 PM', network: 'FOX' },
+      { away: 'Baltimore Ravens', home: 'Atlanta Falcons', date: '2026-10-11', time: '8:20 PM', network: 'NBC' },
+      { away: 'Buffalo Bills', home: 'Los Angeles Rams', date: '2026-10-12', time: '8:15 PM', network: 'ESPN' }
+    ],
+    6: [
+      { away: 'Seattle Seahawks', home: 'Denver Broncos', date: '2026-10-15', time: '8:15 PM', network: 'Prime Video' },
+      { away: 'Houston Texans', home: 'Jacksonville Jaguars', date: '2026-10-18', time: '9:30 AM', network: 'NFL Network' },
+      { away: 'Chicago Bears', home: 'Atlanta Falcons', date: '2026-10-18', time: '1:00 PM', network: 'FOX' },
+      { away: 'Baltimore Ravens', home: 'Cleveland Browns', date: '2026-10-18', time: '1:00 PM', network: 'FOX' },
+      { away: 'Tennessee Titans', home: 'Indianapolis Colts', date: '2026-10-18', time: '1:00 PM', network: 'FOX' },
+      { away: 'New York Jets', home: 'New England Patriots', date: '2026-10-18', time: '1:00 PM', network: 'CBS' },
+      { away: 'New Orleans Saints', home: 'New York Giants', date: '2026-10-18', time: '1:00 PM', network: 'FOX' },
+      { away: 'Carolina Panthers', home: 'Philadelphia Eagles', date: '2026-10-18', time: '1:00 PM', network: 'CBS' },
+      { away: 'Pittsburgh Steelers', home: 'Tampa Bay Buccaneers', date: '2026-10-18', time: '1:00 PM', network: 'CBS' },
+      { away: 'Arizona Cardinals', home: 'Los Angeles Rams', date: '2026-10-18', time: '4:05 PM', network: 'FOX' },
+      { away: 'Los Angeles Chargers', home: 'Kansas City Chiefs', date: '2026-10-18', time: '4:25 PM', network: 'CBS' },
+      { away: 'Buffalo Bills', home: 'Las Vegas Raiders', date: '2026-10-18', time: '4:25 PM', network: 'CBS' },
+      { away: 'Dallas Cowboys', home: 'Green Bay Packers', date: '2026-10-18', time: '8:20 PM', network: 'NBC' },
+      { away: 'Washington Commanders', home: 'San Francisco 49ers', date: '2026-10-19', time: '8:15 PM', network: 'ESPN' }
+    ],
+    7: [
+      { away: 'New England Patriots', home: 'Chicago Bears', date: '2026-10-22', time: '8:15 PM', network: 'Prime Video' },
+      { away: 'Pittsburgh Steelers', home: 'New Orleans Saints', date: '2026-10-25', time: '9:30 AM', network: 'NFL Network' },
+      { away: 'San Francisco 49ers', home: 'Atlanta Falcons', date: '2026-10-25', time: '1:00 PM', network: 'FOX' },
+      { away: 'Cincinnati Bengals', home: 'Baltimore Ravens', date: '2026-10-25', time: '1:00 PM', network: 'CBS' },
+      { away: 'Tampa Bay Buccaneers', home: 'Carolina Panthers', date: '2026-10-25', time: '1:00 PM', network: 'FOX' },
+      { away: 'New York Giants', home: 'Houston Texans', date: '2026-10-25', time: '1:00 PM', network: 'FOX' },
+      { away: 'Indianapolis Colts', home: 'Minnesota Vikings', date: '2026-10-25', time: '1:00 PM', network: 'CBS' },
+      { away: 'Miami Dolphins', home: 'New York Jets', date: '2026-10-25', time: '1:00 PM', network: 'CBS' },
+      { away: 'Cleveland Browns', home: 'Tennessee Titans', date: '2026-10-25', time: '1:00 PM', network: 'CBS' },
+      { away: 'Denver Broncos', home: 'Arizona Cardinals', date: '2026-10-25', time: '4:05 PM', network: 'CBS' },
+      { away: 'Green Bay Packers', home: 'Detroit Lions', date: '2026-10-25', time: '4:25 PM', network: 'FOX' },
+      { away: 'Los Angeles Rams', home: 'Las Vegas Raiders', date: '2026-10-25', time: '4:25 PM', network: 'FOX' },
+      { away: 'Kansas City Chiefs', home: 'Seattle Seahawks', date: '2026-10-25', time: '8:20 PM', network: 'NBC' },
+      { away: 'Dallas Cowboys', home: 'Philadelphia Eagles', date: '2026-10-26', time: '8:15 PM', network: 'ESPN' }
+    ],
+    8: [
+      { away: 'Carolina Panthers', home: 'Green Bay Packers', date: '2026-10-29', time: '8:15 PM', network: 'Prime Video' },
+      { away: 'Baltimore Ravens', home: 'Buffalo Bills', date: '2026-11-01', time: '1:00 PM', network: 'CBS' },
+      { away: 'Tennessee Titans', home: 'Cincinnati Bengals', date: '2026-11-01', time: '1:00 PM', network: 'CBS' },
+      { away: 'Arizona Cardinals', home: 'Dallas Cowboys', date: '2026-11-01', time: '1:00 PM', network: 'FOX' },
+      { away: 'Minnesota Vikings', home: 'Detroit Lions', date: '2026-11-01', time: '1:00 PM', network: 'FOX' },
+      { away: 'Indianapolis Colts', home: 'Jacksonville Jaguars', date: '2026-11-01', time: '1:00 PM', network: 'CBS' },
+      { away: 'Las Vegas Raiders', home: 'New York Jets', date: '2026-11-01', time: '1:00 PM', network: 'FOX' },
+      { away: 'Cleveland Browns', home: 'Pittsburgh Steelers', date: '2026-11-01', time: '1:00 PM', network: 'CBS' },
+      { away: 'Atlanta Falcons', home: 'Tampa Bay Buccaneers', date: '2026-11-01', time: '1:00 PM', network: 'FOX' },
+      { away: 'Los Angeles Chargers', home: 'Los Angeles Rams', date: '2026-11-01', time: '4:05 PM', network: 'FOX' },
+      { away: 'Kansas City Chiefs', home: 'Denver Broncos', date: '2026-11-01', time: '4:25 PM', network: 'CBS' },
+      { away: 'New England Patriots', home: 'Miami Dolphins', date: '2026-11-01', time: '4:25 PM', network: 'CBS' },
+      { away: 'Philadelphia Eagles', home: 'Washington Commanders', date: '2026-11-01', time: '8:20 PM', network: 'NBC' },
+      { away: 'Chicago Bears', home: 'Seattle Seahawks', date: '2026-11-02', time: '8:15 PM', network: 'ESPN' }
+    ],
+    9: [
+      { away: 'Jacksonville Jaguars', home: 'Baltimore Ravens', date: '2026-11-05', time: '8:15 PM', network: 'Prime Video' },
+      { away: 'Cincinnati Bengals', home: 'Atlanta Falcons', date: '2026-11-08', time: '9:30 AM', network: 'NFL Network' },
+      { away: 'Denver Broncos', home: 'Carolina Panthers', date: '2026-11-08', time: '1:00 PM', network: 'CBS' },
+      { away: 'Dallas Cowboys', home: 'Indianapolis Colts', date: '2026-11-08', time: '1:00 PM', network: 'FOX' },
+      { away: 'New York Jets', home: 'Kansas City Chiefs', date: '2026-11-08', time: '1:00 PM', network: 'CBS' },
+      { away: 'Detroit Lions', home: 'Miami Dolphins', date: '2026-11-08', time: '1:00 PM', network: 'FOX' },
+      { away: 'Cleveland Browns', home: 'New Orleans Saints', date: '2026-11-08', time: '1:00 PM', network: 'CBS' },
+      { away: 'New York Giants', home: 'Philadelphia Eagles', date: '2026-11-08', time: '1:00 PM', network: 'FOX' },
+      { away: 'Los Angeles Rams', home: 'Washington Commanders', date: '2026-11-08', time: '1:00 PM', network: 'FOX' },
+      { away: 'Houston Texans', home: 'Los Angeles Chargers', date: '2026-11-08', time: '4:05 PM', network: 'CBS' },
+      { away: 'Las Vegas Raiders', home: 'San Francisco 49ers', date: '2026-11-08', time: '4:05 PM', network: 'CBS' },
+      { away: 'Green Bay Packers', home: 'New England Patriots', date: '2026-11-08', time: '4:25 PM', network: 'FOX' },
+      { away: 'Arizona Cardinals', home: 'Seattle Seahawks', date: '2026-11-08', time: '4:25 PM', network: 'FOX' },
+      { away: 'Tampa Bay Buccaneers', home: 'Chicago Bears', date: '2026-11-08', time: '8:20 PM', network: 'NBC' },
+      { away: 'Buffalo Bills', home: 'Minnesota Vikings', date: '2026-11-09', time: '8:15 PM', network: 'ESPN' }
+    ],
+    10: [
+      { away: 'Washington Commanders', home: 'New York Giants', date: '2026-11-12', time: '8:15 PM', network: 'Prime Video' },
+      { away: 'New England Patriots', home: 'Detroit Lions', date: '2026-11-15', time: '9:30 AM', network: 'FOX' },
+      { away: 'Kansas City Chiefs', home: 'Atlanta Falcons', date: '2026-11-15', time: '1:00 PM', network: 'CBS' },
+      { away: 'Houston Texans', home: 'Cleveland Browns', date: '2026-11-15', time: '1:00 PM', network: 'FOX' },
+      { away: 'Minnesota Vikings', home: 'Green Bay Packers', date: '2026-11-15', time: '1:00 PM', network: 'FOX' },
+      { away: 'Miami Dolphins', home: 'Indianapolis Colts', date: '2026-11-15', time: '1:00 PM', network: 'CBS' },
+      { away: 'Carolina Panthers', home: 'New Orleans Saints', date: '2026-11-15', time: '1:00 PM', network: 'FOX' },
+      { away: 'Buffalo Bills', home: 'New York Jets', date: '2026-11-15', time: '1:00 PM', network: 'CBS' },
+      { away: 'Jacksonville Jaguars', home: 'Tennessee Titans', date: '2026-11-15', time: '1:00 PM', network: 'FOX' },
+      { away: 'Los Angeles Rams', home: 'Arizona Cardinals', date: '2026-11-15', time: '4:05 PM', network: 'CBS' },
+      { away: 'Seattle Seahawks', home: 'Las Vegas Raiders', date: '2026-11-15', time: '4:05 PM', network: 'CBS' },
+      { away: 'San Francisco 49ers', home: 'Dallas Cowboys', date: '2026-11-15', time: '4:25 PM', network: 'FOX' },
+      { away: 'Pittsburgh Steelers', home: 'Cincinnati Bengals', date: '2026-11-15', time: '8:20 PM', network: 'NBC' },
+      { away: 'Los Angeles Chargers', home: 'Baltimore Ravens', date: '2026-11-16', time: '8:15 PM', network: 'ESPN' }
+    ],
+    11: [
+      { away: 'Indianapolis Colts', home: 'Houston Texans', date: '2026-11-19', time: '8:15 PM', network: 'Prime Video' },
+      { away: 'Miami Dolphins', home: 'Buffalo Bills', date: '2026-11-22', time: '1:00 PM', network: 'FOX' },
+      { away: 'Baltimore Ravens', home: 'Carolina Panthers', date: '2026-11-22', time: '1:00 PM', network: 'FOX' },
+      { away: 'New Orleans Saints', home: 'Chicago Bears', date: '2026-11-22', time: '1:00 PM', network: 'FOX' },
+      { away: 'Tennessee Titans', home: 'Dallas Cowboys', date: '2026-11-22', time: '1:00 PM', network: 'FOX' },
+      { away: 'Tampa Bay Buccaneers', home: 'Detroit Lions', date: '2026-11-22', time: '1:00 PM', network: 'CBS' },
+      { away: 'Arizona Cardinals', home: 'Kansas City Chiefs', date: '2026-11-22', time: '1:00 PM', network: 'CBS' },
+      { away: 'Jacksonville Jaguars', home: 'New York Giants', date: '2026-11-22', time: '1:00 PM', network: 'CBS' },
+      { away: 'New York Jets', home: 'Los Angeles Chargers', date: '2026-11-22', time: '4:05 PM', network: 'FOX' },
+      { away: 'Las Vegas Raiders', home: 'Denver Broncos', date: '2026-11-22', time: '4:25 PM', network: 'CBS' },
+      { away: 'Pittsburgh Steelers', home: 'Philadelphia Eagles', date: '2026-11-22', time: '4:25 PM', network: 'CBS' },
+      { away: 'Minnesota Vikings', home: 'San Francisco 49ers', date: '2026-11-22', time: '8:20 PM', network: 'NBC' },
+      { away: 'Cincinnati Bengals', home: 'Washington Commanders', date: '2026-11-23', time: '8:15 PM', network: 'ESPN' }
+    ],
+    12: [
+      { away: 'Green Bay Packers', home: 'Los Angeles Rams', date: '2026-11-25', time: '8:00 PM', network: 'Netflix' },
+      { away: 'Chicago Bears', home: 'Detroit Lions', date: '2026-11-26', time: '1:00 PM', network: 'CBS' },
+      { away: 'Philadelphia Eagles', home: 'Dallas Cowboys', date: '2026-11-26', time: '4:30 PM', network: 'FOX' },
+      { away: 'Kansas City Chiefs', home: 'Buffalo Bills', date: '2026-11-26', time: '8:20 PM', network: 'NBC' },
+      { away: 'Denver Broncos', home: 'Pittsburgh Steelers', date: '2026-11-27', time: '3:00 PM', network: 'Prime Video' },
+      { away: 'New Orleans Saints', home: 'Cincinnati Bengals', date: '2026-11-29', time: '1:00 PM', network: 'CBS' },
+      { away: 'Las Vegas Raiders', home: 'Cleveland Browns', date: '2026-11-29', time: '1:00 PM', network: 'FOX' },
+      { away: 'Baltimore Ravens', home: 'Houston Texans', date: '2026-11-29', time: '1:00 PM', network: 'CBS' },
+      { away: 'New York Giants', home: 'Indianapolis Colts', date: '2026-11-29', time: '1:00 PM', network: 'FOX' },
+      { away: 'New York Jets', home: 'Miami Dolphins', date: '2026-11-29', time: '1:00 PM', network: 'CBS' },
+      { away: 'Atlanta Falcons', home: 'Minnesota Vikings', date: '2026-11-29', time: '1:00 PM', network: 'FOX' },
+      { away: 'Tennessee Titans', home: 'Jacksonville Jaguars', date: '2026-11-29', time: '4:05 PM', network: 'CBS' },
+      { away: 'Washington Commanders', home: 'Arizona Cardinals', date: '2026-11-29', time: '4:25 PM', network: 'FOX' },
+      { away: 'Seattle Seahawks', home: 'San Francisco 49ers', date: '2026-11-29', time: '4:25 PM', network: 'FOX' },
+      { away: 'New England Patriots', home: 'Los Angeles Chargers', date: '2026-11-29', time: '8:20 PM', network: 'NBC' },
+      { away: 'Carolina Panthers', home: 'Tampa Bay Buccaneers', date: '2026-11-30', time: '8:15 PM', network: 'ESPN' }
+    ],
+    13: [
+      { away: 'Kansas City Chiefs', home: 'Los Angeles Rams', date: '2026-12-03', time: '8:15 PM', network: 'Prime Video' },
+      { away: 'Detroit Lions', home: 'Atlanta Falcons', date: '2026-12-06', time: '1:00 PM', network: 'CBS' },
+      { away: 'Jacksonville Jaguars', home: 'Chicago Bears', date: '2026-12-06', time: '1:00 PM', network: 'FOX' },
+      { away: 'Cincinnati Bengals', home: 'Cleveland Browns', date: '2026-12-06', time: '1:00 PM', network: 'CBS' },
+      { away: 'Green Bay Packers', home: 'New Orleans Saints', date: '2026-12-06', time: '1:00 PM', network: 'FOX' },
+      { away: 'San Francisco 49ers', home: 'New York Giants', date: '2026-12-06', time: '1:00 PM', network: 'FOX' },
+      { away: 'Los Angeles Chargers', home: 'Tampa Bay Buccaneers', date: '2026-12-06', time: '1:00 PM', network: 'CBS' },
+      { away: 'Washington Commanders', home: 'Tennessee Titans', date: '2026-12-06', time: '1:00 PM', network: 'CBS' },
+      { away: 'Philadelphia Eagles', home: 'Arizona Cardinals', date: '2026-12-06', time: '4:05 PM', network: 'FOX' },
+      { away: 'Miami Dolphins', home: 'Denver Broncos', date: '2026-12-06', time: '4:05 PM', network: 'FOX' },
+      { away: 'Carolina Panthers', home: 'Minnesota Vikings', date: '2026-12-06', time: '4:25 PM', network: 'CBS' },
+      { away: 'Buffalo Bills', home: 'New England Patriots', date: '2026-12-06', time: '4:25 PM', network: 'CBS' },
+      { away: 'Houston Texans', home: 'Pittsburgh Steelers', date: '2026-12-06', time: '8:20 PM', network: 'NBC' },
+      { away: 'Dallas Cowboys', home: 'Seattle Seahawks', date: '2026-12-07', time: '8:15 PM', network: 'ESPN' }
+    ],
+    14: [
+      { away: 'Minnesota Vikings', home: 'New England Patriots', date: '2026-12-10', time: '8:15 PM', network: 'Prime Video' },
+      { away: 'Tampa Bay Buccaneers', home: 'Baltimore Ravens', date: '2026-12-13', time: '1:00 PM', network: 'FOX' },
+      { away: 'New Orleans Saints', home: 'Carolina Panthers', date: '2026-12-13', time: '1:00 PM', network: 'CBS' },
+      { away: 'Atlanta Falcons', home: 'Cleveland Browns', date: '2026-12-13', time: '1:00 PM', network: 'CBS' },
+      { away: 'Tennessee Titans', home: 'Detroit Lions', date: '2026-12-13', time: '1:00 PM', network: 'FOX' },
+      { away: 'Chicago Bears', home: 'Miami Dolphins', date: '2026-12-13', time: '1:00 PM', network: 'CBS' },
+      { away: 'Denver Broncos', home: 'New York Jets', date: '2026-12-13', time: '1:00 PM', network: 'CBS' },
+      { away: 'Indianapolis Colts', home: 'Philadelphia Eagles', date: '2026-12-13', time: '1:00 PM', network: 'FOX' },
+      { away: 'Houston Texans', home: 'Washington Commanders', date: '2026-12-13', time: '1:00 PM', network: 'CBS' },
+      { away: 'Los Angeles Chargers', home: 'Las Vegas Raiders', date: '2026-12-13', time: '4:05 PM', network: 'CBS' },
+      { away: 'Kansas City Chiefs', home: 'Cincinnati Bengals', date: '2026-12-13', time: '4:25 PM', network: 'FOX' },
+      { away: 'New York Giants', home: 'Seattle Seahawks', date: '2026-12-13', time: '4:25 PM', network: 'FOX' },
+      { away: 'Los Angeles Rams', home: 'San Francisco 49ers', date: '2026-12-13', time: '4:25 PM', network: 'FOX' },
+      { away: 'Buffalo Bills', home: 'Green Bay Packers', date: '2026-12-13', time: '8:20 PM', network: 'NBC' },
+      { away: 'Pittsburgh Steelers', home: 'Jacksonville Jaguars', date: '2026-12-14', time: '8:15 PM', network: 'ESPN' }
+    ],
+    15: [
+      { away: 'San Francisco 49ers', home: 'Los Angeles Chargers', date: '2026-12-17', time: '8:15 PM', network: 'Prime Video' },
+      { away: 'Seattle Seahawks', home: 'Philadelphia Eagles', date: '2026-12-19', time: '5:00 PM', network: 'FOX' },
+      { away: 'Chicago Bears', home: 'Buffalo Bills', date: '2026-12-19', time: '8:20 PM', network: 'CBS' },
+      { away: 'Cincinnati Bengals', home: 'Carolina Panthers', date: '2026-12-20', time: '1:00 PM', network: 'FOX' },
+      { away: 'Miami Dolphins', home: 'Green Bay Packers', date: '2026-12-20', time: '1:00 PM', network: 'FOX' },
+      { away: 'Jacksonville Jaguars', home: 'Houston Texans', date: '2026-12-20', time: '1:00 PM', network: 'CBS' },
+      { away: 'Cleveland Browns', home: 'New York Giants', date: '2026-12-20', time: '1:00 PM', network: 'CBS' },
+      { away: 'Baltimore Ravens', home: 'Pittsburgh Steelers', date: '2026-12-20', time: '1:00 PM', network: 'CBS' },
+      { away: 'New Orleans Saints', home: 'Tampa Bay Buccaneers', date: '2026-12-20', time: '1:00 PM', network: 'FOX' },
+      { away: 'Indianapolis Colts', home: 'Tennessee Titans', date: '2026-12-20', time: '1:00 PM', network: 'CBS' },
+      { away: 'Atlanta Falcons', home: 'Washington Commanders', date: '2026-12-20', time: '1:00 PM', network: 'FOX' },
+      { away: 'New York Jets', home: 'Arizona Cardinals', date: '2026-12-20', time: '4:05 PM', network: 'FOX' },
+      { away: 'Dallas Cowboys', home: 'Los Angeles Rams', date: '2026-12-20', time: '4:25 PM', network: 'CBS' },
+      { away: 'Denver Broncos', home: 'Las Vegas Raiders', date: '2026-12-20', time: '4:25 PM', network: 'CBS' },
+      { away: 'Detroit Lions', home: 'Minnesota Vikings', date: '2026-12-20', time: '8:20 PM', network: 'NBC' },
+      { away: 'New England Patriots', home: 'Kansas City Chiefs', date: '2026-12-21', time: '8:15 PM', network: 'ESPN' }
+    ],
+    16: [
+      { away: 'Houston Texans', home: 'Philadelphia Eagles', date: '2026-12-24', time: '8:15 PM', network: 'Prime Video' },
+      { away: 'Green Bay Packers', home: 'Chicago Bears', date: '2026-12-25', time: '1:00 PM', network: 'Netflix' },
+      { away: 'Buffalo Bills', home: 'Denver Broncos', date: '2026-12-25', time: '4:30 PM', network: 'Netflix' },
+      { away: 'Los Angeles Rams', home: 'Seattle Seahawks', date: '2026-12-25', time: '8:15 PM', network: 'FOX' },
+      { away: 'Cleveland Browns', home: 'Baltimore Ravens', date: '2026-12-27', time: '1:00 PM', network: 'CBS' },
+      { away: 'Los Angeles Chargers', home: 'Miami Dolphins', date: '2026-12-27', time: '1:00 PM', network: 'FOX' },
+      { away: 'Arizona Cardinals', home: 'New Orleans Saints', date: '2026-12-27', time: '1:00 PM', network: 'FOX' },
+      { away: 'New England Patriots', home: 'New York Jets', date: '2026-12-27', time: '1:00 PM', network: 'CBS' },
+      { away: 'Tennessee Titans', home: 'Las Vegas Raiders', date: '2026-12-27', time: '4:05 PM', network: 'FOX' },
+      { away: 'San Francisco 49ers', home: 'Kansas City Chiefs', date: '2026-12-27', time: '4:25 PM', network: 'CBS' },
+      { away: 'Jacksonville Jaguars', home: 'Dallas Cowboys', date: '2026-12-27', time: '8:20 PM', network: 'NBC' },
+      { away: 'New York Giants', home: 'Detroit Lions', date: '2026-12-28', time: '8:15 PM', network: 'ESPN' },
+      { away: 'Tampa Bay Buccaneers', home: 'Atlanta Falcons', date: '2026-12-27', time: 'TBD', network: 'TBD' },
+      { away: 'Cincinnati Bengals', home: 'Indianapolis Colts', date: '2026-12-27', time: 'TBD', network: 'TBD' },
+      { away: 'Washington Commanders', home: 'Minnesota Vikings', date: '2026-12-27', time: 'TBD', network: 'TBD' },
+      { away: 'Carolina Panthers', home: 'Pittsburgh Steelers', date: '2026-12-27', time: 'TBD', network: 'TBD' }
+    ],
+    17: [
+      { away: 'Baltimore Ravens', home: 'Cincinnati Bengals', date: '2026-12-31', time: '8:15 PM', network: 'Prime Video' },
+      { away: 'New Orleans Saints', home: 'Atlanta Falcons', date: '2027-01-03', time: '1:00 PM', network: 'FOX' },
+      { away: 'Seattle Seahawks', home: 'Carolina Panthers', date: '2027-01-03', time: '1:00 PM', network: 'FOX' },
+      { away: 'Indianapolis Colts', home: 'Cleveland Browns', date: '2027-01-03', time: '1:00 PM', network: 'FOX' },
+      { away: 'New York Giants', home: 'Dallas Cowboys', date: '2027-01-03', time: '1:00 PM', network: 'FOX' },
+      { away: 'Buffalo Bills', home: 'Miami Dolphins', date: '2027-01-03', time: '1:00 PM', network: 'CBS' },
+      { away: 'Minnesota Vikings', home: 'New York Jets', date: '2027-01-03', time: '1:00 PM', network: 'CBS' },
+      { away: 'Pittsburgh Steelers', home: 'Tennessee Titans', date: '2027-01-03', time: '1:00 PM', network: 'CBS' },
+      { away: 'Las Vegas Raiders', home: 'Arizona Cardinals', date: '2027-01-03', time: '4:05 PM', network: 'CBS' },
+      { away: 'Detroit Lions', home: 'Chicago Bears', date: '2027-01-03', time: '4:25 PM', network: 'FOX' },
+      { away: 'Philadelphia Eagles', home: 'San Francisco 49ers', date: '2027-01-03', time: '8:20 PM', network: 'NBC' },
+      { away: 'Houston Texans', home: 'Green Bay Packers', date: '2027-01-04', time: '8:15 PM', network: 'ESPN' },
+      { away: 'Washington Commanders', home: 'Jacksonville Jaguars', date: '2027-01-03', time: 'TBD', network: 'TBD' },
+      { away: 'Kansas City Chiefs', home: 'Los Angeles Chargers', date: '2027-01-03', time: 'TBD', network: 'TBD' },
+      { away: 'Denver Broncos', home: 'New England Patriots', date: '2027-01-03', time: 'TBD', network: 'TBD' },
+      { away: 'Los Angeles Rams', home: 'Tampa Bay Buccaneers', date: '2027-01-03', time: 'TBD', network: 'TBD' }
+    ],
+    18: [
+      { away: 'San Francisco 49ers', home: 'Arizona Cardinals', date: '2027-01-10', time: 'TBD', network: 'TBD' },
+      { away: 'Pittsburgh Steelers', home: 'Baltimore Ravens', date: '2027-01-10', time: 'TBD', network: 'TBD' },
+      { away: 'New York Jets', home: 'Buffalo Bills', date: '2027-01-10', time: 'TBD', network: 'TBD' },
+      { away: 'Atlanta Falcons', home: 'Carolina Panthers', date: '2027-01-10', time: 'TBD', network: 'TBD' },
+      { away: 'Cleveland Browns', home: 'Cincinnati Bengals', date: '2027-01-10', time: 'TBD', network: 'TBD' },
+      { away: 'Los Angeles Chargers', home: 'Denver Broncos', date: '2027-01-10', time: 'TBD', network: 'TBD' },
+      { away: 'Detroit Lions', home: 'Green Bay Packers', date: '2027-01-10', time: 'TBD', network: 'TBD' },
+      { away: 'Tennessee Titans', home: 'Houston Texans', date: '2027-01-10', time: 'TBD', network: 'TBD' },
+      { away: 'Jacksonville Jaguars', home: 'Indianapolis Colts', date: '2027-01-10', time: 'TBD', network: 'TBD' },
+      { away: 'Las Vegas Raiders', home: 'Kansas City Chiefs', date: '2027-01-10', time: 'TBD', network: 'TBD' },
+      { away: 'Seattle Seahawks', home: 'Los Angeles Rams', date: '2027-01-10', time: 'TBD', network: 'TBD' },
+      { away: 'Chicago Bears', home: 'Minnesota Vikings', date: '2027-01-10', time: 'TBD', network: 'TBD' },
+      { away: 'Miami Dolphins', home: 'New England Patriots', date: '2027-01-10', time: 'TBD', network: 'TBD' },
+      { away: 'Tampa Bay Buccaneers', home: 'New Orleans Saints', date: '2027-01-10', time: 'TBD', network: 'TBD' },
+      { away: 'Philadelphia Eagles', home: 'New York Giants', date: '2027-01-10', time: 'TBD', network: 'TBD' },
+      { away: 'Dallas Cowboys', home: 'Washington Commanders', date: '2027-01-10', time: 'TBD', network: 'TBD' }
+    ]
+  };
+
+  function buildDefaultGames() {
+    var games = [];
+    Object.keys(SEASON_GAMES).forEach(function (wk) {
+      SEASON_GAMES[wk].forEach(function (g, i) {
+        games.push(Object.assign({ id: 'w' + wk + '-' + i, week: Number(wk), pick: null, result: null }, g));
+      });
+    });
+    return games;
+  }
+
+  function loadState() {
+    var fresh = buildDefaultGames();
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (raw) {
+        var stored = JSON.parse(raw);
+        var known = {};
+        stored.games.forEach(function (g) { known[g.week + '|' + g.away + '|' + g.home] = true; });
+        fresh.forEach(function (g) {
+          if (!known[g.week + '|' + g.away + '|' + g.home]) stored.games.push(g);
+        });
+        return stored;
+      }
+    } catch (e) {}
+    return { games: fresh };
+  }
+
+  function saveState() {
+    localStorage.setItem(STORE_KEY, JSON.stringify(state));
+  }
+
+  var state = loadState();
+
+  function weeksAvailable() {
+    var set = {};
+    state.games.forEach(function (g) { set[g.week] = true; });
+    return Object.keys(set).map(Number).sort(function (a, b) { return a - b; });
+  }
+
+  var currentWeek = weeksAvailable()[weeksAvailable().length - 1] || 1;
+
+  function fmtDate(iso) {
+    if (!iso) return '';
+    var parts = iso.split('-');
+    var d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+    return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  }
+
+  function shortName(full) {
+    var words = full.trim().split(' ');
+    return words[words.length - 1];
+  }
+
+  function computeWeekRecord(week) {
+    var c = 0, i = 0;
+    state.games.filter(function (g) { return g.week === week; }).forEach(function (g) {
+      if (g.pick && g.result) {
+        if (g.pick === g.result) c++; else i++;
+      }
+    });
+    return { c: c, i: i };
+  }
+
+  function computeOverall() {
+    var c = 0, i = 0, p = 0;
+    state.games.forEach(function (g) {
+      if (g.pick && g.result) { if (g.pick === g.result) c++; else i++; }
+      else if (g.pick && !g.result) p++;
+    });
+    return { c: c, i: i, p: p };
+  }
+
+  function renderStats() {
+    var overall = computeOverall();
+    var total = overall.c + overall.i;
+    document.getElementById('statPct').textContent = total ? Math.round((overall.c / total) * 100) + '%' : '—';
+    document.getElementById('statRecord').textContent = overall.c + '-' + overall.i;
+    var wk = computeWeekRecord(currentWeek);
+    document.getElementById('statWeekRecord').textContent = wk.c + '-' + wk.i;
+    document.getElementById('statPending').textContent = overall.p;
+  }
+
+  function renderWeekSelect() {
+    var sel = document.getElementById('weekSelect');
+    sel.innerHTML = '';
+    weeksAvailable().forEach(function (w) {
+      var opt = document.createElement('option');
+      opt.value = w;
+      opt.textContent = 'Week ' + w;
+      if (w === currentWeek) opt.selected = true;
+      sel.appendChild(opt);
+    });
+  }
+
+  function pickTeam(id, side) {
+    var g = state.games.find(function (x) { return x.id === id; });
+    if (!g) return;
+    g.pick = g.pick === side ? null : side;
+    saveState();
+    render();
+  }
+
+  function setResult(id, side) {
+    var g = state.games.find(function (x) { return x.id === id; });
+    if (!g) return;
+    g.result = g.result === side ? null : side;
+    saveState();
+    render();
+  }
+
+  function renderGames() {
+    var area = document.getElementById('gamesArea');
+    area.innerHTML = '';
+    var games = state.games.filter(function (g) { return g.week === currentWeek; });
+    games.sort(function (a, b) { return (a.date + a.time).localeCompare(b.date + b.time); });
+
+    if (!games.length) {
+      area.innerHTML = '<div class="empty">No games in Week ' + currentWeek + ' yet. Use "+ Add Game" to add matchups.</div>';
+      return;
+    }
+
+    var byDay = {};
+    games.forEach(function (g) {
+      (byDay[g.date] = byDay[g.date] || []).push(g);
+    });
+
+    Object.keys(byDay).sort().forEach(function (date) {
+      var group = document.createElement('div');
+      group.className = 'day-group';
+      var label = document.createElement('div');
+      label.className = 'day-label';
+      label.textContent = fmtDate(date);
+      group.appendChild(label);
+
+      byDay[date].forEach(function (g) {
+        group.appendChild(renderGameCard(g));
+      });
+      area.appendChild(group);
+    });
+  }
+
+  function makeTeamButton(fullName, side, g) {
+    var info = teamInfo(fullName);
+    var btn = document.createElement('button');
+    btn.className = 'team-btn' + (g.pick === side ? ' picked' : '');
+    btn.style.setProperty('--team-color', info.color);
+    btn.style.setProperty('--team-color2', info.color2);
+    btn.style.setProperty('--team-ink', textOnColor(info.color));
+    btn.title = fullName;
+    btn.onclick = function () { pickTeam(g.id, side); };
+
+    var badge = document.createElement('span');
+    badge.className = 'team-badge';
+    badge.textContent = info.abbr;
+
+    var label = document.createElement('span');
+    label.textContent = shortName(fullName);
+
+    btn.appendChild(badge);
+    btn.appendChild(label);
+    return btn;
+  }
+
+  function renderGameCard(g) {
+    var card = document.createElement('div');
+    card.className = 'game';
+    card.style.setProperty('--home-color', teamInfo(g.home).color);
+
+    var matchup = document.createElement('div');
+    matchup.className = 'matchup';
+
+    var teams = document.createElement('div');
+    teams.className = 'teams';
+
+    var awayBtn = makeTeamButton(g.away, 'away', g);
+
+    var at = document.createElement('span');
+    at.className = 'at';
+    at.textContent = '@';
+
+    var homeBtn = makeTeamButton(g.home, 'home', g);
+
+    teams.appendChild(awayBtn);
+    teams.appendChild(at);
+    teams.appendChild(homeBtn);
+
+    var meta = document.createElement('div');
+    meta.className = 'meta';
+    meta.innerHTML = '<span>' + (g.time || '') + ' ET</span><span class="net">' + (g.network || '') + '</span>';
+
+    matchup.appendChild(teams);
+    matchup.appendChild(meta);
+
+    var resultCol = document.createElement('div');
+    resultCol.className = 'result-col';
+
+    var pill = document.createElement('div');
+    if (!g.pick) {
+      pill.className = 'pill pending';
+      pill.textContent = 'No Pick';
+    } else if (!g.result) {
+      pill.className = 'pill pending';
+      pill.textContent = 'Pending';
+    } else if (g.pick === g.result) {
+      pill.className = 'pill correct';
+      pill.textContent = 'Correct';
+    } else {
+      pill.className = 'pill incorrect';
+      pill.textContent = 'Incorrect';
+    }
+    resultCol.appendChild(pill);
+
+    if (g.pick) {
+      var actions = document.createElement('div');
+      actions.className = 'result-actions';
+
+      var winBtn = document.createElement('button');
+      winBtn.className = 'mini-btn' + (g.result === g.pick ? ' active-win' : '');
+      winBtn.textContent = shortName(g.pick === 'away' ? g.away : g.home) + ' won';
+      winBtn.onclick = function () { setResult(g.id, g.pick); };
+
+      var loseBtn = document.createElement('button');
+      var otherSide = g.pick === 'away' ? 'home' : 'away';
+      loseBtn.className = 'mini-btn' + (g.result === otherSide ? ' active-lose' : '');
+      loseBtn.textContent = shortName(otherSide === 'away' ? g.away : g.home) + ' won';
+      loseBtn.onclick = function () { setResult(g.id, otherSide); };
+
+      actions.appendChild(winBtn);
+      actions.appendChild(loseBtn);
+      resultCol.appendChild(actions);
+    }
+
+    card.appendChild(matchup);
+    card.appendChild(resultCol);
+    return card;
+  }
+
+  function renderHistory() {
+    var body = document.getElementById('histBody');
+    body.innerHTML = '';
+    weeksAvailable().forEach(function (w) {
+      var rec = computeWeekRecord(w);
+      var total = rec.c + rec.i;
+      var pct = total ? Math.round((rec.c / total) * 100) + '%' : '—';
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>Week ' + w + '</td><td>' + rec.c + '-' + rec.i + '</td><td>' + pct + '</td>';
+      body.appendChild(tr);
+    });
+  }
+
+  function computePredictedRecords() {
+    var records = {};
+    Object.keys(TEAM_INFO).forEach(function (name) { records[name] = { w: 0, l: 0 }; });
+    state.games.forEach(function (g) {
+      if (!g.pick) return;
+      var winner = g.pick === 'home' ? g.home : g.away;
+      var loser = g.pick === 'home' ? g.away : g.home;
+      if (!records[winner]) records[winner] = { w: 0, l: 0 };
+      if (!records[loser]) records[loser] = { w: 0, l: 0 };
+      records[winner].w++;
+      records[loser].l++;
+    });
+    return Object.keys(records)
+      .map(function (name) { return Object.assign({ name: name }, records[name]); })
+      .filter(function (r) { return r.w + r.l > 0; })
+      .sort(function (a, b) { return b.w - a.w || a.name.localeCompare(b.name); });
+  }
+
+  function renderStandings() {
+    var records = computePredictedRecords();
+    var chart = document.getElementById('standingsChart');
+    var body = document.getElementById('standingsBody');
+    chart.innerHTML = '';
+    body.innerHTML = '';
+
+    if (!records.length) {
+      chart.innerHTML = '<div class="empty">Make some picks first — this fills in as you go.</div>';
+      return;
+    }
+
+    records.forEach(function (r) {
+      var total = r.w + r.l;
+      var info = teamInfo(r.name);
+      var winPct = total ? Math.round((r.w / total) * 100) : 0;
+
+      var row = document.createElement('div');
+      row.className = 'standing-row';
+      row.title = r.name + ': picked to win ' + r.w + ', picked to lose ' + r.l;
+
+      var teamCell = document.createElement('div');
+      teamCell.className = 'standing-team';
+      var badge = document.createElement('span');
+      badge.className = 'team-badge';
+      badge.textContent = info.abbr;
+      badge.style.setProperty('--team-color', info.color);
+      badge.style.setProperty('--team-color2', info.color2);
+      badge.style.setProperty('--team-ink', textOnColor(info.color));
+      var nameSpan = document.createElement('span');
+      nameSpan.className = 'name';
+      nameSpan.textContent = shortName(r.name);
+      teamCell.appendChild(badge);
+      teamCell.appendChild(nameSpan);
+
+      var bar = document.createElement('div');
+      bar.className = 'standing-bar';
+      var winFill = document.createElement('div');
+      winFill.className = 'standing-fill-win';
+      winFill.style.setProperty('--seg-color', info.color);
+      winFill.style.width = (total ? (r.w / total) * 100 : 0) + '%';
+      var lossFill = document.createElement('div');
+      lossFill.className = 'standing-fill-loss';
+      lossFill.style.width = (total ? (r.l / total) * 100 : 0) + '%';
+      bar.appendChild(winFill);
+      bar.appendChild(lossFill);
+
+      var record = document.createElement('div');
+      record.className = 'standing-record';
+      record.textContent = r.w + '-' + r.l;
+
+      row.appendChild(teamCell);
+      row.appendChild(bar);
+      row.appendChild(record);
+      chart.appendChild(row);
+
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + r.name + '</td><td>' + r.w + '-' + r.l + '</td><td>' + winPct + '%</td>';
+      body.appendChild(tr);
+    });
+  }
+
+  function computePickAccuracy() {
+    var records = {};
+    state.games.forEach(function (g) {
+      if (!g.pick || !g.result) return;
+      var pickedTeam = g.pick === 'home' ? g.home : g.away;
+      if (!records[pickedTeam]) records[pickedTeam] = { c: 0, i: 0 };
+      if (g.pick === g.result) records[pickedTeam].c++; else records[pickedTeam].i++;
+    });
+    return Object.keys(records)
+      .map(function (name) { return Object.assign({ name: name }, records[name]); })
+      .sort(function (a, b) {
+        var pctA = a.c / (a.c + a.i), pctB = b.c / (b.c + b.i);
+        return pctB - pctA || (b.c + b.i) - (a.c + a.i) || a.name.localeCompare(b.name);
+      });
+  }
+
+  function renderAccuracy() {
+    var records = computePickAccuracy();
+    var chart = document.getElementById('accuracyChart');
+    var body = document.getElementById('accuracyBody');
+    chart.innerHTML = '';
+    body.innerHTML = '';
+
+    if (!records.length) {
+      chart.innerHTML = '<div class="empty">No results marked yet. Mark games as "won" once they\'re played and this fills in automatically.</div>';
+      return;
+    }
+
+    records.forEach(function (r) {
+      var total = r.c + r.i;
+      var info = teamInfo(r.name);
+      var pct = total ? Math.round((r.c / total) * 100) : 0;
+
+      var row = document.createElement('div');
+      row.className = 'standing-row';
+      row.title = r.name + ': ' + r.c + ' correct, ' + r.i + ' incorrect';
+
+      var teamCell = document.createElement('div');
+      teamCell.className = 'standing-team';
+      var badge = document.createElement('span');
+      badge.className = 'team-badge';
+      badge.textContent = info.abbr;
+      badge.style.setProperty('--team-color', info.color);
+      badge.style.setProperty('--team-color2', info.color2);
+      badge.style.setProperty('--team-ink', textOnColor(info.color));
+      var nameSpan = document.createElement('span');
+      nameSpan.className = 'name';
+      nameSpan.textContent = shortName(r.name);
+      teamCell.appendChild(badge);
+      teamCell.appendChild(nameSpan);
+
+      var bar = document.createElement('div');
+      bar.className = 'standing-bar';
+      var correctFill = document.createElement('div');
+      correctFill.className = 'standing-fill-correct';
+      correctFill.style.width = (total ? (r.c / total) * 100 : 0) + '%';
+      var incorrectFill = document.createElement('div');
+      incorrectFill.className = 'standing-fill-incorrect';
+      incorrectFill.style.width = (total ? (r.i / total) * 100 : 0) + '%';
+      bar.appendChild(correctFill);
+      bar.appendChild(incorrectFill);
+
+      var record = document.createElement('div');
+      record.className = 'standing-record';
+      record.textContent = r.c + '-' + r.i;
+
+      row.appendChild(teamCell);
+      row.appendChild(bar);
+      row.appendChild(record);
+      chart.appendChild(row);
+
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + r.name + '</td><td>' + r.c + '-' + r.i + '</td><td>' + pct + '%</td>';
+      body.appendChild(tr);
+    });
+  }
+
+  function render() {
+    renderWeekSelect();
+    renderStats();
+    renderGames();
+    renderHistory();
+    renderStandings();
+    renderAccuracy();
+  }
+
+  document.getElementById('weekSelect').addEventListener('change', function (e) {
+    currentWeek = Number(e.target.value);
+    render();
+  });
+
+  document.getElementById('addWeekBtn').addEventListener('click', function () {
+    var next = Math.max.apply(null, weeksAvailable().concat([0])) + 1;
+    currentWeek = next;
+    document.getElementById('addForm').classList.add('open');
+    renderWeekSelect();
+    var opt = document.createElement('option');
+    render();
+    document.getElementById('weekSelect').value = next;
+  });
+
+  document.getElementById('standingsToggle').addEventListener('click', function () {
+    var section = document.getElementById('standingsSection');
+    var tableMode = section.classList.toggle('table-mode');
+    this.textContent = tableMode ? 'View as Chart' : 'View as Table';
+  });
+
+  document.getElementById('accuracyToggle').addEventListener('click', function () {
+    var section = document.getElementById('accuracySection');
+    var tableMode = section.classList.toggle('table-mode');
+    this.textContent = tableMode ? 'View as Chart' : 'View as Table';
+  });
+
+  document.getElementById('addGameToggle').addEventListener('click', function () {
+    document.getElementById('addForm').classList.toggle('open');
+  });
+  document.getElementById('cancelAdd').addEventListener('click', function () {
+    document.getElementById('addForm').classList.remove('open');
+  });
+  document.getElementById('saveAdd').addEventListener('click', function () {
+    var away = document.getElementById('fAway').value.trim();
+    var home = document.getElementById('fHome').value.trim();
+    var date = document.getElementById('fDate').value;
+    var time = document.getElementById('fTime').value.trim();
+    var network = document.getElementById('fNetwork').value.trim();
+    if (!away || !home || !date) {
+      alert('Please fill in away team, home team, and date.');
+      return;
+    }
+    var id = 'w' + currentWeek + '-' + Date.now();
+    state.games.push({ id: id, week: currentWeek, away: away, home: home, date: date, time: time, network: network, pick: null, result: null });
+    saveState();
+    ['fAway', 'fHome', 'fDate', 'fTime', 'fNetwork'].forEach(function (f) { document.getElementById(f).value = ''; });
+    document.getElementById('addForm').classList.remove('open');
+    render();
+  });
+
+  render();
+})();
+</script>
