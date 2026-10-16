@@ -3,6 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="2026 Picks">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#f2f2f1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111213" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoiMjAyNiBORkwgUGlja3MiLCJzaG9ydF9uYW1lIjoiMjAyNiBQaWNrcyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMxMTEyMTMiLCJ0aGVtZV9jb2xvciI6IiMxMTEyMTMiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFnQUFBQUlBQ0FZQUFBRDBlTlQ2QUFBQUFYTlNSMElBcnM0YzZRQUFBQVJuUVUxQkFBQ3hqd3Y4WVFVQUFBQUpjRWhaY3dBQURzTUFBQTdEQWNkdnFHUUFBQ2ROU1VSQlZIaGU3ZDI5NjNWZFdoOXcvd3ZEZ0RwRmRHUklGRVlIY1l6UldHUUVqWUpCUVFhYm1jWUVpNmVRQnh1SEJHSTFRVWpTUkN5MEdwQzhGR3Jsa0dLcXhNWnBSQkN0TkUxc2duL0JIYTc3eVg3bVBPdDNYdFkrWjExcnYxeWY0c1BBUFBmNTdYMzJYbWV0NzNyYit6dSs4eDk4NmgwQVVNdDN0UDhIQUhCK0FnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFnQUFGQ1FBQUVCQkFzQ0pmTy8zZnViZHYvaTVuMy92TjcvNjFYZi83cmQrNjczLy9EdS84KzRiMy9pVGozM3RhMS83K0wvOTZyLzYxeDkvNWgvOTR4OTQ4emY1dHUvK25rOS9mSzIrL0pXdmZId052LzcxcjcrNXRuSDlsMy83bzEvNHNUZC9pN2VpL0MzWGJMbTJ5bSt1ZTJWNWNYa3Y0dC9HWjlxL3d6RUpBQWNXUDhRUFAveU45ei9hdi9pTFAzLzM5My8vZjE4V2YrZjNmLy8zM2xlc0dxNVB2ZnZKbi95cGQvL3hQLzJIZDkvNjFwKzl1VlpyL04zZi9aLzM5eWtxMEFnUzdYRXFXb0xxeVBJYjkya3B2NS83b2MrL09XWmwwVUdJOGhlQmFzVDFYc0xZTC83aUx5blRCeVVBSEV6OGdQL29qLy9velk4eHkxLy85Vis5KzIvLy9iKytQMjU3TG1jVkRkT29TdkthcW1FZ3ZtczB6Ti84NWpmZlhKTXNVWDdqV24vcFM3L3k1bndxbUhuTkkzaEZZRzdQZ2YwU0FBNGdlaktSdEtNeWEzOTBNMFdEK01FSEg1eTIwWXBHWXZZMWpqQVE5L2FzMXpURVNGSUVxci85MzMvejV2dlBGS01EMFJpMjUzZEdVV2RFZzd6Rk5ZK1JnYXFCNjJnRWdCMzc0ay8vOU5UZWZxOW9KR1BvTm9ZVTIzTStvbWlndHI3T2NVMWpLTFU5dHlPTDd6T2o1N2xXWE91WU9qdEwrYjBVNnlBaWJMWGZlUXNSdUtJT2E4K1IvUkFBZGlncXByMzhpTytKM3NXUmUxVFI2NDZGVGRFTGI3L2JWaUtJSEgweFc1VGY2SDIyMzIxdm92eWVaV29yeW5LTUpPMnBMQy9pTjlhZUwvc2dBT3pNRnNQUXI0cksvbWhEMkRIUG56WEgvNnFveEtPSDJwN3pFVVFnM0dMWStSVVJ0bzlXZmkvRkNOWWVSMW91eGZsWlZMdy9Bc0JPUks5djYySG9WOFJ3MzFGKzRERTB2Y2VlVXV0SVBhYzlUS084NG4vOTZmODhUUG05RkVIeENHVTV4SG1lYlpycjZBU0FIWWdGTzN2dGphNFJQL0M5VHdrY3BmRmZIQ0VFeE1ydm8vWDZyem5hbE1BUnBnbGI4ZHV6TG1BL0JJQ05uYVh4djdUWDRldWpOZjZMUFllQXN6VCtsL1llWW1PNjRzaWpMVkZlYkJmY0J3RmdRMmRzL0JkNzJ3WjAxTVovc2NjUWNNYkdQMFE1MmV2VDdtS0JaVXhYdE9kOE5FTEFQZ2dBR3psejR4K2lFdDNMRHp5R0hJL2MrQy8yRkFMTzJ2Z3Y0cnZ0YlUxQTlQeGpqMzE3cmtjVmk1M1B1Qlh6U0FTQURjUVArY3lOL3lKKzRGcy9qald1OWF1UDhkMlRQU3lpaWtyN2FEdFZuaEcvMFQxdHlUenlzUDh0c1k2aC9aN01Jd0JzSVBicnRqK0VzNHJHZDhzdFZtZTcxdEh3YnQwb3hic1Iydk02cXhodTM3TDhMbzY0NEsrWFJZSGJFUUFtaTJIRk13eEhyeEdOY0hzZFpvaUtwVDJYTTRobjI3ZmZkWllZK20vUDUreTJYdFFhaXhMYmN6cVRyVHNKbFFrQWs1MXBEcTlYQko0dGVxMW5XQ3gxeTFhTExNOThUVy9acXZ5R0toMkdQYTF2cVVRQW1DajJHTGNGdjRwNG8yQjdQVEpGQTltZXc1bEVROXgrNTJ6eElxajJQS3FJYVkvMmVtUTcyL3FWZXlMa0dBV1lUd0NZWk11RlUxR0p4TWhEMkhMeDRheGRBVnNzc3R6aTJzNGNCWWdlOEZhci9pUHNMT1YzcTk5UW1GVitGN1BYV2l6MVJEemFPNmFaWmo5ZU9BSm1ldzNJSlFCTU1xdjNGSlYwL0lCanRPSGVzR1g4dC9nM00xL1RPcXZYR25PMjdiRkhpeFhac1NLLzNTb1c0U1Aya01mYkVyT3Y2NnpyR2VMN3RNZlBFQTE4bE1rb20vZTJpTVh1a3BnYm4vbksyNW1qV1BIN25ESDBIMlVvNnFaNzF6cktlTnlQN05HSW1lV1pqd2dBazJTbjZhZ0VZeDd0M2cvNWx2aE1mSFpHUlRxakY1WFpTNHhLc0hjcjNveFhzODRhQmNpdS9KZFg5RDR6RER5ei9NN2ExaG85OFBiWUl6M3ordWtaYnh5Y1VUL3diUUxBQkZGcHRBVjlwQWdYOTNyN3ZlSnZaQWVWN01VK21YUC8wZHRzajljajh5bUVjYi9hNDQyV3ZmSS9ocDJmQ2E2dCtKMWxMMUtjc1NNZyszckhTTVlyMXp0R0JMS3VzK2NDekNVQVRCQ05YbHZRUjRtZXdqTzlwbHZpYjJYMlByS0grYUp5YTQ4NXdxdGI3eUlFdEg5emxIWWFZclRNWnlrOEc2cHV5WDVPZm9TVjlwaWpaWlhoTU9wNlI5aktHSEdKdjlrZWl6d0N3QVJadzZmUit4dlorQyt5Vng5bkRhTm16WnZHY09tSTY1eTFxQ3Q3aFhyV2xFcFdZeHE5MjZ6eUcrWHJsZDd6STVtamhhK0cyRmJXYUp0cGdIa0VnR1JaRDZPSnBKelZrSWJNL2NkWnEzMnpGcXFObW1lUEVKSFJtSTRLS05mRWdzYjJlQ05rUDlFd3MveG12aTB3YTdRbHdsWkdHY21ZQ3BneHpjSkhCSUJrV1Qvb0dUK1NyQjVyRE5HMnh4b2hvOWMzZXNvaWE0ZkNxSkRTaWlIajlsZ2pITG44anU1Skw3SUNZblFXc3NKV3hpakF6TjBXMVFrQXlUSVcxYzE2TWxuV2tIbzAxTzJ4WHBVMWREcTZvY3E2cHFQbWRsc1pQYnpNRVl0TFdkYzZhK29pNjBGaG84dHdhM1Jvc1E1Z0hnRWdXY1pDbWV3NTMwc1pDNUtpd21pUDg2cU01eXhremZkbTlLcmpJVVR0Y1Y0VmpYUjduQkZtbHQrTVIyOW5YT3VRc1hneHF3eGZ5dGpxYWgzQUhBSkFvcXhlYWN6THRzZktralZrM1I3blZSbEJKV3VxSW10SHdPamRBRm5iMFdaVzdoazdjS0pSYlkvenFnaGJHYU1WTThMV3lKR0xHREdOMExiMkdRVThSd0JJbERFL052dVoyVm1Od01nRmpIRTlNa1phc2haN1pWWDJvNGQ2UjFic2k5bkR1MW1MR0VmL0JqUHFpakFqYlBYV0VVdmpIaU1HRWN4aTFDN3VqOWNCYjBjQVNKU3hLajFyL3ZHZTloeEdHRmt4WlZYeUkwTktLK05aQzZQTFJzWUMxdGtMdkxKRzRVYVhqWXhwb2RFTFdHK0pNTFM4cTBIamZpd0NRS0tNU2o1Q1JYdWNiQm05MVpIVEdCblRGTms5MVNPY2M4YWM5T2hSaWg3dE9Zd3d1bUVidlpBdVpEOTFrK01UQUJKbHJLQ09ZZG4yT05reTNuSTNNZ0JrQksycytmOUYxdk1oUnE0RHlHaVV0cGpielpnZUdqbUMxVHVFdnRiSTN4am5KQUFreXRpWFBycm4wU01qQUl4c3FES3VjL2JpcWF3VjlxTUNZcHpmM3U5N3I0enZNWElLSUdNMGFQWmFJWTVKQUpna0d1NUk1RkZCeDlCY2lQblFtRGRiTTFJd1kvOS9LNk1DSGJVMUtmNU8rN2RIR05XUTNyUG12dmZLQ2k1UmR0dnlHNk1rYTh2dkZvMVN4aFJXZTR4WEhIbituMk1UQUhZbWhnT2pvbzJoMHFXaWpTSHVaWkZOKys5bmFDdVhWNDNjUnBXMUFIREdTRXZHMU1WV1pXU3hsTjlZMWQ2VzM5a0xBRVBHU012b3RSWkhITUhpSEFRQTdzcm9ZWTk4a0VyR1Rvc3djb2ozbG94VjlxTWJwNk9MS1lmMkdyMXFaUG5OK0gyRnJDMnNuSXNBd0YwWis1Tkh2c00rNHlsa29UMU9ob3k1M3pCcWV1VU1vaUZzcjgrclJvNnlaUHkrd3NoRmlweVhBTUJkR1Ezc3lLSGdqSzFxSTN0NDkyUThhQ2VvL0w4dFkzNTlaUG5OR3NIYVlxMEZ4eU1BY0ZmR0FzQ1IrNU16NWs5SGpsRGNrN1YrSWV2TmdFZTA5L0tiRWJBejNyWEJPUWtBM0pUVlFJM2NuNXl4d2p2cmRhK3RqUG5wc01YRGR2Ym9DT1UzNDJWRnp6ekRJcWFOMnNXYnl5NmwrTi9sLzR2L0h2L09LTk01Q0FEY2xQR0NuWkdMMUdKTFpQdjNSOGg2dFc0cjZ6RzFWb0IvWk8vbE4yU01VUFNXMzJqMFk0M0VzOWNwUmhwaUJHT0xoenN4aGdEQVZVZG9YTE9lcGpkeWlQZVI5dGdqakp5alBxb2psTitNTFlyaFVmbU5CdnZaUnYrV0NFWnhiWVNCWXhFQXVDcGpiaktNM0o2VXRZTDZVUVU2VXNZVXhxdzFESHQyaFBLYk5RVVVMK0pwanhVaUZHVThlNklWNWM4VXdURUlBTHlSOVd6eU1IS0xXc1lXcnpDeWtuOGtZd2g0MWk2R3ZUcEsrYzFhbzNCdEVXaUVnb3gzSXR3VElXems5V0k4QVlBM01oWW1oWkg3cDBQV0ZxcWpCNERSODlSSHMrYlJ4R3VNTHI5WkFmYnlLWmF4emlSNjVPMi9tU1hLb2tXcCt5VUE4QW5SVTJoL3hLT01yZ2hpcUw0OXhnZ3o1ekd6R3F2Mk9GVmtQVndwWE90WnZ5THJ0N1k4eFRMK055TmdQaU4ySm5nMndmNElBSHdzZWc0WmM5SWhWZ3lQcmdBeUh2SVNSbTd6ZWlScnRHV0xsMFp0TFd0SVBXUzhYQ2Nyd01idmJFK04veUt1b1NtQmZSRUFlQzhhakl6M3Z5L2l1ZmZ0TVYrVnRhQnA1Z0ttckFBdzQxMEdleExmTjNPT2UzVHZQMlFzVkl3QXY4ZkdmeEhudGNVcm9ibE9BT0I5S3M4YWlnNVJLV1gwU00vUWVHWjloNW1qR0Z1TDhwdnhSTWhGUnU4L1pJeGdSUWphYStPL2lIT2M4YlpOSGhNQWlvdmh3b3puNlYvSzJsYVgxWGpPREFCWjE3NUtBSWp5bTczSUxhUDNIN0xLN3hGRXAwQUkySjRBVU56b0I0SzBNdWIrRjFrVjZNd0FrTkVMREZVQ1FGYUFXbVQxL2tOVytUMktHS25JR0Jta253QlFXRmJqYytuV1EwbEd5QnIyUFVNQXlPcTE3a25XdGJ1VWVSMnJCNEF3ZW1zbDZ3Z0FSYzJvUExPZlNKYzExM21HQUREeldRWmJ5THB1bDdJYnA2d0FlelJaVTRROEpnQVVOS1B5akRtKzdOVytBc0J0Wnc0QVdkZnNVaXhVeXk0SFdlWDNpR1krZTROdkV3Q0ttVkY1aGhtcFBxc0N6YTc0TDJYZGo3TUdnS3pyMVpweC9iTEs3eXRpMUNOa2JnbStKZ0tYOVFEekNRQ0Z6S284WStnL2ErSGZwYXdLVkFEWXA2eHIxWXJuUzdUSHpwQlZmbnN0Yi9DN3Q4NGhSdkVpek0rWXJ2QWE2L2tFZ0NKbVZaNHpoazRYV1JYb3JQTVBXZmZsYkFFZzZ6cTFvdWM3NjJsMVdlVzN4ek12Nm9reWxUa3lrUFc4RUc0VEFBcVlWWG1HbVExUFZnVXFBT3hMMWpXNlp1YjJ5YXp5ZTA4Yzg1WDk5eEVhc3A3QUdZd0N6Q1VBbkZnTXcyZnY4NzhVRlhWN0RwbXlLbEFCWUI5bWw5L29GYmZua0Ntci9ONFN4eHRWdHJQS3JWR0F1UVNBazVyeGhMOUxzK2I5TDJWVm9LTXF5UjVaRmVuUkE0RHlPOWJJeG4rUlZYYmpOZC90c2NnaEFKeFFETlBOckR5amN0a2l0V2RWb0tNcnludXlLdEVqQjRBdHl1L2ErZkFSc3Nydk5SbFRHeEdZTXQ0aGt2bjBVRDVKQURpWjdCZjd0R0xJYnViYjh5NWxWYUF6QTBEVzArRHVyZXplczlubE54YXRaait2NHBhczh0dktlQlBuSXRZVHRNY2I0YWpsOTJnRWdCT1pYWGxHNDcvbEF6eXlLdEF6QklDTUhsKzJMY3J2VnVFMVpOMzdTek42MHhtdk5iWVljQTRCNENTaTBacXhWM2V4ZGVNZnNyNnZBREJmeGZLYmRlOHZaZmIrRnhHaTJ1TytLc3BDZXh6R0V3Qk9JQ3JQck43d0xYdVlZODZxUU04UUFGN1o2alhiN1BLN2g4WS9aTjM3UzdQS2NzYkl6YXh6cjB3QU9MalpsV2ZZUStNZnNyYUl6V3c4c3hxQm8xU2VzOHZ2WGhyL2tMbWZQbVMvek9qU2h4Lyt4cHZqdjJvdjljeVpDUUFIRmtOdm1VL21ha1hsdWFjZlpkWUsrcG5ENTdIOXJEMytDRnVzYWw5cmkvSzdsOFkvWk15ZFg1b3gvTCtJSU5jZS8xV3pueXRTa1FCd1VGRjV4Z3JtOWtlVFpXK1ZaNGdLcmozUEVXWUdnS3plYjN1Y3ZWRitQL1grR2Z2dGVZNDBleVg5NlBzWnY0MzJHSXdsQUJ5UXl2TWpXUlhvekZHT2pBQVF2ZXIyT0hzeXUvekdzZlpZZmpPR3pTL05malpIeG5SV2V3ekdFZ0FPSm5xbktzK1BSRVBkbnU4SU13TkFoS3YyK0svYWM4OXBpL0s3NVZhL2U3TEtiOWdpQk1iV3ZmWThYalU3eEZRakFCeElOTVFaRGNZdGU2NDh3NWUvOHBVMzV6eEM5TXphWTJWcGp6M0N6TVZmYXlpL254UmhxRDNuVWJZSWdSOTg4TUdiODNqVlVSYXpIcFVBY0JBcXo3ZXlLdENZV21pUGxTRWUwTkllZTRUWUhkRWVhMnV6eTI4MGdIdHZQT0lKaE8xNWp4TGI4dHJqWmNzSTVEUFg0MVFrQUJ4QU5NUXF6N2N5Vmg2SFdhdW5zODUvYjA5UmkyMlZ5dTliV1FFd2JERUtsQkhJOXpyOWVCWUN3TTdOWGpBVlQrQTZRdVc1YU05L2hGbmJqektlb0JabVRtRThNcnY4UnMvM0NGc2dGMW5iSU9ObFN1MnhzbVVFZ0pucmNTb1NBSFlzR21LVjUzMFpxK2huOVo2aWQ5TWVlNFRaMjc5dW1kMzR4MzA3V3ZuTmVnN0VyREo4S1dOS1kwOWg5b3dFZ0oyYS9ZUzA2REVjcmZJTUdWdVBaajJIUEdQUlZOakQybzBvdjFtOTIydGkzVVAyUzI4eVpEM01hb3MxQUJsVFdyUFc0MVFsQU96UTdNWS9Ia2w2eE1velpEeE9OWHF0N1hFeVpEM0hZT3NnTjd2OHpwcXl5WkJWQnJiWUJaQXhBbUFLSUpjQXNET3pYNGw2NU1velpGV2dNeHJSak43ZkZ2dS9MODF1L0djdDJNd1Mwelh0ZHhwaFZvaTlsTEVHSUhZV3RNZGhIQUZnUjZJWG5qVW5lTTNlVm9zL0k2c0NqZDVNZTZ6Uk1xWXZ0dHdDR09WM1puZzl3L0J3UE9pbS9WNmp6QjdWeXdnQXRnSG1FZ0IySkdNNCs1WXpWSjRoWTlneHpPaDVaTXlSYjNsZnM5N09lTTJaRm9kbGpaak1mS3RseUhpeTRZd2dYcGtBc0JPLytkV3Z2aW44V2VKWTdmR1BMR09sZWZiUWNsYlBiNnNkQUJtUGdiM2xiUFBDV2NGcGRraktXTlRxVWNDNUJJQWR5QnJHdnVac2xXZkltRGJKM2thVmRjKzNxREF6S3Y1YnpsaCtzMTRLTkh0OVQ4YnJqZHRqTUpZQXNMR1pUL2s3WStVWk1pcWU3RVZVR2E4eTNtSUJZTXpSS3IrdnlaZzdEN08yc3k1R0IvSHMzeUFDd0thaXQ1WTEvOWVhUFJ3NFU4YmNZOGljUXozREFzQ1pENm82YStNZllyRmUxbldjK1V5STBkOWhpMmNaVkNNQWJHaDBZcjVseTRWaE0yUThnQ1JrWGJlbzhETjZ6VE1ieWZnTzBjTnN6eUhEMmRhc1hKTzFBRGhHeDlwalpjaDRyUFVaZGludG5RQ3drYXo5NjYwcVA2S003V2RaUFpBenpQL1BXdlJYcGZ4bWpXSkYwSnp4VEl1TStteXJCYTJWQ0FBYm1QVjJ0QzFlQ0xLVnJBWXBZeHRTeGdPQVlqU3BQVTZXckRuclZxWHlHNDEwKy8xSG1UR0NNbm8wS09ySDJjOHhxRWdBbUd6VzBHbXNMWmlSL1BjaXExYzl1Z2NhOXlRai9HVk5WN1RpL0RPZVg5Q0szMGlsOGhzeTFvV0VLRzhaUVhZUkhacjJtSy9LM29YRFJ3U0F5VEpXckxmaUJ6OXo4YzhlWk0ycmorNkpaRzM1eWx5d2VDbHJydnBTZG9PMVYvSHdxZlphakpJNVFwUVJYR1lGMnVvRWdJbXlYdi9hcXZyanlXcWNSajBVS0lKRVJ1OTUxbmF2ckhucTFvd2g2ejNLS2grTFVlWDRVdFl6SUR3Q2VBNEJZS0tNaFdxdE9NYklIdXVSWkFXc1VTTXFXZXNVWmpTWTJZM1RJck9uZWdRWno0ZTROTEp6a1BVTWt5aG5WZXV3MlFTQVNUS0g5NDRvSytGbk5WSVJyRjZaazg3c1BjOVkvWjgxZFhGVVdlVTM2eEhSbDBhRWdHajhSKy83WDV6NW1TVjdJd0JNTUt2M2RDUlpGV2hXTHp0RTcvU1p4alpybURUTVdDbXYvTDZWVlg1RDFsVFdwU2czejVUbEVDTnRXWTEvakNnOGUxNnNKd0JNb1BmMFZsWUZHcFZIeHJEa0l2NTI5S0I2aGloallWNzJ3NTVtN0pXZSthS3FvOGdxdnlHN0RDOGkxSzE1NjJXY1Y4WVcxa3VqZDkxd253Q1FUTy9wdXN3S05ITVVZQkgzTklKQU5NRExpdlc0MS9HOUl2RE42TVZsUGFqbzBxekc2R2d5eTIrWVVZWVgwWnVQM1VuUnM3OWM2N0tVNXhqQmloR0Q5bk9qNmYzUEp3QWt5eHorUGJMTUNyUktvelZpWWVJalJxK3V5eXkvSWNwd3RZNkQzdjk4QWtDeUdTdi9qeWk3QXAzWmc5ckNyQmYvekhwWjFkRmtsOStRdVhCMGIvVCt0eUVBSk1wNFFjWlpaRmVnczU1WXQ0VlIyeElmeWRwV2VRYlo1WGN4WXlwcEQyS2t0UDN1NUJNQUVtVXZtRG15R1JYb1dSdXdFZHU0ZXNRb1EzdHNQaktqL0lZSXNtY2ZoWm4xeGtMZUVnQ1NWSm1IZnRhc0NuVEdvNWRuaWwwRlBUc1FYalZqUC9xUnpTcS9JWTUxMXJwa1Zubm1PZ0VnU2FYNXUyZk1xa0NqY2puTE9veVp6OGkzK08rK1dlVjNjY1lIaWNVVW5Ybi9iUWtBU1F6LzN6ZXpBbzFLNWd6RHFCRXEyKytXWmNhMnJ5T2JXWDRYWndwbEVXWm52Y0NLMndTQUpGbFB5anFMMlJYbzUzN284NGUrSnpNYi82dzNLNTdKN1BLN3lINVh3QXhSdG1hV1oyNFRBQkprdkIvN2JMYW9RR1BsL0JGM0JzeXVMT1BldE9mQUoyMVJmaGRISGdtSUVLN252eDhDUUlKWXBkMFdmRDVwcXdvMFJnS09OQjB3dS9FUFozK0d3Z2hibGQ5RnJBazQyaWhOck1XSjMxLzdYZGlPQUpEQS9PbGpXMWFnc2JVcSt4bjlJMnpSK0llekxKck10R1g1WFVSUCtsdmYrck0zNTdaSHNhWDBsYmRwa2tNQVNIREVZZWJaOWxDQjduVStOY3JQakpmODNISzBudVVXOWxCK1F6U3FlMTl3SEwrejlyelpCd0Znc1BoQnRqOEEzdHBMQlJxOXFEMU5DVVJsdVdWUHlmNy9QbnNwdjR0NDZOV2V5bkdJWHYrc2JhczhSd0FZekFMQVBudXFRR1BWZTd6eWRzdGRBdC80eHAvc29ySTg2OU1UUjl0VCtiMFVDd1MzSG9HTXNyelg2OE1uQ1FDRGVmdGZuejFXRU5IempoNzR6QW8wNW5EWHZKTTkyNUZYbU0rMHgvSzdpSEljZ1hiMmlFQ3NIZGx5Nm9yMUJJREJvbUtJWFFEY3QvZlZ3TkVvWnowTFB5ckthR2ozME9OdnhRaEFlNjk0YSsvbGR4SDNNMTRvbERXNkZRdWU5MXFXZVV3QWdEdGllaUI2TmZGT2dSamFiQ3ZBSGpHaUVCVmxqQTRkcGVIZ2ZHSjZNa1lHb2h3L084b1Zvd3J4VzRqZmhHZjRINThBQUN2RlFya1k2UWxSb1Y3MkRLUEhGZisvaDUxd0JFczVqaTJubCtVNHd1cnkzL1R1ejBzQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCQUFBS0VnQUFJQ0NCSUFUK0lOLy96UHYvdklQdndRd3pUZC83MSsrcVlzNEZnSGdCQVFBWURZQjRQZ0VnQk1RQUlEWkJJRGpFd0JPUUFBQVpoTUFqazhBT0FFQkFKaE5BRGcrQWVBRUJBQmdOZ0hnK0FTQUUvZ25QL3g5Nzc3NEU1OEZtT2FmZmVINzM5UkZISXNBQUFBRkNRQUFVSkFBQUFBRkNRQUFVSkFBQUFBRkNRQUFVSkFBQUFBRkNRQUFVSkFBQUFBRkNRQUFVSkFBQUFBRkNRQUFVSkFBQUFBRkNRQUFVSkFBQUFBRkNRQUFVSkFBQUFBRkNRQUFVSkFBQUFBRkNRQUFVSkFBQUFBRkNRQUFVSkFBQUFmMTR6L3ltWGRmL0luUHZ2dlZYLzc4Si96S3ozL3UvWC83N0djKy9lWXozQmJYTExUWE0vekNGMy9BTmVWMEJBQjI2VlpGL0t5bEFoOVppY2ZmYkkvVGFqL3ppamp2WC8veUY5NzlsOS8rMlhkLytZZGY2dmJiSC83VSszTnQvOTR6ZXU1TC9KdjJjODlvLys0OUVYcmF6ejhTMXpNKzk3di85cCsvdVdhUC9KdGYrNmZEcmlsc1JRQmdsNkpTYnl2ZDBhTGlqMHI4MDkvelhXK08zNk9uNFdnLzg0eG9VSHVPMVNPdTY3UGZOL1RjbC9nMzdlZldpZ2EyL2J2My9QQVAvc00zZitPV2FQalgvdjE3Um54ZjJJSUF3QzcxTkRRanhWQjZldzZQOURUSzdXZldpSWFxNXhoci9ZL2YvWVduZStrOTkrWFZCbkZ0NDd5bThlODUvMmZFcU15YTg0QTlFQURZcGF5SytwNW9lTnJ6dUtlbmNXNC8weXRHSnRxL05kb3pEWFhQZlhubTd5NWlTTDc5ZS9lc2FYVFhCb3RuckRrZjJKb0F3QzcxTkRRWjFvU0FyQUF3by9GZnJQbStvZWUrUEJzQTFuN3ZOWTF0ckoxb1A1OWx6WG5CbGdRQWRxbW5vY2tTalVWN1B0ZGtCSUMxamVBSWF4cnNudnV5NXU4dDFuN3ZOVk0yOFcvYnoyZUtLWlpYMWxuQUxBSUF1OVRUMEdUcW1TTWZIUURXTm9JajlYemYwSE5mMWdhQTZERzNmK09ldGF2dm8wRnUvMGEyM2hBSld4SUEyS1dlaGlhR3IrUGYzUk5iNEhvYTZsWjhwajJuVnMvZmJUOXpTeXo0YXovYkk4N2g4dnMrczAwd3hHZmFjN3FtNTc2c0NRRFpqZi9hVUJYWG9TMVhjVTE3N25YTEtBQjdKd0N3U3owTlRXK3ZkUkdOd1pyZTRLUG5CZlEwQ3UxbmJ1bjVXNHRvcEI0MWhISHVQZGZ3MHFPL0dYcitabThBV0J0NmVzNnZGUUd3L1R2WHhEay9hckRqdi9kOC84VXp6eWFBbVFRQWRxbW5vbDBiQUVKVTRyMDk1RWNWZUUrajNYN21talc5MU43R2RSRTk3Tjd2RytHby9YeXI1Nzcwbk9PYSt4Q2VhZnhEKzNldVdidG9yM2ZVb25kVUJiWWlBTEJMUFEzTk13RWdST1BUL3Excm92ZllmdmJTcUFEUU95cnhiQ080cHJGOTFCajIzSmRIQVdETitZUkhRZXlXbm9iNjJXdmFjeDFDK3puWUV3R0FYZXFwWUo4TkFLRm5XOWlqSHR5SUFCRGZvZjNNTmM4MmdvdWV4akE4V3J6V2MxOGVCWUNlNjdaWXUwM3hVcysxZmJZTTlZYklaLzgrekNBQXNFczlEYzBybFd0UDR4RGF6MTNxYWNqYXo3UjZIazd6S0lqMGVuU3NPTTZqb05GelgrNEZnRWZuY09tVnhqLzAzT00xMndsYlBkL2xsVElLMlFRQWRxbW5vWG1sY3UxcEhFTDd1VXNqQWtENzc2OTVwWkc2MUM2NlczWVF4TFY0dEFCdTBYTmZiZ1dBbmdaejhXcmpIM3BHUFNMMDlINzNWbHkzK0s3M1BGcElDbHNTQU5pbG5vYm02QUZneERtc0ZUMzhSL1A4OS9UY2wyc0JZTTBqZmtjMC9vdjJiMThUSVVCRFRVVUNBTHZVMDlDOEVnQjZudzdYZnU3U3F3R2c1enVPYkF4SDZEbm5OZ0NzMmVVdyt2djIzS1BGOHRya1owY0U0R2dFQUhhcHA2RjVKUUQwREVjL2VoaFFUK1BTZnVaU3p4NzFSM1B5cy9YY2w4c0EwQnUwd3FpMURwZldoSTlMY1c5ZUhTMkJ2Uk1BMktXZWh1YlpBTkRPaGQveXFEZjZhZ0RvK2Z5ejN6Rkx6MzFaQWtEUEhQemlsYm40ZStKdjltNnp2R2NKQktZS09CTUJnRjNxYVdpZWFSelg3RUYvdEVlOHB3RnZQM09wL2JmWFpEU0tyK2k1TC9GdjFqVCtJZk1GT210R0lYckV1Y1oyU2FNREhKMEF3QzcxTkRSckFrQTBMbXVIZ3g4MVNETUNRUHVacmZYY2w1NW5MRnp6NkJrRXIraVo4bmxHaElFWUdYaFVWbUNQQkFCMnFhZWhhVi9hMGxwZTR0TGI0NyswREdQZkl3Q010eWJVclpVVkFoWTlaUWIyUkFCZ2w3SWJta2Q2ZW5RQ3dIZ1pDd0V2UFRzNjBjdVdRbzVFQUdDWHNodWFlM3A3b1FKQWp1eWVkTnpmbm52M0N1c0RPQUlCZ0YyYTBkQmM4MmpoMzZXZVJxVDl6S1gyMzE3VGZtWnJzKzdMakFZMGdrRFBWc3huOVl3aXdaWUVBSFpwVmtOemFlMGpkd1dBZFdMQlhPOUN6T3lwZ0VzeFpCOEwrWHJ1NXhxUDNpWUpXeE1BMktWWEdwcTFZbkhZTTcyMW5nYWovY3lsOXQ5ZXM3ZjU1RmZ1eTlLcjc3bHVJWHNxNEpvb0J4RUVZNjNBTTR0SFc3M1RTYkFGQVlCZGVxV2g2UkdWZTFUeXJ6U3dQUTFaKzVsTFBRK28yVnNEOHV4OXVSelNYL09NZ0ZmdXp3akw5dEVJaVQzM3EyVVVnRDBUQU5pbG5vYm0wVGJBUlF6dlJrTWFSczR0dnhvQWVqNC8rbEhBY1ExZWFWUjc3a3ZyMmpYdlhZMGYxNmo5N0piaXU2emRUdmpNNkJMTUlBQ3dTejBOemRhOTQ1NEd2UDNNcFo1R2NIUVBjbG4wRmlNZ3p6emF0dWUrWExyVytJZG9GTnQvZTh2b0VEUkNuSC92QXNLMWEwdGdGZ0dBWGVwcGFJNGVBSG9mVWR0KzdsbTNHdDM0SHIxdndldTVMNHRiamYraWQwRmdXQnRVcm9tL0VXVW1qanVxVWU1Wkp4RFhyUDBjN0lFQXdDNzFORFJIRHdDM0d1VFdtcTJKOS9RMHVJOUdISHJ1UzNqVStDOTZHdEN3ZGlvZ3ZtdDhsMXYzYU5RdWc1NXJLZ0N3VndJQXU5VFQwQnc5QUlTZVllUllmTlorN2hrOWk5aEdCSUExei9TUGU5aCsvcFkxUWFqbjN2U01lRHpTYy80Q0FIc2xBTEJMUFEzTkdRSkFUdzh5dkRvUDNuTTl3Nk5HdHVmdnJHM3cxaXlxNjIyMGU5WlhyRDNQYXdRQWprd0FZSmQ2R3BvekJJRFFmdWFXUjQzekxiMXJEY0tqQnJibnZxeHQ4SHFuUXNLakVZcEY3M2QrOUgwZm1SVTBJSU1Bd0M3MU5EUm5DUUE5MzNXeGRpU2dkNFFoOUF6ZDk1enJNdzFlejk5ZDlDemc2dzBWdllIaW10N25HVHdiM0NDYkFNQXU5VFFJWndrQW9XZCtmaEhIZmRRSVJ1UFVzNzdnVWs5dnVPZStQQk1Bd3BwcjBIT3V2ZC8vbVNkQjlqYitZY1FPQnNnZ0FMQkxQUTNObVFKQXoxenlOWEVPY2EwV3p6NnhycmZSN3JrdnZYK3J0ZVlhOVBUYzE0eCtMTzhwYVA5R0t4cnpubXV3V0x0N0FXWVNBTmlsbmtyMlRBRWd4UEIrKy9rWjFteUo2N2t2endhQTBOdHJEejMzLzVrd0ZQYzFwa011ZzFXY1YrK1d4VXM5b1FLMklnQ3dTejBOVFU4RGtHbDBBQWhyVnNTUDBydG5QL1RjbDFjQ1FQU3cyNzkzU3pUdWo0YnUxNHdxakxZbVdNRVdCQUIycWFlaE9XTUFDRE5Ed0pyR1AvVGNsMWNDUU84eEZqMExGM3RXNm1kWWUyMWhOZ0dBWGVwcEJNNGFBTUtNNllCbkdxaWUrL0pxQUloZS9acWgrNTV5OE16dy9Tc00vWE1FQWdDNzFOUFE5RlQ4bVRJRFFJZ0dPcVBoaXZOK05IUitTODk5ZVRVQWhONTkvS0ZuS2lEK2U4LzlHa0hqejFFSUFPeFNUME56OWdDd2lBWmxUWS80bGpqZlY2OVp6MzBaRVFCQ3ovVmRlOHllODM5VzNLTlhyeS9NSkFDd1N6MFY5ZGFWYlU4RDFYN21GZkY5MTI3eml4R0VtQU4vWnJqL21wNzcwdHNZUDdKbXIzM28vWTZ4MEhEME9vdjR6bzlHSVdCdkJBQjJLUnE3cUZUdjJmb0JLOUV6YjgrcDFYNW1sR2hzNGhyRldvSDJtSEZlOGQ4eUdxU2Urekl5bVBWYzQ4V2poeU8xb3Z6RTllc0pjcTBJWVJFaTFoNFQ5a1FBQVBqL0l3NjNRdFVTTUxLQ0ZXeEJBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDaElBQUNBZ2dRQUFDam8vd0hLeXdBZDM1d2xZd0FBQUFCSlJVNUVya0pnZ2c9PSIsInNpemVzIjoiNTEyeDUxMiIsInR5cGUiOiJpbWFnZS9wbmciLCJwdXJwb3NlIjoiYW55In1dfQ==">
 <title>26' NFL PICK'EM TRACKER</title>
 </head>
 <body>
@@ -426,92 +435,326 @@
     .game { grid-template-columns: 1fr; }
     .result-col { align-items: flex-start; flex-direction: row; justify-content: space-between; }
   }
+
+  /* ---------- app shell: tabs, panels, new features ---------- */
+  html { -webkit-text-size-adjust: 100%; }
+  button, select, input, textarea { touch-action: manipulation; }
+  button { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .wrap { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+  .wrap [data-view] { display: none; }
+  .wrap[data-tab="picks"] [data-view="picks"],
+  .wrap[data-tab="stats"] [data-view="stats"],
+  .wrap[data-tab="friends"] [data-view="friends"] { display: block; }
+
+  .tabbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .tabbar-inner { display: flex; max-width: 880px; margin: 0 auto; }
+  .tabbar button {
+    flex: 1;
+    background: none;
+    border: 0;
+    border-top: 3px solid transparent;
+    padding: 14px 8px 13px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .tabbar button[aria-current="page"] { color: var(--text); border-top-color: var(--accent); }
+
+  .data-note { font-size: 12px; color: var(--muted); margin: -12px 0 18px; }
+
+  .lean-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 14px;
+    flex-wrap: wrap;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .lean-bar:empty { display: none; }
+  .lean-bar strong { color: var(--text); }
+  .lean-bar .sub { margin-top: 2px; }
+
+  .meta .lean { color: var(--text); font-weight: 600; }
+  .meta .final { color: var(--text); font-weight: 700; }
+  .flag {
+    background: var(--gold-bg);
+    color: var(--text);
+    border-radius: 999px;
+    padding: 1px 8px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+  .panel h2 {
+    font-family: "Arial Narrow", "Helvetica Neue Condensed", Impact, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 18px;
+    margin: 0 0 4px;
+  }
+  .panel label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin: 10px 0 4px;
+  }
+  .panel input[type="text"] {
+    width: 100%;
+    font: inherit;
+    padding: 9px 10px;
+    border-radius: 7px;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--text);
+  }
+  .panel textarea {
+    display: block;
+    width: 100%;
+    font: 12px/1.4 ui-monospace, Menlo, Consolas, monospace;
+    padding: 8px 10px;
+    border-radius: 7px;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--text);
+    resize: vertical;
+    margin: 8px 0;
+    word-break: break-all;
+  }
+  .panel .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .msg { font-size: 12px; min-height: 16px; margin-top: 8px; color: var(--muted); }
+  .msg.ok { color: var(--text); font-weight: 600; }
+  .msg.err { color: var(--brick); font-weight: 600; }
+  .friend-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 0;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .friend-row:first-child { margin-top: 10px; }
+  table.hist tr.me td { font-weight: 800; background: var(--surface-2); }
+  table.hist td.n, table.hist th.n { text-align: right; }
+
+  .split-row {
+    display: grid;
+    grid-template-columns: 108px 1fr 92px;
+    align-items: center;
+    gap: 12px;
+    padding: 5px 0;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .split-row .record { text-align: right; font-variant-numeric: tabular-nums; font-size: 12px; color: var(--muted); }
+  .split-group { margin-bottom: 18px; }
+  .split-group h3 {
+    margin: 0 0 6px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  @media (max-width: 560px) {
+    .btn { min-height: 40px; }
+    .mini-btn { min-height: 36px; padding: 6px 10px; font-size: 12px; }
+    .team-btn { min-height: 44px; }
+    .split-row { grid-template-columns: 88px 1fr 80px; gap: 8px; }
+    .tabbar button { padding: 15px 8px 14px; }
+  }
 </style>
 
-<div class="wrap">
+<div class="wrap" id="app" data-tab="picks">
   <div class="masthead">
     <h1>2026 Picks</h1>
     <div class="tag">2026 Season · Straight-Up Tracker</div>
   </div>
 
-  <div class="stat-row">
-    <div class="stat accent"><div class="num" id="statPct">—</div><div class="label">Correct %</div></div>
-    <div class="stat"><div class="num" id="statRecord">0-0</div><div class="label">Overall Record</div></div>
-    <div class="stat"><div class="num" id="statWeekRecord">0-0</div><div class="label">This Week</div></div>
-    <div class="stat"><div class="num" id="statPending">0</div><div class="label">Pending</div></div>
+  <div data-view="picks">
+    <div class="stat-row">
+      <div class="stat accent"><div class="num" id="statPct">—</div><div class="label">Correct %</div></div>
+      <div class="stat"><div class="num" id="statRecord">0-0</div><div class="label">Overall Record</div></div>
+      <div class="stat"><div class="num" id="statWeekRecord">0-0</div><div class="label">This Week</div></div>
+      <div class="stat"><div class="num" id="statPending">0</div><div class="label">Pending</div></div>
+    </div>
+    <div class="data-note" id="dataNote"></div>
+
+    <div class="week-bar">
+      <select id="weekSelect" aria-label="Week"></select>
+      <button class="btn" id="addGameToggle">+ Add Game</button>
+      <div class="spacer"></div>
+      <button class="btn" id="addWeekBtn">+ New Week</button>
+    </div>
+
+    <div class="lean-bar" id="leanBar"></div>
+
+    <div class="add-form" id="addForm">
+      <div class="grid">
+        <div><label>Away Team</label><input id="fAway" placeholder="e.g. Dallas Cowboys"></div>
+        <div><label>Home Team</label><input id="fHome" placeholder="e.g. New York Giants"></div>
+        <div><label>Date</label><input id="fDate" type="date"></div>
+        <div><label>Time (ET)</label><input id="fTime" placeholder="e.g. 8:20 PM"></div>
+        <div><label>Watch On</label><input id="fNetwork" placeholder="e.g. NBC"></div>
+      </div>
+      <div class="row-actions">
+        <button class="btn" id="cancelAdd">Cancel</button>
+        <button class="btn primary" id="saveAdd">Save Game</button>
+      </div>
+    </div>
+
+    <div id="gamesArea"></div>
   </div>
 
-  <div class="week-bar">
-    <select id="weekSelect"></select>
-    <button class="btn" id="addGameToggle">+ Add Game</button>
-    <div class="spacer"></div>
-    <button class="btn" id="addWeekBtn">+ New Week</button>
+  <div data-view="stats">
+    <div class="stat-row">
+      <div class="stat"><div class="num" id="statStreak">—</div><div class="label">Current streak</div></div>
+      <div class="stat"><div class="num" id="statBestStreak">—</div><div class="label">Best win streak</div></div>
+      <div class="stat"><div class="num" id="statBestWeek">—</div><div class="label" id="statBestWeekLbl">Best week</div></div>
+      <div class="stat"><div class="num" id="statWorstWeek">—</div><div class="label" id="statWorstWeekLbl">Worst week</div></div>
+    </div>
+
+    <div class="history">
+      <h2>Week by Week</h2>
+      <div class="overflow">
+        <table class="hist">
+          <thead><tr><th>Week</th><th>Record</th><th>Pct</th></tr></thead>
+          <tbody id="histBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="standings" id="splitSection">
+      <div class="standings-head"><h2>Where Your Picks Hit</h2></div>
+      <div class="standings-sub">Your accuracy on games that have a final result, split a few ways.</div>
+      <div class="standings-legend">
+        <span><i class="correct"></i>Correct</span>
+        <span><i class="incorrect"></i>Incorrect</span>
+      </div>
+      <div class="split-group"><h3>By the side you picked</h3><div id="sideSplit"></div></div>
+      <div class="split-group"><h3>By game day</h3><div id="daySplit"></div></div>
+    </div>
+
+    <div class="standings" id="standingsSection">
+      <div class="standings-head">
+        <h2>Predicted Records by Team</h2>
+        <button class="btn" id="standingsToggle">View as Table</button>
+      </div>
+      <div class="standings-sub">How often you picked each team to win vs. lose, across every game on their schedule.</div>
+      <div class="standings-legend">
+        <span><i class="win"></i>Picked to win</span>
+        <span><i class="loss"></i>Picked to lose</span>
+      </div>
+      <div id="standingsChart"></div>
+      <div class="overflow">
+        <table class="hist">
+          <thead><tr><th>Team</th><th>Predicted Record</th><th>Win %</th></tr></thead>
+          <tbody id="standingsBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="standings" id="accuracySection">
+      <div class="standings-head">
+        <h2>Pick Accuracy by Team</h2>
+        <button class="btn" id="accuracyToggle">View as Table</button>
+      </div>
+      <div class="standings-sub">Of the games you've called for each team, how many you actually got right.</div>
+      <div class="standings-legend">
+        <span><i class="correct"></i>Correct</span>
+        <span><i class="incorrect"></i>Incorrect</span>
+      </div>
+      <div id="accuracyChart"></div>
+      <div class="overflow">
+        <table class="hist">
+          <thead><tr><th>Team</th><th>Record</th><th>Accuracy</th></tr></thead>
+          <tbody id="accuracyBody"></tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
-  <div class="add-form" id="addForm">
-    <div class="grid">
-      <div><label>Away Team</label><input id="fAway" placeholder="e.g. Dallas Cowboys"></div>
-      <div><label>Home Team</label><input id="fHome" placeholder="e.g. New York Giants"></div>
-      <div><label>Date</label><input id="fDate" type="date"></div>
-      <div><label>Time (ET)</label><input id="fTime" placeholder="e.g. 8:20 PM"></div>
-      <div><label>Watch On</label><input id="fNetwork" placeholder="e.g. NBC"></div>
+  <div data-view="friends">
+    <div class="panel">
+      <h2>Leaderboard</h2>
+      <div class="standings-sub">Everyone is scored the same way: on your picks against the official final scores.</div>
+      <div class="overflow">
+        <table class="hist">
+          <thead id="lbHead"></thead>
+          <tbody id="lbBody"></tbody>
+        </table>
+      </div>
+      <div class="msg" id="lbNote"></div>
     </div>
-    <div class="row-actions">
-      <button class="btn" id="cancelAdd">Cancel</button>
-      <button class="btn primary" id="saveAdd">Save Game</button>
-    </div>
-  </div>
 
-  <div id="gamesArea"></div>
+    <div class="panel">
+      <h2>Your Share Code</h2>
+      <label for="myName">Your name</label>
+      <input type="text" id="myName" maxlength="24" placeholder="e.g. Brian" autocomplete="off">
+      <div class="standings-sub" style="margin-top:10px">Text or email this code to a friend. They paste it into the box below on their own Friends tab.</div>
+      <textarea id="shareCode" readonly rows="3" aria-label="Your share code"></textarea>
+      <div class="actions"><button class="btn" id="copyShare">Copy my code</button></div>
+      <div class="msg" id="shareMsg" role="status"></div>
+    </div>
 
-  <div class="history">
-    <h2>Week by Week</h2>
-    <div class="overflow">
-      <table class="hist">
-        <thead><tr><th>Week</th><th>Record</th><th>Pct</th></tr></thead>
-        <tbody id="histBody"></tbody>
-      </table>
+    <div class="panel">
+      <h2>Add a Friend</h2>
+      <textarea id="friendCode" rows="3" placeholder="Paste a friend's code here (starts with GP1:)" aria-label="Friend's code"></textarea>
+      <div class="actions"><button class="btn primary" id="addFriend">Add to leaderboard</button></div>
+      <div class="msg" id="friendMsg" role="status"></div>
+      <div id="friendList"></div>
     </div>
-  </div>
 
-  <div class="standings" id="standingsSection">
-    <div class="standings-head">
-      <h2>Predicted Records by Team</h2>
-      <button class="btn" id="standingsToggle">View as Table</button>
-    </div>
-    <div class="standings-sub">How often you picked each team to win vs. lose, across every game on their schedule.</div>
-    <div class="standings-legend">
-      <span><i class="win"></i>Picked to win</span>
-      <span><i class="loss"></i>Picked to lose</span>
-    </div>
-    <div id="standingsChart"></div>
-    <div class="overflow">
-      <table class="hist">
-        <thead><tr><th>Team</th><th>Predicted Record</th><th>Win %</th></tr></thead>
-        <tbody id="standingsBody"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="standings" id="accuracySection">
-    <div class="standings-head">
-      <h2>Pick Accuracy by Team</h2>
-      <button class="btn" id="accuracyToggle">View as Table</button>
-    </div>
-    <div class="standings-sub">Of the games you've called for each team, how many you actually got right.</div>
-    <div class="standings-legend">
-      <span><i class="correct"></i>Correct</span>
-      <span><i class="incorrect"></i>Incorrect</span>
-    </div>
-    <div id="accuracyChart"></div>
-    <div class="overflow">
-      <table class="hist">
-        <thead><tr><th>Team</th><th>Record</th><th>Accuracy</th></tr></thead>
-        <tbody id="accuracyBody"></tbody>
-      </table>
+    <div class="panel">
+      <h2>Backup &amp; Restore</h2>
+      <div class="standings-sub">Your picks are saved in this browser only. Copy this backup code somewhere safe (a notes app, or an email to yourself) so a new phone or a cleared browser doesn't wipe them.</div>
+      <textarea id="backupCode" readonly rows="3" aria-label="Your backup code"></textarea>
+      <div class="actions"><button class="btn" id="copyBackup">Copy backup code</button></div>
+      <label for="restoreCode">Restore from a backup code</label>
+      <textarea id="restoreCode" rows="3" placeholder="Paste a backup code here (starts with GPB1:)"></textarea>
+      <div class="actions"><button class="btn" id="restoreBtn">Restore picks</button></div>
+      <div class="msg" id="backupMsg" role="status"></div>
     </div>
   </div>
 </div>
+
+<nav class="tabbar" aria-label="Sections">
+  <div class="tabbar-inner">
+    <button data-go="picks" aria-current="page">Picks</button>
+    <button data-go="stats">Stats</button>
+    <button data-go="friends">Friends</button>
+  </div>
+</nav>
 
 <script>
 (function () {
@@ -876,6 +1119,111 @@
     ]
   };
 
+  // ---------------------------------------------------------------------
+  // Official results and odds leans. These ship inside the file and are
+  // refreshed by replacing the file; nobody has to mark winners by hand.
+  //   results:  AWAY@HOME:a|h|t   (a = away won, h = home won, t = tie)
+  //   leans:    AWAY@HOME:a|h|t:spread   (side the betting line favors)
+  // ---------------------------------------------------------------------
+  var DATA_AS_OF = 'Oct 15, 2026';
+  var RESULTS_THROUGH = 5;
+
+  var RESULTS_RAW = {
+    1: 'NE@SEA:h SF@LAR:a CHI@CAR:a TB@CIN:h NO@DET:h BUF@HOU:a BAL@IND:a CLE@JAX:h ATL@PIT:h NYJ@TEN:a ARI@LAC:a MIA@LV:h GB@MIN:h WAS@PHI:h DAL@NYG:h DEN@KC:h',
+    2: 'DET@BUF:h CAR@ATL:a NO@BAL:a MIN@CHI:a CIN@HOU:a PIT@NE:h GB@NYJ:a CLE@TB:a PHI@TEN:a JAX@DEN:h LV@LAC:a SEA@ARI:a WAS@DAL:h MIA@SF:h IND@KC:h NYG@LAR:h',
+    3: 'ATL@GB:a LAC@BUF:h CAR@CLE:h NYJ@DET:h HOU@IND:h NE@JAX:h KC@MIA:a TEN@NYG:h CIN@PIT:h SEA@WAS:h ARI@SF:h MIN@TB:a LV@NO:a BAL@DAL:a LAR@DEN:h PHI@CHI:h',
+    4: 'PIT@CLE:h IND@WAS:a TEN@BAL:h NE@BUF:a NYJ@CHI:h JAX@CIN:a DAL@HOU:a ARI@NYG:h LAR@PHI:a GB@TB:a MIA@MIN:h KC@LV:a LAC@SEA:h DEN@SF:h DET@CAR:h ATL@NO:a',
+    5: 'TB@DAL:a PHI@JAX:h CIN@MIA:a LV@NE:h MIN@NO:a CLE@NYJ:h IND@PIT:h HOU@TEN:a NYG@WAS:t CHI@GB:h DEN@LAC:a DET@ARI:a SF@SEA:a BAL@ATL:a BUF@LAR:a'
+  };
+
+  var LEANS_RAW = {
+    6: 'SEA@DEN:a:2.5 HOU@JAX:h:2.5 CHI@ATL:a:1.5 BAL@CLE:a:3.5 TEN@IND:h:7 NYJ@NE:h:7.5 NO@NYG:a:1.5 CAR@PHI:a:3.5 PIT@TB:t:0 ARI@LAR:h:12.5 LAC@KC:h:8.5 BUF@LV:a:4.5 DAL@GB:h:1.5 WAS@SF:h:7.5',
+    7: 'NE@CHI:h:1.5 PIT@NO:a:2.5 CIN@BAL:h:3.5 CLE@TEN:h:2.5 IND@MIN:h:2.5 MIA@NYJ:h:2.5 NYG@HOU:h:5.5 SF@ATL:a:4.5 TB@CAR:a:1.5 DEN@ARI:a:7.5 GB@DET:h:2.5 LAR@LV:a:7.5 KC@SEA:h:3.5 DAL@PHI:h:3.5'
+  };
+
+  var LEAN_NOTES = {
+    6: 'Lines as of ' + DATA_AS_OF + '. Steelers–Buccaneers is a toss-up because sources disagree.',
+    7: 'Early look-ahead lines. They will move before kickoff.'
+  };
+
+  var ABBR = {};
+  Object.keys(TEAM_INFO).forEach(function (n) { ABBR[TEAM_INFO[n].abbr] = n; });
+
+  function gkey(g) { return g.week + '|' + g.away + '|' + g.home; }
+
+  function sideFromCode(c) { return c === 'a' ? 'away' : (c === 'h' ? 'home' : 'tie'); }
+
+  var OFFICIAL = {};
+  Object.keys(RESULTS_RAW).forEach(function (wk) {
+    RESULTS_RAW[wk].trim().split(/\s+/).forEach(function (tok) {
+      var m = /^([A-Z]+)@([A-Z]+):([aht])$/.exec(tok);
+      if (!m || !ABBR[m[1]] || !ABBR[m[2]]) return;
+      OFFICIAL[wk + '|' + ABBR[m[1]] + '|' + ABBR[m[2]]] = sideFromCode(m[3]);
+    });
+  });
+
+  var LEANS = {};
+  Object.keys(LEANS_RAW).forEach(function (wk) {
+    LEANS_RAW[wk].trim().split(/\s+/).forEach(function (tok) {
+      var m = /^([A-Z]+)@([A-Z]+):([aht]):([0-9.]+)$/.exec(tok);
+      if (!m || !ABBR[m[1]] || !ABBR[m[2]]) return;
+      LEANS[wk + '|' + ABBR[m[1]] + '|' + ABBR[m[2]]] = { side: sideFromCode(m[3]), spread: parseFloat(m[4]) };
+    });
+  });
+
+  // ---------------------------------------------------------------------
+  // Helpers
+  // ---------------------------------------------------------------------
+  function mk(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  function toB64(str) {
+    var bytes = new TextEncoder().encode(str);
+    var bin = '';
+    for (var k = 0; k < bytes.length; k++) bin += String.fromCharCode(bytes[k]);
+    return btoa(bin);
+  }
+
+  function fromB64(b64) {
+    var bin = atob(b64);
+    var bytes = new Uint8Array(bin.length);
+    for (var k = 0; k < bin.length; k++) bytes[k] = bin.charCodeAt(k);
+    return new TextDecoder().decode(bytes);
+  }
+
+  function parseDate(iso) {
+    var parts = iso.split('-');
+    return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+  }
+
+  function fmtDate(iso) {
+    if (!iso) return '';
+    return parseDate(iso).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  }
+
+  function shortName(full) {
+    var words = full.trim().split(' ');
+    return words[words.length - 1];
+  }
+
+  function timeMinutes(t) {
+    var m = /^(\d{1,2}):(\d{2})\s*(AM|PM)$/i.exec(t || '');
+    if (!m) return 1439;
+    return (Number(m[1]) % 12 + (m[3].toUpperCase() === 'PM' ? 12 : 0)) * 60 + Number(m[2]);
+  }
+
+  function chronoKey(g) { return g.date + ' ' + String(timeMinutes(g.time)).padStart(4, '0'); }
+
+  function fmtRecord(c, i, t) { return c + '-' + i + (t ? '-' + t : ''); }
+  function pctText(c, i) { return (c + i) ? Math.round((c / (c + i)) * 100) + '%' : '—'; }
+
+  // ---------------------------------------------------------------------
+  // State
+  // ---------------------------------------------------------------------
   function buildDefaultGames() {
     var games = [];
     Object.keys(SEASON_GAMES).forEach(function (wk) {
@@ -886,25 +1234,42 @@
     return games;
   }
 
+  var DEFAULT_LIST = buildDefaultGames();
+  var DEFAULT_KEYS = {};
+  DEFAULT_LIST.forEach(function (g) { DEFAULT_KEYS[gkey(g)] = true; });
+
   function loadState() {
     var fresh = buildDefaultGames();
+    var stored = null;
     try {
       var raw = localStorage.getItem(STORE_KEY);
-      if (raw) {
-        var stored = JSON.parse(raw);
-        var known = {};
-        stored.games.forEach(function (g) { known[g.week + '|' + g.away + '|' + g.home] = true; });
-        fresh.forEach(function (g) {
-          if (!known[g.week + '|' + g.away + '|' + g.home]) stored.games.push(g);
-        });
-        return stored;
-      }
-    } catch (e) {}
-    return { games: fresh };
+      if (raw) stored = JSON.parse(raw);
+    } catch (e) { stored = null; }
+
+    if (!stored || !Array.isArray(stored.games)) {
+      stored = { games: fresh };
+    } else {
+      var byKey = {};
+      stored.games.forEach(function (g) { byKey[gkey(g)] = g; });
+      fresh.forEach(function (f) {
+        var existing = byKey[gkey(f)];
+        if (existing) {
+          // Schedule details are authoritative; picks and results stay untouched.
+          existing.date = f.date;
+          existing.time = f.time;
+          existing.network = f.network;
+        } else {
+          stored.games.push(f);
+        }
+      });
+    }
+    if (!Array.isArray(stored.friends)) stored.friends = [];
+    if (typeof stored.myName !== 'string') stored.myName = '';
+    return stored;
   }
 
   function saveState() {
-    localStorage.setItem(STORE_KEY, JSON.stringify(state));
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) { /* private mode: keep working in memory */ }
   }
 
   var state = loadState();
@@ -915,61 +1280,111 @@
     return Object.keys(set).map(Number).sort(function (a, b) { return a - b; });
   }
 
-  var currentWeek = weeksAvailable()[weeksAvailable().length - 1] || 1;
-
-  function fmtDate(iso) {
-    if (!iso) return '';
-    var parts = iso.split('-');
-    var d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
-    return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  function pickCurrentWeek() {
+    var d = new Date();
+    var today = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    var weeks = weeksAvailable();
+    for (var i = 0; i < weeks.length; i++) {
+      var lastDate = '';
+      state.games.forEach(function (g) {
+        if (g.week === weeks[i] && g.date > lastDate) lastDate = g.date;
+      });
+      if (lastDate >= today) return weeks[i];
+    }
+    return weeks[weeks.length - 1] || 1;
   }
 
-  function shortName(full) {
-    var words = full.trim().split(' ');
-    return words[words.length - 1];
+  var currentWeek = pickCurrentWeek();
+
+  var VIEWS = ['picks', 'stats', 'friends'];
+  var currentView = 'picks';
+  try {
+    var savedView = sessionStorage.getItem('gp-view');
+    if (VIEWS.indexOf(savedView) >= 0) currentView = savedView;
+  } catch (e) {}
+
+  function setView(v) {
+    currentView = v;
+    document.getElementById('app').setAttribute('data-tab', v);
+    Array.prototype.forEach.call(document.querySelectorAll('.tabbar button'), function (b) {
+      if (b.getAttribute('data-go') === v) b.setAttribute('aria-current', 'page');
+      else b.removeAttribute('aria-current');
+    });
+    try { sessionStorage.setItem('gp-view', v); } catch (e) {}
+    window.scrollTo(0, 0);
+  }
+
+  // ---------------------------------------------------------------------
+  // Results and records
+  // ---------------------------------------------------------------------
+  function resultOf(g) { return OFFICIAL[gkey(g)] || g.result || null; }
+  function isOfficial(g) { return !!OFFICIAL[gkey(g)]; }
+
+  // n = no pick, p = pending, t = tie, c = correct, i = incorrect
+  function verdict(g) {
+    if (!g.pick) return 'n';
+    var r = resultOf(g);
+    if (!r) return 'p';
+    if (r === 'tie') return 't';
+    return g.pick === r ? 'c' : 'i';
   }
 
   function computeWeekRecord(week) {
-    var c = 0, i = 0;
-    state.games.filter(function (g) { return g.week === week; }).forEach(function (g) {
-      if (g.pick && g.result) {
-        if (g.pick === g.result) c++; else i++;
-      }
+    var rec = { c: 0, i: 0, t: 0 };
+    state.games.forEach(function (g) {
+      if (g.week !== week) return;
+      var v = verdict(g);
+      if (v === 'c') rec.c++; else if (v === 'i') rec.i++; else if (v === 't') rec.t++;
     });
-    return { c: c, i: i };
+    return rec;
   }
 
   function computeOverall() {
-    var c = 0, i = 0, p = 0;
+    var rec = { c: 0, i: 0, t: 0, p: 0 };
     state.games.forEach(function (g) {
-      if (g.pick && g.result) { if (g.pick === g.result) c++; else i++; }
-      else if (g.pick && !g.result) p++;
+      var v = verdict(g);
+      if (v === 'c') rec.c++; else if (v === 'i') rec.i++; else if (v === 't') rec.t++; else if (v === 'p') rec.p++;
     });
-    return { c: c, i: i, p: p };
+    return rec;
   }
 
-  function renderStats() {
-    var overall = computeOverall();
-    var total = overall.c + overall.i;
-    document.getElementById('statPct').textContent = total ? Math.round((overall.c / total) * 100) + '%' : '—';
-    document.getElementById('statRecord').textContent = overall.c + '-' + overall.i;
-    var wk = computeWeekRecord(currentWeek);
-    document.getElementById('statWeekRecord').textContent = wk.c + '-' + wk.i;
-    document.getElementById('statPending').textContent = overall.p;
+  function decidedGames() {
+    return state.games
+      .filter(function (g) { var v = verdict(g); return v === 'c' || v === 'i'; })
+      .sort(function (a, b) { return chronoKey(a).localeCompare(chronoKey(b)); });
   }
 
-  function renderWeekSelect() {
-    var sel = document.getElementById('weekSelect');
-    sel.innerHTML = '';
+  function computeStreaks() {
+    var list = decidedGames(), best = 0, run = 0;
+    list.forEach(function (g) {
+      if (verdict(g) === 'c') { run++; if (run > best) best = run; } else { run = 0; }
+    });
+    var n = 0, type = null;
+    for (var k = list.length - 1; k >= 0; k--) {
+      var v = verdict(list[k]);
+      if (type === null) type = v;
+      if (v !== type) break;
+      n++;
+    }
+    return { total: list.length, best: best, cur: n, curType: type };
+  }
+
+  function computeWeekExtremes() {
+    var best = null, worst = null;
     weeksAvailable().forEach(function (w) {
-      var opt = document.createElement('option');
-      opt.value = w;
-      opt.textContent = 'Week ' + w;
-      if (w === currentWeek) opt.selected = true;
-      sel.appendChild(opt);
+      var r = computeWeekRecord(w), n = r.c + r.i;
+      if (!n) return;
+      var pct = r.c / n;
+      var entry = { week: w, c: r.c, i: r.i, t: r.t, pct: pct };
+      if (!best || pct > best.pct || (pct === best.pct && r.c > best.c)) best = entry;
+      if (!worst || pct < worst.pct || (pct === worst.pct && r.i > worst.i)) worst = entry;
     });
+    return { best: best, worst: worst };
   }
 
+  // ---------------------------------------------------------------------
+  // Actions
+  // ---------------------------------------------------------------------
   function pickTeam(id, side) {
     var g = state.games.find(function (x) { return x.id === id; });
     if (!g) return;
@@ -986,121 +1401,156 @@
     render();
   }
 
+  // ---------------------------------------------------------------------
+  // Picks tab
+  // ---------------------------------------------------------------------
+  function renderStats() {
+    var overall = computeOverall();
+    document.getElementById('statPct').textContent = pctText(overall.c, overall.i);
+    document.getElementById('statRecord').textContent = fmtRecord(overall.c, overall.i, overall.t);
+    var wk = computeWeekRecord(currentWeek);
+    document.getElementById('statWeekRecord').textContent = fmtRecord(wk.c, wk.i, wk.t);
+    document.getElementById('statPending').textContent = overall.p;
+    document.getElementById('dataNote').textContent =
+      'Official results through Week ' + RESULTS_THROUGH + ' · odds leans for Weeks 6–7 · as of ' + DATA_AS_OF;
+  }
+
+  function renderWeekSelect() {
+    var sel = document.getElementById('weekSelect');
+    sel.innerHTML = '';
+    var weeks = weeksAvailable();
+    if (weeks.indexOf(currentWeek) < 0) { weeks.push(currentWeek); weeks.sort(function (a, b) { return a - b; }); }
+    weeks.forEach(function (w) {
+      var opt = document.createElement('option');
+      opt.value = w;
+      opt.textContent = 'Week ' + w;
+      if (w === currentWeek) opt.selected = true;
+      sel.appendChild(opt);
+    });
+  }
+
+  function leanText(g, lean) {
+    if (lean.side === 'tie') return 'Odds: toss-up';
+    var strength = lean.spread >= 7 ? 'strong' : (lean.spread >= 3 ? 'solid' : 'slight');
+    return 'Odds lean: ' + shortName(lean.side === 'home' ? g.home : g.away) + ' (−' + lean.spread + ', ' + strength + ')';
+  }
+
+  function renderLeanBar() {
+    var bar = document.getElementById('leanBar');
+    bar.innerHTML = '';
+    var games = state.games.filter(function (g) { return g.week === currentWeek && LEANS[gkey(g)] && !isOfficial(g); });
+    if (!games.length) return;
+
+    var agree = 0, differ = 0, open = 0, fillable = 0;
+    games.forEach(function (g) {
+      var lean = LEANS[gkey(g)];
+      if (!g.pick) { open++; if (lean.side !== 'tie') fillable++; }
+      else if (lean.side !== 'tie') { if (g.pick === lean.side) agree++; else differ++; }
+    });
+
+    var text = mk('div');
+    var line1 = mk('div');
+    line1.appendChild(mk('strong', null, 'Odds leans: '));
+    line1.appendChild(document.createTextNode(agree + ' agree · ' + differ + ' differ · ' + open + ' not picked'));
+    text.appendChild(line1);
+    text.appendChild(mk('div', 'sub', (LEAN_NOTES[currentWeek] || '') + ' The favorite wins most games, not all of them. Treat it as a starting point.'));
+    bar.appendChild(text);
+
+    if (fillable) {
+      var btn = mk('button', 'btn', 'Fill ' + fillable + ' empty ' + (fillable === 1 ? 'pick' : 'picks'));
+      btn.onclick = function () {
+        games.forEach(function (g) {
+          var lean = LEANS[gkey(g)];
+          if (!g.pick && lean.side !== 'tie') g.pick = lean.side;
+        });
+        saveState();
+        render();
+      };
+      bar.appendChild(btn);
+    }
+  }
+
   function renderGames() {
     var area = document.getElementById('gamesArea');
     area.innerHTML = '';
     var games = state.games.filter(function (g) { return g.week === currentWeek; });
-    games.sort(function (a, b) { return (a.date + a.time).localeCompare(b.date + b.time); });
+    games.sort(function (a, b) { return chronoKey(a).localeCompare(chronoKey(b)); });
 
     if (!games.length) {
-      area.innerHTML = '<div class="empty">No games in Week ' + currentWeek + ' yet. Use "+ Add Game" to add matchups.</div>';
+      area.appendChild(mk('div', 'empty', 'No games in Week ' + currentWeek + ' yet. Use "+ Add Game" to add matchups.'));
       return;
     }
 
     var byDay = {};
-    games.forEach(function (g) {
-      (byDay[g.date] = byDay[g.date] || []).push(g);
-    });
+    games.forEach(function (g) { (byDay[g.date] = byDay[g.date] || []).push(g); });
 
     Object.keys(byDay).sort().forEach(function (date) {
-      var group = document.createElement('div');
-      group.className = 'day-group';
-      var label = document.createElement('div');
-      label.className = 'day-label';
-      label.textContent = fmtDate(date);
-      group.appendChild(label);
-
-      byDay[date].forEach(function (g) {
-        group.appendChild(renderGameCard(g));
-      });
+      var group = mk('div', 'day-group');
+      group.appendChild(mk('div', 'day-label', fmtDate(date)));
+      byDay[date].forEach(function (g) { group.appendChild(renderGameCard(g)); });
       area.appendChild(group);
     });
   }
 
   function makeTeamButton(fullName, side, g) {
     var info = teamInfo(fullName);
-    var btn = document.createElement('button');
-    btn.className = 'team-btn' + (g.pick === side ? ' picked' : '');
+    var btn = mk('button', 'team-btn' + (g.pick === side ? ' picked' : ''));
     btn.style.setProperty('--team-color', info.color);
     btn.style.setProperty('--team-color2', info.color2);
     btn.style.setProperty('--team-ink', textOnColor(info.color));
     btn.title = fullName;
     btn.onclick = function () { pickTeam(g.id, side); };
-
-    var badge = document.createElement('span');
-    badge.className = 'team-badge';
-    badge.textContent = info.abbr;
-
-    var label = document.createElement('span');
-    label.textContent = shortName(fullName);
-
-    btn.appendChild(badge);
-    btn.appendChild(label);
+    btn.appendChild(mk('span', 'team-badge', info.abbr));
+    btn.appendChild(mk('span', null, shortName(fullName)));
     return btn;
   }
 
   function renderGameCard(g) {
-    var card = document.createElement('div');
-    card.className = 'game';
+    var card = mk('div', 'game');
     card.style.setProperty('--home-color', teamInfo(g.home).color);
 
-    var matchup = document.createElement('div');
-    matchup.className = 'matchup';
+    var matchup = mk('div', 'matchup');
+    var teams = mk('div', 'teams');
+    teams.appendChild(makeTeamButton(g.away, 'away', g));
+    teams.appendChild(mk('span', 'at', '@'));
+    teams.appendChild(makeTeamButton(g.home, 'home', g));
 
-    var teams = document.createElement('div');
-    teams.className = 'teams';
+    var meta = mk('div', 'meta');
+    meta.appendChild(mk('span', null, (!g.time || g.time === 'TBD') ? 'Time TBD' : g.time + ' ET'));
+    if (g.network) meta.appendChild(mk('span', 'net', g.network));
 
-    var awayBtn = makeTeamButton(g.away, 'away', g);
-
-    var at = document.createElement('span');
-    at.className = 'at';
-    at.textContent = '@';
-
-    var homeBtn = makeTeamButton(g.home, 'home', g);
-
-    teams.appendChild(awayBtn);
-    teams.appendChild(at);
-    teams.appendChild(homeBtn);
-
-    var meta = document.createElement('div');
-    meta.className = 'meta';
-    meta.innerHTML = '<span>' + (g.time || '') + ' ET</span><span class="net">' + (g.network || '') + '</span>';
+    var official = isOfficial(g);
+    if (official) {
+      var res = resultOf(g);
+      meta.appendChild(mk('span', 'final', res === 'tie' ? 'Final · Tie' : 'Final · ' + shortName(res === 'home' ? g.home : g.away) + ' won'));
+    } else {
+      var lean = LEANS[gkey(g)];
+      if (lean) {
+        meta.appendChild(mk('span', 'lean', leanText(g, lean)));
+        if (g.pick && lean.side !== 'tie' && g.pick !== lean.side) meta.appendChild(mk('span', 'flag', 'Against the odds'));
+      }
+    }
 
     matchup.appendChild(teams);
     matchup.appendChild(meta);
 
-    var resultCol = document.createElement('div');
-    resultCol.className = 'result-col';
-
-    var pill = document.createElement('div');
-    if (!g.pick) {
-      pill.className = 'pill pending';
-      pill.textContent = 'No Pick';
-    } else if (!g.result) {
-      pill.className = 'pill pending';
-      pill.textContent = 'Pending';
-    } else if (g.pick === g.result) {
-      pill.className = 'pill correct';
-      pill.textContent = 'Correct';
-    } else {
-      pill.className = 'pill incorrect';
-      pill.textContent = 'Incorrect';
-    }
+    var resultCol = mk('div', 'result-col');
+    var v = verdict(g);
+    var pill;
+    if (v === 'n') pill = mk('div', 'pill pending', 'No Pick');
+    else if (v === 'p') pill = mk('div', 'pill pending', 'Pending');
+    else if (v === 't') pill = mk('div', 'pill pending', 'Tie');
+    else if (v === 'c') pill = mk('div', 'pill correct', 'Correct');
+    else pill = mk('div', 'pill incorrect', 'Incorrect');
     resultCol.appendChild(pill);
 
-    if (g.pick) {
-      var actions = document.createElement('div');
-      actions.className = 'result-actions';
-
-      var winBtn = document.createElement('button');
-      winBtn.className = 'mini-btn' + (g.result === g.pick ? ' active-win' : '');
-      winBtn.textContent = shortName(g.pick === 'away' ? g.away : g.home) + ' won';
-      winBtn.onclick = function () { setResult(g.id, g.pick); };
-
-      var loseBtn = document.createElement('button');
+    if (g.pick && !official) {
+      var actions = mk('div', 'result-actions');
       var otherSide = g.pick === 'away' ? 'home' : 'away';
-      loseBtn.className = 'mini-btn' + (g.result === otherSide ? ' active-lose' : '');
-      loseBtn.textContent = shortName(otherSide === 'away' ? g.away : g.home) + ' won';
+
+      var winBtn = mk('button', 'mini-btn' + (g.result === g.pick ? ' active-win' : ''), shortName(g.pick === 'away' ? g.away : g.home) + ' won');
+      winBtn.onclick = function () { setResult(g.id, g.pick); };
+      var loseBtn = mk('button', 'mini-btn' + (g.result === otherSide ? ' active-lose' : ''), shortName(otherSide === 'away' ? g.away : g.home) + ' won');
       loseBtn.onclick = function () { setResult(g.id, otherSide); };
 
       actions.appendChild(winBtn);
@@ -1113,17 +1563,70 @@
     return card;
   }
 
+  // ---------------------------------------------------------------------
+  // Stats tab
+  // ---------------------------------------------------------------------
+  function renderStreaks() {
+    var s = computeStreaks(), ext = computeWeekExtremes();
+    document.getElementById('statStreak').textContent = s.total ? (s.curType === 'c' ? 'W' : 'L') + s.cur : '—';
+    document.getElementById('statBestStreak').textContent = s.total ? String(s.best) : '—';
+    document.getElementById('statBestWeek').textContent = ext.best ? fmtRecord(ext.best.c, ext.best.i, ext.best.t) : '—';
+    document.getElementById('statBestWeekLbl').textContent = ext.best ? 'Best week (Wk ' + ext.best.week + ')' : 'Best week';
+    document.getElementById('statWorstWeek').textContent = ext.worst ? fmtRecord(ext.worst.c, ext.worst.i, ext.worst.t) : '—';
+    document.getElementById('statWorstWeekLbl').textContent = ext.worst ? 'Worst week (Wk ' + ext.worst.week + ')' : 'Worst week';
+  }
+
   function renderHistory() {
     var body = document.getElementById('histBody');
     body.innerHTML = '';
     weeksAvailable().forEach(function (w) {
       var rec = computeWeekRecord(w);
-      var total = rec.c + rec.i;
-      var pct = total ? Math.round((rec.c / total) * 100) + '%' : '—';
-      var tr = document.createElement('tr');
-      tr.innerHTML = '<td>Week ' + w + '</td><td>' + rec.c + '-' + rec.i + '</td><td>' + pct + '</td>';
+      var tr = mk('tr');
+      tr.appendChild(mk('td', null, 'Week ' + w));
+      tr.appendChild(mk('td', null, fmtRecord(rec.c, rec.i, rec.t)));
+      tr.appendChild(mk('td', null, pctText(rec.c, rec.i)));
       body.appendChild(tr);
     });
+  }
+
+  function renderSplitRows(container, rows) {
+    container.innerHTML = '';
+    var any = rows.some(function (r) { return r[1].c + r[1].i > 0; });
+    if (!any) {
+      container.appendChild(mk('div', 'empty', 'Shows up once games have results.'));
+      return;
+    }
+    rows.forEach(function (r) {
+      var c = r[1].c, i = r[1].i, total = c + i;
+      var row = mk('div', 'split-row');
+      row.title = r[0] + ': ' + c + ' correct, ' + i + ' incorrect';
+      row.appendChild(mk('div', null, r[0]));
+      var bar = mk('div', 'standing-bar');
+      var good = mk('div', 'standing-fill-correct');
+      good.style.width = (total ? (c / total) * 100 : 0) + '%';
+      var bad = mk('div', 'standing-fill-incorrect');
+      bad.style.width = (total ? (i / total) * 100 : 0) + '%';
+      bar.appendChild(good);
+      bar.appendChild(bad);
+      row.appendChild(bar);
+      row.appendChild(mk('div', 'record', total ? c + '-' + i + ' · ' + pctText(c, i) : '—'));
+      container.appendChild(row);
+    });
+  }
+
+  function renderSplits() {
+    var side = { home: { c: 0, i: 0 }, away: { c: 0, i: 0 } };
+    var days = { Thursday: { c: 0, i: 0 }, Sunday: { c: 0, i: 0 }, Monday: { c: 0, i: 0 }, Other: { c: 0, i: 0 } };
+    decidedGames().forEach(function (g) {
+      var k = verdict(g) === 'c' ? 'c' : 'i';
+      side[g.pick][k]++;
+      var d = parseDate(g.date).getDay();
+      days[d === 4 ? 'Thursday' : d === 0 ? 'Sunday' : d === 1 ? 'Monday' : 'Other'][k]++;
+    });
+    renderSplitRows(document.getElementById('sideSplit'), [['Picked home', side.home], ['Picked away', side.away]]);
+    renderSplitRows(document.getElementById('daySplit'), [
+      ['Thursday', days.Thursday], ['Sunday', days.Sunday], ['Monday', days.Monday], ['Other days', days.Other]
+    ]);
   }
 
   function computePredictedRecords() {
@@ -1144,6 +1647,24 @@
       .sort(function (a, b) { return b.w - a.w || a.name.localeCompare(b.name); });
   }
 
+  function teamCell(name) {
+    var info = teamInfo(name);
+    var cell = mk('div', 'standing-team');
+    var badge = mk('span', 'team-badge', info.abbr);
+    badge.style.setProperty('--team-color', info.color);
+    badge.style.setProperty('--team-color2', info.color2);
+    badge.style.setProperty('--team-ink', textOnColor(info.color));
+    cell.appendChild(badge);
+    cell.appendChild(mk('span', 'name', shortName(name)));
+    return cell;
+  }
+
+  function tableRow(cells) {
+    var tr = mk('tr');
+    cells.forEach(function (c) { tr.appendChild(mk('td', null, c)); });
+    return tr;
+  }
+
   function renderStandings() {
     var records = computePredictedRecords();
     var chart = document.getElementById('standingsChart');
@@ -1152,67 +1673,42 @@
     body.innerHTML = '';
 
     if (!records.length) {
-      chart.innerHTML = '<div class="empty">Make some picks first — this fills in as you go.</div>';
+      chart.appendChild(mk('div', 'empty', 'Make some picks first. This fills in as you go.'));
       return;
     }
 
     records.forEach(function (r) {
       var total = r.w + r.l;
       var info = teamInfo(r.name);
-      var winPct = total ? Math.round((r.w / total) * 100) : 0;
 
-      var row = document.createElement('div');
-      row.className = 'standing-row';
+      var row = mk('div', 'standing-row');
       row.title = r.name + ': picked to win ' + r.w + ', picked to lose ' + r.l;
+      row.appendChild(teamCell(r.name));
 
-      var teamCell = document.createElement('div');
-      teamCell.className = 'standing-team';
-      var badge = document.createElement('span');
-      badge.className = 'team-badge';
-      badge.textContent = info.abbr;
-      badge.style.setProperty('--team-color', info.color);
-      badge.style.setProperty('--team-color2', info.color2);
-      badge.style.setProperty('--team-ink', textOnColor(info.color));
-      var nameSpan = document.createElement('span');
-      nameSpan.className = 'name';
-      nameSpan.textContent = shortName(r.name);
-      teamCell.appendChild(badge);
-      teamCell.appendChild(nameSpan);
-
-      var bar = document.createElement('div');
-      bar.className = 'standing-bar';
-      var winFill = document.createElement('div');
-      winFill.className = 'standing-fill-win';
+      var bar = mk('div', 'standing-bar');
+      var winFill = mk('div', 'standing-fill-win');
       winFill.style.setProperty('--seg-color', info.color);
       winFill.style.width = (total ? (r.w / total) * 100 : 0) + '%';
-      var lossFill = document.createElement('div');
-      lossFill.className = 'standing-fill-loss';
+      var lossFill = mk('div', 'standing-fill-loss');
       lossFill.style.width = (total ? (r.l / total) * 100 : 0) + '%';
       bar.appendChild(winFill);
       bar.appendChild(lossFill);
-
-      var record = document.createElement('div');
-      record.className = 'standing-record';
-      record.textContent = r.w + '-' + r.l;
-
-      row.appendChild(teamCell);
       row.appendChild(bar);
-      row.appendChild(record);
+      row.appendChild(mk('div', 'standing-record', r.w + '-' + r.l));
       chart.appendChild(row);
 
-      var tr = document.createElement('tr');
-      tr.innerHTML = '<td>' + r.name + '</td><td>' + r.w + '-' + r.l + '</td><td>' + winPct + '%</td>';
-      body.appendChild(tr);
+      body.appendChild(tableRow([r.name, r.w + '-' + r.l, pctText(r.w, r.l)]));
     });
   }
 
   function computePickAccuracy() {
     var records = {};
     state.games.forEach(function (g) {
-      if (!g.pick || !g.result) return;
+      var v = verdict(g);
+      if (v !== 'c' && v !== 'i') return;
       var pickedTeam = g.pick === 'home' ? g.home : g.away;
       if (!records[pickedTeam]) records[pickedTeam] = { c: 0, i: 0 };
-      if (g.pick === g.result) records[pickedTeam].c++; else records[pickedTeam].i++;
+      records[pickedTeam][v]++;
     });
     return Object.keys(records)
       .map(function (name) { return Object.assign({ name: name }, records[name]); })
@@ -1230,67 +1726,257 @@
     body.innerHTML = '';
 
     if (!records.length) {
-      chart.innerHTML = '<div class="empty">No results marked yet. Mark games as "won" once they\'re played and this fills in automatically.</div>';
+      chart.appendChild(mk('div', 'empty', 'No finished games with picks yet. This fills in automatically.'));
       return;
     }
 
     records.forEach(function (r) {
       var total = r.c + r.i;
-      var info = teamInfo(r.name);
-      var pct = total ? Math.round((r.c / total) * 100) : 0;
-
-      var row = document.createElement('div');
-      row.className = 'standing-row';
+      var row = mk('div', 'standing-row');
       row.title = r.name + ': ' + r.c + ' correct, ' + r.i + ' incorrect';
+      row.appendChild(teamCell(r.name));
 
-      var teamCell = document.createElement('div');
-      teamCell.className = 'standing-team';
-      var badge = document.createElement('span');
-      badge.className = 'team-badge';
-      badge.textContent = info.abbr;
-      badge.style.setProperty('--team-color', info.color);
-      badge.style.setProperty('--team-color2', info.color2);
-      badge.style.setProperty('--team-ink', textOnColor(info.color));
-      var nameSpan = document.createElement('span');
-      nameSpan.className = 'name';
-      nameSpan.textContent = shortName(r.name);
-      teamCell.appendChild(badge);
-      teamCell.appendChild(nameSpan);
-
-      var bar = document.createElement('div');
-      bar.className = 'standing-bar';
-      var correctFill = document.createElement('div');
-      correctFill.className = 'standing-fill-correct';
-      correctFill.style.width = (total ? (r.c / total) * 100 : 0) + '%';
-      var incorrectFill = document.createElement('div');
-      incorrectFill.className = 'standing-fill-incorrect';
-      incorrectFill.style.width = (total ? (r.i / total) * 100 : 0) + '%';
-      bar.appendChild(correctFill);
-      bar.appendChild(incorrectFill);
-
-      var record = document.createElement('div');
-      record.className = 'standing-record';
-      record.textContent = r.c + '-' + r.i;
-
-      row.appendChild(teamCell);
+      var bar = mk('div', 'standing-bar');
+      var good = mk('div', 'standing-fill-correct');
+      good.style.width = (total ? (r.c / total) * 100 : 0) + '%';
+      var bad = mk('div', 'standing-fill-incorrect');
+      bad.style.width = (total ? (r.i / total) * 100 : 0) + '%';
+      bar.appendChild(good);
+      bar.appendChild(bad);
       row.appendChild(bar);
-      row.appendChild(record);
+      row.appendChild(mk('div', 'standing-record', r.c + '-' + r.i));
       chart.appendChild(row);
 
-      var tr = document.createElement('tr');
-      tr.innerHTML = '<td>' + r.name + '</td><td>' + r.c + '-' + r.i + '</td><td>' + pct + '%</td>';
-      body.appendChild(tr);
+      body.appendChild(tableRow([r.name, r.c + '-' + r.i, pctText(r.c, r.i)]));
     });
   }
 
+  // ---------------------------------------------------------------------
+  // Friends tab: leaderboard, share codes, backup and restore
+  // ---------------------------------------------------------------------
+  function pickString() {
+    var byKey = {};
+    state.games.forEach(function (g) { byKey[gkey(g)] = g; });
+    return DEFAULT_LIST.map(function (d) {
+      var g = byKey[gkey(d)];
+      return g && g.pick === 'away' ? 'a' : (g && g.pick === 'home' ? 'h' : '-');
+    }).join('');
+  }
+
+  function manualResultString() {
+    var byKey = {};
+    state.games.forEach(function (g) { byKey[gkey(g)] = g; });
+    return DEFAULT_LIST.map(function (d) {
+      var g = byKey[gkey(d)];
+      return g && g.result === 'away' ? 'a' : (g && g.result === 'home' ? 'h' : (g && g.result === 'tie' ? 't' : '-'));
+    }).join('');
+  }
+
+  function scorePicks(p) {
+    var out = { c: 0, i: 0, t: 0, weeks: {} };
+    for (var k = 0; k < DEFAULT_LIST.length; k++) {
+      var ch = p.charAt(k);
+      if (ch !== 'a' && ch !== 'h') continue;
+      var d = DEFAULT_LIST[k], res = OFFICIAL[gkey(d)];
+      if (!res) continue;
+      var w = out.weeks[d.week] || (out.weeks[d.week] = { c: 0, i: 0 });
+      if (res === 'tie') { out.t++; continue; }
+      if ((ch === 'a' ? 'away' : 'home') === res) { out.c++; w.c++; } else { out.i++; w.i++; }
+    }
+    return out;
+  }
+
+  function shareCode() {
+    return 'GP1:' + toB64(JSON.stringify({ n: state.myName || 'Friend', p: pickString() }));
+  }
+
+  function backupCode() {
+    var custom = state.games.filter(function (g) { return !DEFAULT_KEYS[gkey(g)]; }).map(function (g) {
+      return { week: g.week, away: g.away, home: g.home, date: g.date, time: g.time, network: g.network, pick: g.pick, result: g.result };
+    });
+    return 'GPB1:' + toB64(JSON.stringify({ n: state.myName, p: pickString(), r: manualResultString(), c: custom, f: state.friends }));
+  }
+
+  function renderLeaderboard() {
+    var people = [{ name: state.myName || 'You', me: true, p: pickString() }]
+      .concat(state.friends.map(function (f) { return { name: f.n, me: false, p: f.p }; }));
+    people.forEach(function (x) { x.s = scorePicks(x.p); });
+    people.sort(function (a, b) {
+      var na = a.s.c + a.s.i, nb = b.s.c + b.s.i;
+      var pa = na ? a.s.c / na : 0, pb = nb ? b.s.c / nb : 0;
+      return b.s.c - a.s.c || pb - pa || a.name.localeCompare(b.name);
+    });
+
+    var weeks = Object.keys(RESULTS_RAW).map(Number).sort(function (a, b) { return a - b; });
+    var head = document.getElementById('lbHead');
+    var body = document.getElementById('lbBody');
+    head.innerHTML = '';
+    body.innerHTML = '';
+
+    var hr = mk('tr');
+    ['#', 'Name', 'Right', 'Wrong', 'Pct'].forEach(function (h, idx) { hr.appendChild(mk('th', idx >= 2 ? 'n' : null, h)); });
+    weeks.forEach(function (w) { hr.appendChild(mk('th', 'n', 'Wk ' + w)); });
+    head.appendChild(hr);
+
+    people.forEach(function (x, rank) {
+      var tr = mk('tr', x.me ? 'me' : '');
+      tr.appendChild(mk('td', null, String(rank + 1)));
+      tr.appendChild(mk('td', null, x.name + (x.me ? ' (you)' : '')));
+      tr.appendChild(mk('td', 'n', String(x.s.c)));
+      tr.appendChild(mk('td', 'n', String(x.s.i)));
+      tr.appendChild(mk('td', 'n', pctText(x.s.c, x.s.i)));
+      weeks.forEach(function (w) {
+        var wk = x.s.weeks[w];
+        tr.appendChild(mk('td', 'n', wk && (wk.c + wk.i) ? wk.c + '-' + wk.i : '—'));
+      });
+      body.appendChild(tr);
+    });
+
+    document.getElementById('lbNote').textContent = people.length === 1
+      ? 'Add a friend below to start comparing. Ties are not counted either way.'
+      : 'Ties are not counted either way.';
+  }
+
+  function renderFriendList() {
+    var list = document.getElementById('friendList');
+    list.innerHTML = '';
+    state.friends.forEach(function (f, idx) {
+      var row = mk('div', 'friend-row');
+      row.appendChild(mk('span', null, f.n));
+      var rm = mk('button', 'mini-btn', 'Remove');
+      rm.onclick = function () {
+        if (!window.confirm('Remove ' + f.n + ' from your leaderboard?')) return;
+        state.friends.splice(idx, 1);
+        saveState();
+        render();
+      };
+      row.appendChild(rm);
+      list.appendChild(row);
+    });
+  }
+
+  function renderFriends() {
+    var nameInput = document.getElementById('myName');
+    if (document.activeElement !== nameInput) nameInput.value = state.myName;
+    document.getElementById('shareCode').value = shareCode();
+    document.getElementById('backupCode').value = backupCode();
+    renderLeaderboard();
+    renderFriendList();
+  }
+
+  function setMsg(id, text, kind) {
+    var m = document.getElementById(id);
+    m.textContent = text;
+    m.className = 'msg' + (kind ? ' ' + kind : '');
+  }
+
+  function copyText(ta, msgId, okText) {
+    var text = ta.value;
+    function fallback() {
+      var ok = false;
+      try { ta.focus(); ta.select(); ta.setSelectionRange(0, text.length); ok = document.execCommand('copy'); } catch (e) {}
+      setMsg(msgId, ok ? okText : 'Copy did not work. Press and hold the code above, then choose Copy.', ok ? 'ok' : 'err');
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { setMsg(msgId, okText, 'ok'); }, fallback);
+    } else {
+      fallback();
+    }
+  }
+
+  function parseFriendCode(raw) {
+    var s = (raw || '').replace(/\s+/g, '');
+    if (s.indexOf('GPB1:') === 0) throw new Error('That is a backup code. Use "Restore picks" in the Backup & Restore box instead.');
+    if (s.indexOf('GP1:') !== 0) throw new Error('That does not look like a friend code. It should start with GP1:');
+    var obj;
+    try { obj = JSON.parse(fromB64(s.slice(4))); } catch (e) { throw new Error('That code is damaged. Ask your friend to copy it again.'); }
+    if (!obj || typeof obj.n !== 'string' || typeof obj.p !== 'string') throw new Error('That code is damaged. Ask your friend to copy it again.');
+    if (obj.p.length !== DEFAULT_LIST.length || !/^[ah-]+$/.test(obj.p)) {
+      throw new Error('That code comes from a different version of the tracker. Make sure you both have the latest link.');
+    }
+    return { n: obj.n.trim().slice(0, 24) || 'Friend', p: obj.p };
+  }
+
+  function addFriendFromCode(raw) {
+    var f = parseFriendCode(raw);
+    var at = -1;
+    state.friends.forEach(function (x, idx) { if (x.n.toLowerCase() === f.n.toLowerCase()) at = idx; });
+    if (at >= 0) { state.friends[at] = f; }
+    else {
+      if (state.friends.length >= 40) throw new Error('The leaderboard is full (40 friends). Remove someone first.');
+      state.friends.push(f);
+    }
+    saveState();
+    render();
+    return at >= 0 ? 'Updated ' + f.n + '\'s picks.' : 'Added ' + f.n + ' to the leaderboard.';
+  }
+
+  function restoreFromCode(raw) {
+    var s = (raw || '').replace(/\s+/g, '');
+    if (s.indexOf('GPB1:') !== 0) throw new Error('That does not look like a backup code. It should start with GPB1:');
+    var obj;
+    try { obj = JSON.parse(fromB64(s.slice(5))); } catch (e) { throw new Error('That backup code is damaged. Copy it again from the original device.'); }
+    if (!obj || typeof obj.p !== 'string' || typeof obj.r !== 'string' ||
+        obj.p.length !== DEFAULT_LIST.length || obj.r.length !== DEFAULT_LIST.length ||
+        !/^[ah-]+$/.test(obj.p) || !/^[aht-]+$/.test(obj.r)) {
+      throw new Error('That backup comes from a different version of the tracker, so it cannot be restored here.');
+    }
+    if (!window.confirm('This replaces the picks currently saved on this device. Continue?')) return null;
+
+    var games = buildDefaultGames();
+    games.forEach(function (g, k) {
+      var pc = obj.p.charAt(k), rc = obj.r.charAt(k);
+      g.pick = pc === 'a' ? 'away' : (pc === 'h' ? 'home' : null);
+      g.result = rc === 'a' ? 'away' : (rc === 'h' ? 'home' : (rc === 't' ? 'tie' : null));
+    });
+
+    function side(v) { return v === 'away' || v === 'home' ? v : null; }
+    (Array.isArray(obj.c) ? obj.c : []).slice(0, 200).forEach(function (c, n) {
+      if (!c || typeof c.away !== 'string' || typeof c.home !== 'string') return;
+      var wk = parseInt(c.week, 10);
+      if (!(wk >= 1 && wk <= 40)) return;
+      games.push({
+        id: 'w' + wk + '-r' + n, week: wk,
+        away: c.away.slice(0, 40), home: c.home.slice(0, 40),
+        date: /^\d{4}-\d{2}-\d{2}$/.test(c.date) ? c.date : '2026-09-01',
+        time: String(c.time || '').slice(0, 12), network: String(c.network || '').slice(0, 20),
+        pick: side(c.pick), result: c.result === 'tie' ? 'tie' : side(c.result)
+      });
+    });
+
+    var friends = [];
+    (Array.isArray(obj.f) ? obj.f : []).slice(0, 40).forEach(function (f) {
+      if (f && typeof f.n === 'string' && typeof f.p === 'string' && f.p.length === DEFAULT_LIST.length && /^[ah-]+$/.test(f.p)) {
+        friends.push({ n: f.n.slice(0, 24), p: f.p });
+      }
+    });
+
+    state = { games: games, friends: friends, myName: typeof obj.n === 'string' ? obj.n.slice(0, 24) : '' };
+    currentWeek = pickCurrentWeek();
+    saveState();
+    render();
+    return 'Restored your picks' + (friends.length ? ' and ' + friends.length + ' friend' + (friends.length === 1 ? '' : 's') : '') + '.';
+  }
+
+  // ---------------------------------------------------------------------
+  // Render + wiring
+  // ---------------------------------------------------------------------
   function render() {
     renderWeekSelect();
     renderStats();
+    renderLeanBar();
     renderGames();
+    renderStreaks();
     renderHistory();
+    renderSplits();
     renderStandings();
     renderAccuracy();
+    renderFriends();
   }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.tabbar button'), function (b) {
+    b.addEventListener('click', function () { setView(b.getAttribute('data-go')); });
+  });
 
   document.getElementById('weekSelect').addEventListener('change', function (e) {
     currentWeek = Number(e.target.value);
@@ -1298,24 +1984,18 @@
   });
 
   document.getElementById('addWeekBtn').addEventListener('click', function () {
-    var next = Math.max.apply(null, weeksAvailable().concat([0])) + 1;
-    currentWeek = next;
+    currentWeek = Math.max.apply(null, weeksAvailable().concat([0])) + 1;
     document.getElementById('addForm').classList.add('open');
-    renderWeekSelect();
-    var opt = document.createElement('option');
     render();
-    document.getElementById('weekSelect').value = next;
   });
 
   document.getElementById('standingsToggle').addEventListener('click', function () {
-    var section = document.getElementById('standingsSection');
-    var tableMode = section.classList.toggle('table-mode');
+    var tableMode = document.getElementById('standingsSection').classList.toggle('table-mode');
     this.textContent = tableMode ? 'View as Chart' : 'View as Table';
   });
 
   document.getElementById('accuracyToggle').addEventListener('click', function () {
-    var section = document.getElementById('accuracySection');
-    var tableMode = section.classList.toggle('table-mode');
+    var tableMode = document.getElementById('accuracySection').classList.toggle('table-mode');
     this.textContent = tableMode ? 'View as Chart' : 'View as Table';
   });
 
@@ -1332,18 +2012,56 @@
     var time = document.getElementById('fTime').value.trim();
     var network = document.getElementById('fNetwork').value.trim();
     if (!away || !home || !date) {
-      alert('Please fill in away team, home team, and date.');
+      window.alert('Please fill in away team, home team, and date.');
       return;
     }
-    var id = 'w' + currentWeek + '-' + Date.now();
-    state.games.push({ id: id, week: currentWeek, away: away, home: home, date: date, time: time, network: network, pick: null, result: null });
+    state.games.push({ id: 'w' + currentWeek + '-' + Date.now(), week: currentWeek, away: away, home: home, date: date, time: time, network: network, pick: null, result: null });
     saveState();
     ['fAway', 'fHome', 'fDate', 'fTime', 'fNetwork'].forEach(function (f) { document.getElementById(f).value = ''; });
     document.getElementById('addForm').classList.remove('open');
     render();
   });
 
+  document.getElementById('myName').addEventListener('input', function (e) {
+    state.myName = e.target.value.trim().slice(0, 24);
+    saveState();
+    document.getElementById('shareCode').value = shareCode();
+    document.getElementById('backupCode').value = backupCode();
+    renderLeaderboard();
+  });
+
+  document.getElementById('copyShare').addEventListener('click', function () {
+    if (!state.myName) { setMsg('shareMsg', 'Type your name above first so your friends know whose picks these are.', 'err'); return; }
+    copyText(document.getElementById('shareCode'), 'shareMsg', 'Copied. Paste it into a text or email.');
+  });
+  document.getElementById('copyBackup').addEventListener('click', function () {
+    copyText(document.getElementById('backupCode'), 'backupMsg', 'Backup copied. Save it somewhere you can find later.');
+  });
+
+  document.getElementById('addFriend').addEventListener('click', function () {
+    var box = document.getElementById('friendCode');
+    try {
+      var msg = addFriendFromCode(box.value);
+      box.value = '';
+      setMsg('friendMsg', msg, 'ok');
+    } catch (e) {
+      setMsg('friendMsg', e.message, 'err');
+    }
+  });
+
+  document.getElementById('restoreBtn').addEventListener('click', function () {
+    var box = document.getElementById('restoreCode');
+    try {
+      var msg = restoreFromCode(box.value);
+      if (msg) { box.value = ''; setMsg('backupMsg', msg, 'ok'); }
+    } catch (e) {
+      setMsg('backupMsg', e.message, 'err');
+    }
+  });
+
+  setView(currentView);
   render();
+  //__TEST_HOOK__
 })();
 </script>
 
