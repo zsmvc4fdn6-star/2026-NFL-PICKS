@@ -475,6 +475,29 @@
 
   .data-note { font-size: 12px; color: var(--muted); margin: -12px 0 18px; }
 
+  .season-switch {
+    display: flex;
+    margin: -6px 0 20px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .season-switch button {
+    flex: 1;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 12px 8px;
+  }
+  .season-switch button + button { border-left: 1px solid var(--line); }
+  .season-switch button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+  .wrap[data-tab="friends"] .season-switch { display: none; }
+
   .lean-bar {
     display: flex;
     align-items: center;
@@ -597,8 +620,13 @@
 
 <div class="wrap" id="app" data-tab="picks">
   <div class="masthead">
-    <h1>2026 Picks</h1>
-    <div class="tag">2026 Season · Straight-Up Tracker</div>
+    <h1 id="pageTitle">2026 Picks</h1>
+    <div class="tag" id="pageTag">2026 Season · Straight-Up Tracker</div>
+  </div>
+
+  <div class="season-switch" role="group" aria-label="Season">
+    <button type="button" data-season="2026" aria-pressed="true">2026 Season</button>
+    <button type="button" data-season="2025" aria-pressed="false">2025 Season</button>
   </div>
 
   <div data-view="picks">
@@ -707,7 +735,7 @@
   <div data-view="friends">
     <div class="panel">
       <h2>Leaderboard</h2>
-      <div class="standings-sub">Everyone is scored the same way: on your picks against the official final scores.</div>
+      <div class="standings-sub">2026 season only. Everyone is scored the same way: on their picks against the official final scores.</div>
       <div class="overflow">
         <table class="hist">
           <thead id="lbHead"></thead>
@@ -1146,10 +1174,38 @@
     7: 'Early look-ahead lines. They will move before kickoff.'
   };
 
+  // Last season (2025): AWAY@HOME:MM-DD:awayScore-homeScore, in the order NFL.com lists them.
+  // Kickoff times and channels are not included for last season.
+  var S25_RAW = {
+    1: 'DAL@PHI:09-04:20-24 KC@LAC:09-05:21-27 TB@ATL:09-07:23-20 CIN@CLE:09-07:17-16 MIA@IND:09-07:8-33 CAR@JAX:09-07:10-26 LV@NE:09-07:20-13 ARI@NO:09-07:20-13 PIT@NYJ:09-07:34-32 NYG@WAS:09-07:6-21 TEN@DEN:09-07:12-20 SF@SEA:09-07:17-13 DET@GB:09-07:13-27 HOU@LAR:09-07:9-14 BAL@BUF:09-07:40-41 MIN@CHI:09-08:27-24',
+    2: 'WAS@GB:09-11:18-27 CLE@BAL:09-14:17-41 JAX@CIN:09-14:27-31 NYG@DAL:09-14:37-40 CHI@DET:09-14:21-52 NE@MIA:09-14:33-27 SF@NO:09-14:26-21 BUF@NYJ:09-14:30-10 SEA@PIT:09-14:31-17 LAR@TEN:09-14:33-19 CAR@ARI:09-14:22-27 DEN@IND:09-14:28-29 PHI@KC:09-14:20-17 ATL@MIN:09-14:22-6 TB@HOU:09-15:20-19 LAC@LV:09-15:20-9',
+    3: 'MIA@BUF:09-18:21-31 ATL@CAR:09-21:0-30 GB@CLE:09-21:10-13 HOU@JAX:09-21:10-17 CIN@MIN:09-21:10-48 PIT@NE:09-21:21-14 LAR@PHI:09-21:26-33 NYJ@TB:09-21:27-29 IND@TEN:09-21:41-20 LV@WAS:09-21:24-41 DEN@LAC:09-21:20-23 NO@SEA:09-21:13-44 DAL@CHI:09-21:14-31 ARI@SF:09-21:15-16 KC@NYG:09-21:22-9 DET@BAL:09-22:38-30',
+    4: 'SEA@ARI:09-25:23-20 MIN@PIT:09-28:21-24 WAS@ATL:09-28:27-34 NO@BUF:09-28:19-31 CLE@DET:09-28:10-34 TEN@HOU:09-28:0-26 CAR@NE:09-28:13-42 LAC@NYG:09-28:18-21 PHI@TB:09-28:31-25 IND@LAR:09-28:20-27 JAX@SF:09-28:26-21 BAL@KC:09-28:20-37 CHI@LV:09-28:25-24 GB@DAL:09-28:40-40 NYJ@MIA:09-29:21-27 CIN@DEN:09-29:3-28',
+    5: 'SF@LAR:10-02:26-23 MIN@CLE:10-05:21-17 HOU@BAL:10-05:44-10 MIA@CAR:10-05:24-27 LV@IND:10-05:6-40 NYG@NO:10-05:14-26 DAL@NYJ:10-05:37-22 DEN@PHI:10-05:21-17 TEN@ARI:10-05:22-21 TB@SEA:10-05:38-35 DET@CIN:10-05:37-24 WAS@LAC:10-05:27-10 NE@BUF:10-05:23-20 KC@JAX:10-06:28-31',
+    6: 'PHI@NYG:10-09:17-34 DEN@NYJ:10-12:13-11 LAR@BAL:10-12:17-3 DAL@CAR:10-12:27-30 ARI@IND:10-12:27-31 SEA@JAX:10-12:20-12 LAC@MIA:10-12:29-27 CLE@PIT:10-12:9-23 NE@NO:10-12:25-19 TEN@LV:10-12:10-20 SF@TB:10-12:19-30 CIN@GB:10-12:18-27 DET@KC:10-12:17-30 BUF@ATL:10-13:14-24 CHI@WAS:10-13:25-24',
+    7: 'PIT@CIN:10-16:31-33 LAR@JAX:10-19:35-7 NO@CHI:10-19:14-26 MIA@CLE:10-19:6-31 LV@KC:10-19:0-31 PHI@MIN:10-19:28-22 CAR@NYJ:10-19:13-6 NE@TEN:10-19:31-13 NYG@DEN:10-19:32-33 IND@LAC:10-19:38-24 GB@ARI:10-19:27-23 WAS@DAL:10-19:22-44 ATL@SF:10-19:10-20 TB@DET:10-20:9-24 HOU@SEA:10-20:19-27',
+    8: 'MIN@LAC:10-23:10-37 MIA@ATL:10-26:34-10 CHI@BAL:10-26:16-30 BUF@CAR:10-26:40-9 NYJ@CIN:10-26:39-38 SF@HOU:10-26:15-26 CLE@NE:10-26:13-32 NYG@PHI:10-26:20-38 TB@NO:10-26:23-3 DAL@DEN:10-26:24-44 TEN@IND:10-26:14-38 GB@PIT:10-26:35-25 WAS@KC:10-27:7-28',
+    9: 'BAL@MIA:10-30:28-6 CHI@CIN:11-02:47-42 MIN@DET:11-02:27-24 CAR@GB:11-02:16-13 DEN@HOU:11-02:18-15 ATL@NE:11-02:23-24 SF@NYG:11-02:34-24 IND@PIT:11-02:20-27 LAC@TEN:11-02:27-20 NO@LAR:11-02:10-34 JAX@LV:11-02:30-29 KC@BUF:11-02:21-28 SEA@WAS:11-02:38-14 ARI@DAL:11-03:27-17',
+    10: 'LV@DEN:11-06:7-10 ATL@IND:11-09:25-31 NO@CAR:11-09:17-7 NYG@CHI:11-09:20-24 JAX@HOU:11-09:29-36 BUF@MIA:11-09:13-30 BAL@MIN:11-09:27-19 CLE@NYJ:11-09:20-27 NE@TB:11-09:28-23 ARI@SEA:11-09:22-44 LAR@SF:11-09:42-26 DET@WAS:11-09:44-22 PIT@LAC:11-09:10-25 PHI@GB:11-10:10-7',
+    11: 'NYJ@NE:11-13:14-27 WAS@MIA:11-16:13-16 CAR@ATL:11-16:30-27 TB@BUF:11-16:32-44 LAC@JAX:11-16:6-35 CHI@MIN:11-16:19-17 GB@NYG:11-16:27-20 CIN@PIT:11-16:12-34 HOU@TEN:11-16:16-13 SF@ARI:11-16:41-22 SEA@LAR:11-16:19-21 BAL@CLE:11-16:23-16 KC@DEN:11-16:19-22 DET@PHI:11-16:9-16 DAL@LV:11-17:33-16',
+    12: 'BUF@HOU:11-20:19-23 NYJ@BAL:11-23:10-23 PIT@CHI:11-23:28-31 NE@CIN:11-23:26-20 NYG@DET:11-23:27-34 MIN@GB:11-23:6-23 IND@KC:11-23:20-23 SEA@TEN:11-23:30-24 JAX@ARI:11-23:27-24 CLE@LV:11-23:24-10 PHI@DAL:11-23:21-24 ATL@NO:11-23:24-10 TB@LAR:11-23:7-34 CAR@SF:11-24:9-20',
+    13: 'GB@DET:11-27:31-24 KC@DAL:11-27:28-31 CIN@BAL:11-27:32-14 CHI@PHI:11-28:24-15 LAR@CAR:11-30:28-31 SF@CLE:11-30:26-8 HOU@IND:11-30:20-16 NO@MIA:11-30:17-21 ATL@NYJ:11-30:24-27 ARI@TB:11-30:17-20 JAX@TEN:11-30:25-3 MIN@SEA:11-30:0-26 LV@LAC:11-30:14-31 BUF@PIT:11-30:26-7 DEN@WAS:11-30:27-26 NYG@NE:12-01:15-33',
+    14: 'DAL@DET:12-04:30-44 SEA@ATL:12-07:37-9 PIT@BAL:12-07:27-22 TEN@CLE:12-07:31-29 IND@JAX:12-07:19-36 WAS@MIN:12-07:0-31 MIA@NYJ:12-07:34-10 NO@TB:12-07:24-20 CIN@BUF:12-07:34-39 DEN@LV:12-07:24-17 CHI@GB:12-07:21-28 LAR@ARI:12-07:45-17 HOU@KC:12-07:20-10 PHI@LAC:12-08:19-22',
+    15: 'ATL@TB:12-11:29-28 CLE@CHI:12-14:3-31 BAL@CIN:12-14:24-0 ARI@HOU:12-14:20-40 NYJ@JAX:12-14:20-48 LAC@KC:12-14:16-13 BUF@NE:12-14:35-31 WAS@NYG:12-14:29-21 LV@PHI:12-14:0-31 GB@DEN:12-14:26-34 DET@LAR:12-14:34-41 CAR@NO:12-14:17-20 IND@SEA:12-14:16-18 TEN@SF:12-14:24-37 MIN@DAL:12-14:34-26 MIA@PIT:12-15:15-28',
+    16: 'LAR@SEA:12-18:37-38 PHI@WAS:12-20:29-18 GB@CHI:12-20:16-22 TB@CAR:12-21:20-23 BUF@CLE:12-21:23-20 LAC@DAL:12-21:34-17 NYJ@NO:12-21:6-29 MIN@NYG:12-21:16-13 KC@TEN:12-21:9-26 CIN@MIA:12-21:45-21 ATL@ARI:12-21:26-19 JAX@DEN:12-21:34-20 PIT@DET:12-21:29-24 LV@HOU:12-21:21-23 NE@BAL:12-21:28-24 SF@IND:12-22:48-27',
+    17: 'DAL@WAS:12-25:30-23 DET@MIN:12-25:10-23 DEN@KC:12-25:20-13 HOU@LAC:12-27:20-16 BAL@GB:12-27:41-24 SEA@CAR:12-28:27-10 ARI@CIN:12-28:14-37 PIT@CLE:12-28:6-13 JAX@IND:12-28:23-17 TB@MIA:12-28:17-20 NE@NYJ:12-28:42-10 NO@TEN:12-28:34-26 NYG@LV:12-28:34-10 PHI@BUF:12-28:13-12 CHI@SF:12-28:38-42 LAR@ATL:12-29:24-27',
+    18: 'CAR@TB:01-03:14-16 SEA@SF:01-03:13-3 NO@ATL:01-04:17-19 CLE@CIN:01-04:20-18 IND@HOU:01-04:30-38 TEN@JAX:01-04:7-41 GB@MIN:01-04:3-16 DAL@NYG:01-04:17-34 NYJ@BUF:01-04:8-35 DET@CHI:01-04:19-16 LAC@DEN:01-04:3-19 ARI@LAR:01-04:20-37 KC@LV:01-04:12-14 MIA@NE:01-04:10-38 WAS@PHI:01-04:24-17 BAL@PIT:01-04:24-26'
+  };
+
   var ABBR = {};
   Object.keys(TEAM_INFO).forEach(function (n) { ABBR[TEAM_INFO[n].abbr] = n; });
 
-  function gkey(g) { return g.week + '|' + g.away + '|' + g.home; }
+  // A game's identity. 2026 keys stay exactly as before so saved picks and old codes keep working;
+  // other seasons get a prefix so the same matchup in the same week number can't collide.
+  function gkey(g) {
+    var s = g.season || 2026;
+    return (s === 2026 ? '' : s + ':') + g.week + '|' + g.away + '|' + g.home;
+  }
 
   function sideFromCode(c) { return c === 'a' ? 'away' : (c === 'h' ? 'home' : 'tie'); }
 
@@ -1168,6 +1224,26 @@
       var m = /^([A-Z]+)@([A-Z]+):([aht]):([0-9.]+)$/.exec(tok);
       if (!m || !ABBR[m[1]] || !ABBR[m[2]]) return;
       LEANS[wk + '|' + ABBR[m[1]] + '|' + ABBR[m[2]]] = { side: sideFromCode(m[3]), spread: parseFloat(m[4]) };
+    });
+  });
+
+  // Build last season's games and final results.
+  var SCORES = {};
+  var S25 = [];
+  Object.keys(S25_RAW).forEach(function (wk) {
+    S25_RAW[wk].trim().split(/\s+/).forEach(function (tok, i) {
+      var m = /^([A-Z]+)@([A-Z]+):(\d{2})-(\d{2}):(\d+)-(\d+)$/.exec(tok);
+      if (!m || !ABBR[m[1]] || !ABBR[m[2]]) return;
+      var g = {
+        id: 's25-w' + wk + '-' + i, season: 2025, week: Number(wk),
+        away: ABBR[m[1]], home: ABBR[m[2]],
+        date: (m[3] === '01' ? '2026' : '2025') + '-' + m[3] + '-' + m[4],
+        time: '', network: ''
+      };
+      var as = Number(m[5]), hs = Number(m[6]);
+      S25.push(g);
+      SCORES[gkey(g)] = [as, hs];
+      OFFICIAL[gkey(g)] = as > hs ? 'away' : (hs > as ? 'home' : 'tie');
     });
   });
 
@@ -1224,7 +1300,7 @@
   // ---------------------------------------------------------------------
   // State
   // ---------------------------------------------------------------------
-  function buildDefaultGames() {
+  function build2026() {
     var games = [];
     Object.keys(SEASON_GAMES).forEach(function (wk) {
       SEASON_GAMES[wk].forEach(function (g, i) {
@@ -1234,9 +1310,17 @@
     return games;
   }
 
-  var DEFAULT_LIST = buildDefaultGames();
+  function build2025() {
+    return S25.map(function (g) { return Object.assign({ pick: null, result: null }, g); });
+  }
+
+  function buildDefaultGames() { return build2026().concat(build2025()); }
+
+  // Share codes and backups index games by position in these two lists, so never reorder them.
+  var DEFAULT_LIST = build2026();
+  var S25_LIST = build2025();
   var DEFAULT_KEYS = {};
-  DEFAULT_LIST.forEach(function (g) { DEFAULT_KEYS[gkey(g)] = true; });
+  DEFAULT_LIST.concat(S25_LIST).forEach(function (g) { DEFAULT_KEYS[gkey(g)] = true; });
 
   function loadState() {
     var fresh = buildDefaultGames();
@@ -1274,19 +1358,43 @@
 
   var state = loadState();
 
-  function weeksAvailable() {
+  var SEASONS = [2026, 2025];
+  var currentSeason = 2026;
+  try {
+    var savedSeason = Number(sessionStorage.getItem('gp-season'));
+    if (SEASONS.indexOf(savedSeason) >= 0) currentSeason = savedSeason;
+  } catch (e) {}
+
+  // Games saved before seasons existed have no season field, and they are all 2026.
+  function seasonOf(g) { return g.season || 2026; }
+
+  function sgames(season) {
+    var s = season || currentSeason;
+    return state.games.filter(function (g) { return seasonOf(g) === s; });
+  }
+
+  function weeksAvailable(season) {
     var set = {};
-    state.games.forEach(function (g) { set[g.week] = true; });
+    sgames(season).forEach(function (g) { set[g.week] = true; });
     return Object.keys(set).map(Number).sort(function (a, b) { return a - b; });
   }
 
-  function pickCurrentWeek() {
+  function pickCurrentWeek(season) {
+    var s = season || currentSeason;
+    var weeks = weeksAvailable(s);
+    var games = sgames(s);
+    if (s !== 2026) {
+      // A finished season: resume at the first week that still has an unpicked game.
+      for (var j = 0; j < weeks.length; j++) {
+        if (games.some(function (g) { return g.week === weeks[j] && !g.pick; })) return weeks[j];
+      }
+      return weeks[weeks.length - 1] || 1;
+    }
     var d = new Date();
     var today = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-    var weeks = weeksAvailable();
     for (var i = 0; i < weeks.length; i++) {
       var lastDate = '';
-      state.games.forEach(function (g) {
+      games.forEach(function (g) {
         if (g.week === weeks[i] && g.date > lastDate) lastDate = g.date;
       });
       if (lastDate >= today) return weeks[i];
@@ -1294,7 +1402,8 @@
     return weeks[weeks.length - 1] || 1;
   }
 
-  var currentWeek = pickCurrentWeek();
+  var weekBySeason = {};
+  var currentWeek = pickCurrentWeek(currentSeason);
 
   var VIEWS = ['picks', 'stats', 'friends'];
   var currentView = 'picks';
@@ -1311,7 +1420,28 @@
       else b.removeAttribute('aria-current');
     });
     try { sessionStorage.setItem('gp-view', v); } catch (e) {}
+    renderMasthead();
     window.scrollTo(0, 0);
+  }
+
+  function setSeason(s) {
+    if (s === currentSeason) return;
+    weekBySeason[currentSeason] = currentWeek;
+    currentSeason = s;
+    currentWeek = weekBySeason[s] || pickCurrentWeek(s);
+    try { sessionStorage.setItem('gp-season', String(s)); } catch (e) {}
+    document.getElementById('addForm').classList.remove('open');
+    render();
+  }
+
+  // The leaderboard is always the 2026 season, so the Friends tab says 2026 whatever season is selected.
+  function renderMasthead() {
+    var s = currentView === 'friends' ? 2026 : currentSeason;
+    document.getElementById('pageTitle').textContent = s + ' Picks';
+    document.getElementById('pageTag').textContent = s + ' Season · Straight-Up Tracker';
+    Array.prototype.forEach.call(document.querySelectorAll('.season-switch button'), function (b) {
+      b.setAttribute('aria-pressed', String(Number(b.getAttribute('data-season')) === currentSeason));
+    });
   }
 
   // ---------------------------------------------------------------------
@@ -1331,7 +1461,7 @@
 
   function computeWeekRecord(week) {
     var rec = { c: 0, i: 0, t: 0 };
-    state.games.forEach(function (g) {
+    sgames().forEach(function (g) {
       if (g.week !== week) return;
       var v = verdict(g);
       if (v === 'c') rec.c++; else if (v === 'i') rec.i++; else if (v === 't') rec.t++;
@@ -1341,7 +1471,7 @@
 
   function computeOverall() {
     var rec = { c: 0, i: 0, t: 0, p: 0 };
-    state.games.forEach(function (g) {
+    sgames().forEach(function (g) {
       var v = verdict(g);
       if (v === 'c') rec.c++; else if (v === 'i') rec.i++; else if (v === 't') rec.t++; else if (v === 'p') rec.p++;
     });
@@ -1349,7 +1479,7 @@
   }
 
   function decidedGames() {
-    return state.games
+    return sgames()
       .filter(function (g) { var v = verdict(g); return v === 'c' || v === 'i'; })
       .sort(function (a, b) { return chronoKey(a).localeCompare(chronoKey(b)); });
   }
@@ -1411,8 +1541,9 @@
     var wk = computeWeekRecord(currentWeek);
     document.getElementById('statWeekRecord').textContent = fmtRecord(wk.c, wk.i, wk.t);
     document.getElementById('statPending').textContent = overall.p;
-    document.getElementById('dataNote').textContent =
-      'Official results through Week ' + RESULTS_THROUGH + ' · odds leans for Weeks 6–7 · as of ' + DATA_AS_OF;
+    document.getElementById('dataNote').textContent = currentSeason === 2025
+      ? 'Final scores for all 18 weeks of last season · kickoff times and channels are not listed for 2025'
+      : 'Official results through Week ' + RESULTS_THROUGH + ' · odds leans for Weeks 6–7 · as of ' + DATA_AS_OF;
   }
 
   function renderWeekSelect() {
@@ -1438,7 +1569,7 @@
   function renderLeanBar() {
     var bar = document.getElementById('leanBar');
     bar.innerHTML = '';
-    var games = state.games.filter(function (g) { return g.week === currentWeek && LEANS[gkey(g)] && !isOfficial(g); });
+    var games = sgames().filter(function (g) { return g.week === currentWeek && LEANS[gkey(g)] && !isOfficial(g); });
     if (!games.length) return;
 
     var agree = 0, differ = 0, open = 0, fillable = 0;
@@ -1473,7 +1604,7 @@
   function renderGames() {
     var area = document.getElementById('gamesArea');
     area.innerHTML = '';
-    var games = state.games.filter(function (g) { return g.week === currentWeek; });
+    var games = sgames().filter(function (g) { return g.week === currentWeek; });
     games.sort(function (a, b) { return chronoKey(a).localeCompare(chronoKey(b)); });
 
     if (!games.length) {
@@ -1516,13 +1647,16 @@
     teams.appendChild(makeTeamButton(g.home, 'home', g));
 
     var meta = mk('div', 'meta');
-    meta.appendChild(mk('span', null, (!g.time || g.time === 'TBD') ? 'Time TBD' : g.time + ' ET'));
+    if (g.time === 'TBD') meta.appendChild(mk('span', null, 'Time TBD'));
+    else if (g.time) meta.appendChild(mk('span', null, g.time + ' ET'));
     if (g.network) meta.appendChild(mk('span', 'net', g.network));
 
     var official = isOfficial(g);
     if (official) {
       var res = resultOf(g);
-      meta.appendChild(mk('span', 'final', res === 'tie' ? 'Final · Tie' : 'Final · ' + shortName(res === 'home' ? g.home : g.away) + ' won'));
+      var sc = SCORES[gkey(g)];
+      var scoreTxt = sc ? ' ' + Math.max(sc[0], sc[1]) + '–' + Math.min(sc[0], sc[1]) : '';
+      meta.appendChild(mk('span', 'final', res === 'tie' ? 'Final · Tie' + scoreTxt : 'Final · ' + shortName(res === 'home' ? g.home : g.away) + ' won' + scoreTxt));
     } else {
       var lean = LEANS[gkey(g)];
       if (lean) {
@@ -1632,7 +1766,7 @@
   function computePredictedRecords() {
     var records = {};
     Object.keys(TEAM_INFO).forEach(function (name) { records[name] = { w: 0, l: 0 }; });
-    state.games.forEach(function (g) {
+    sgames().forEach(function (g) {
       if (!g.pick) return;
       var winner = g.pick === 'home' ? g.home : g.away;
       var loser = g.pick === 'home' ? g.away : g.home;
@@ -1703,7 +1837,7 @@
 
   function computePickAccuracy() {
     var records = {};
-    state.games.forEach(function (g) {
+    sgames().forEach(function (g) {
       var v = verdict(g);
       if (v !== 'c' && v !== 'i') return;
       var pickedTeam = g.pick === 'home' ? g.home : g.away;
@@ -1790,11 +1924,22 @@
     return 'GP1:' + toB64(JSON.stringify({ n: state.myName || 'Friend', p: pickString() }));
   }
 
+  // 2025 picks, in the same a / h / - form, in S25_LIST order.
+  function pickString25() {
+    var byKey = {};
+    state.games.forEach(function (g) { byKey[gkey(g)] = g; });
+    return S25_LIST.map(function (d) {
+      var g = byKey[gkey(d)];
+      return g && g.pick === 'away' ? 'a' : (g && g.pick === 'home' ? 'h' : '-');
+    }).join('');
+  }
+
+  // Old backups have no "q" field. Codes and backups made before the 2025 season was added still restore fine.
   function backupCode() {
     var custom = state.games.filter(function (g) { return !DEFAULT_KEYS[gkey(g)]; }).map(function (g) {
-      return { week: g.week, away: g.away, home: g.home, date: g.date, time: g.time, network: g.network, pick: g.pick, result: g.result };
+      return { season: seasonOf(g), week: g.week, away: g.away, home: g.home, date: g.date, time: g.time, network: g.network, pick: g.pick, result: g.result };
     });
-    return 'GPB1:' + toB64(JSON.stringify({ n: state.myName, p: pickString(), r: manualResultString(), c: custom, f: state.friends }));
+    return 'GPB1:' + toB64(JSON.stringify({ n: state.myName, p: pickString(), q: pickString25(), r: manualResultString(), c: custom, f: state.friends }));
   }
 
   function renderLeaderboard() {
@@ -1821,7 +1966,7 @@
     people.forEach(function (x, rank) {
       var tr = mk('tr', x.me ? 'me' : '');
       tr.appendChild(mk('td', null, String(rank + 1)));
-      tr.appendChild(mk('td', null, x.name + (x.me ? ' (you)' : '')));
+      tr.appendChild(mk('td', null, x.me && !state.myName ? 'You' : x.name + (x.me ? ' (you)' : '')));
       tr.appendChild(mk('td', 'n', String(x.s.c)));
       tr.appendChild(mk('td', 'n', String(x.s.i)));
       tr.appendChild(mk('td', 'n', pctText(x.s.c, x.s.i)));
@@ -1923,12 +2068,23 @@
     }
     if (!window.confirm('This replaces the picks currently saved on this device. Continue?')) return null;
 
-    var games = buildDefaultGames();
+    var games = build2026();
     games.forEach(function (g, k) {
       var pc = obj.p.charAt(k), rc = obj.r.charAt(k);
       g.pick = pc === 'a' ? 'away' : (pc === 'h' ? 'home' : null);
       g.result = rc === 'a' ? 'away' : (rc === 'h' ? 'home' : (rc === 't' ? 'tie' : null));
     });
+
+    // 2025 picks come from the backup if it has them; an older backup keeps the ones already on this device.
+    var games25 = build2025();
+    var q = (typeof obj.q === 'string' && obj.q.length === games25.length && /^[ah-]+$/.test(obj.q)) ? obj.q : null;
+    var keep25 = {};
+    state.games.forEach(function (g) { if (seasonOf(g) === 2025) keep25[gkey(g)] = g.pick; });
+    games25.forEach(function (g, k) {
+      if (q) { var qc = q.charAt(k); g.pick = qc === 'a' ? 'away' : (qc === 'h' ? 'home' : null); }
+      else g.pick = keep25[gkey(g)] || null;
+    });
+    games = games.concat(games25);
 
     function side(v) { return v === 'away' || v === 'home' ? v : null; }
     (Array.isArray(obj.c) ? obj.c : []).slice(0, 200).forEach(function (c, n) {
@@ -1936,7 +2092,7 @@
       var wk = parseInt(c.week, 10);
       if (!(wk >= 1 && wk <= 40)) return;
       games.push({
-        id: 'w' + wk + '-r' + n, week: wk,
+        id: 'w' + wk + '-r' + n, season: c.season === 2025 ? 2025 : 2026, week: wk,
         away: c.away.slice(0, 40), home: c.home.slice(0, 40),
         date: /^\d{4}-\d{2}-\d{2}$/.test(c.date) ? c.date : '2026-09-01',
         time: String(c.time || '').slice(0, 12), network: String(c.network || '').slice(0, 20),
@@ -1952,7 +2108,8 @@
     });
 
     state = { games: games, friends: friends, myName: typeof obj.n === 'string' ? obj.n.slice(0, 24) : '' };
-    currentWeek = pickCurrentWeek();
+    weekBySeason = {};
+    currentWeek = pickCurrentWeek(currentSeason);
     saveState();
     render();
     return 'Restored your picks' + (friends.length ? ' and ' + friends.length + ' friend' + (friends.length === 1 ? '' : 's') : '') + '.';
@@ -1962,6 +2119,7 @@
   // Render + wiring
   // ---------------------------------------------------------------------
   function render() {
+    renderMasthead();
     renderWeekSelect();
     renderStats();
     renderLeanBar();
@@ -1976,6 +2134,10 @@
 
   Array.prototype.forEach.call(document.querySelectorAll('.tabbar button'), function (b) {
     b.addEventListener('click', function () { setView(b.getAttribute('data-go')); });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('.season-switch button'), function (b) {
+    b.addEventListener('click', function () { setSeason(Number(b.getAttribute('data-season'))); });
   });
 
   document.getElementById('weekSelect').addEventListener('change', function (e) {
@@ -2015,7 +2177,7 @@
       window.alert('Please fill in away team, home team, and date.');
       return;
     }
-    state.games.push({ id: 'w' + currentWeek + '-' + Date.now(), week: currentWeek, away: away, home: home, date: date, time: time, network: network, pick: null, result: null });
+    state.games.push({ id: 'w' + currentWeek + '-' + Date.now(), season: currentSeason, week: currentWeek, away: away, home: home, date: date, time: time, network: network, pick: null, result: null });
     saveState();
     ['fAway', 'fHome', 'fDate', 'fTime', 'fNetwork'].forEach(function (f) { document.getElementById(f).value = ''; });
     document.getElementById('addForm').classList.remove('open');
