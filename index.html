@@ -1153,25 +1153,29 @@
   //   results:  AWAY@HOME:a|h|t   (a = away won, h = home won, t = tie)
   //   leans:    AWAY@HOME:a|h|t:spread   (side the betting line favors)
   // ---------------------------------------------------------------------
-  var DATA_AS_OF = 'Oct 15, 2026';
-  var RESULTS_THROUGH = 5;
+  var DATA_AS_OF = 'Nov 20, 2026';
 
   var RESULTS_RAW = {
     1: 'NE@SEA:h SF@LAR:a CHI@CAR:a TB@CIN:h NO@DET:h BUF@HOU:a BAL@IND:a CLE@JAX:h ATL@PIT:h NYJ@TEN:a ARI@LAC:a MIA@LV:h GB@MIN:h WAS@PHI:h DAL@NYG:h DEN@KC:h',
     2: 'DET@BUF:h CAR@ATL:a NO@BAL:a MIN@CHI:a CIN@HOU:a PIT@NE:h GB@NYJ:a CLE@TB:a PHI@TEN:a JAX@DEN:h LV@LAC:a SEA@ARI:a WAS@DAL:h MIA@SF:h IND@KC:h NYG@LAR:h',
     3: 'ATL@GB:a LAC@BUF:h CAR@CLE:h NYJ@DET:h HOU@IND:h NE@JAX:h KC@MIA:a TEN@NYG:h CIN@PIT:h SEA@WAS:h ARI@SF:h MIN@TB:a LV@NO:a BAL@DAL:a LAR@DEN:h PHI@CHI:h',
     4: 'PIT@CLE:h IND@WAS:a TEN@BAL:h NE@BUF:a NYJ@CHI:h JAX@CIN:a DAL@HOU:a ARI@NYG:h LAR@PHI:a GB@TB:a MIA@MIN:h KC@LV:a LAC@SEA:h DEN@SF:h DET@CAR:h ATL@NO:a',
-    5: 'TB@DAL:a PHI@JAX:h CIN@MIA:a LV@NE:h MIN@NO:a CLE@NYJ:h IND@PIT:h HOU@TEN:a NYG@WAS:t CHI@GB:h DEN@LAC:a DET@ARI:a SF@SEA:a BAL@ATL:a BUF@LAR:a'
+    5: 'TB@DAL:a PHI@JAX:h CIN@MIA:a LV@NE:h MIN@NO:a CLE@NYJ:h IND@PIT:h HOU@TEN:a NYG@WAS:t CHI@GB:h DEN@LAC:a DET@ARI:a SF@SEA:a BAL@ATL:a BUF@LAR:a',
+    6: 'SEA@DEN:h HOU@JAX:a CHI@ATL:a BAL@CLE:h TEN@IND:a NYJ@NE:h NO@NYG:a CAR@PHI:a PIT@TB:a ARI@LAR:a LAC@KC:h BUF@LV:a DAL@GB:h WAS@SF:h',
+    7: 'NE@CHI:h PIT@NO:a SF@ATL:h CIN@BAL:a TB@CAR:a NYG@HOU:a IND@MIN:h MIA@NYJ:a CLE@TEN:a DEN@ARI:a GB@DET:h LAR@LV:a KC@SEA:h DAL@PHI:a',
+    8: 'CAR@GB:h BAL@BUF:h TEN@CIN:h ARI@DAL:a MIN@DET:h IND@JAX:h LV@NYJ:a CLE@PIT:h ATL@TB:h LAC@LAR:h KC@DEN:h NE@MIA:a PHI@WAS:h CHI@SEA:a',
+    9: 'JAX@BAL:a CIN@ATL:a DEN@CAR:a DAL@IND:a NYJ@KC:h DET@MIA:a CLE@NO:h NYG@PHI:a LAR@WAS:a HOU@LAC:a LV@SF:h GB@NE:a ARI@SEA:h TB@CHI:h BUF@MIN:a',
+    10: 'WAS@NYG:a NE@DET:h KC@ATL:a HOU@CLE:h MIN@GB:a MIA@IND:h CAR@NO:a BUF@NYJ:a JAX@TEN:a LAR@ARI:a SEA@LV:a SF@DAL:a PIT@CIN:h LAC@BAL:a',
+    11: 'IND@HOU:h'
   };
 
+  // Only upcoming weeks belong here. Once a week is final, its leans are no longer shown anyway.
   var LEANS_RAW = {
-    6: 'SEA@DEN:a:2.5 HOU@JAX:h:2.5 CHI@ATL:a:1.5 BAL@CLE:a:3.5 TEN@IND:h:7 NYJ@NE:h:7.5 NO@NYG:a:1.5 CAR@PHI:a:3.5 PIT@TB:t:0 ARI@LAR:h:12.5 LAC@KC:h:8.5 BUF@LV:a:4.5 DAL@GB:h:1.5 WAS@SF:h:7.5',
-    7: 'NE@CHI:h:1.5 PIT@NO:a:2.5 CIN@BAL:h:3.5 CLE@TEN:h:2.5 IND@MIN:h:2.5 MIA@NYJ:h:2.5 NYG@HOU:h:5.5 SF@ATL:a:4.5 TB@CAR:a:1.5 DEN@ARI:a:7.5 GB@DET:h:2.5 LAR@LV:a:7.5 KC@SEA:h:3.5 DAL@PHI:h:3.5'
+    11: 'MIA@BUF:h:16.5 BAL@CAR:h:3 NO@CHI:h:11.5 TEN@DAL:h:8.5 TB@DET:h:5.5 ARI@KC:h:16.5 JAX@NYG:a:6 NYJ@LAC:h:3 LV@DEN:h:10 PIT@PHI:a:3.5 MIN@SF:h:3 CIN@WAS:a:6'
   };
 
   var LEAN_NOTES = {
-    6: 'Lines as of ' + DATA_AS_OF + '. Steelers–Buccaneers is a toss-up because sources disagree.',
-    7: 'Early look-ahead lines. They will move before kickoff.'
+    11: 'Lines as of ' + DATA_AS_OF + ' (VegasInsider). Sportsbooks can differ by a point or two.'
   };
 
   // Last season (2025): AWAY@HOME:MM-DD:awayScore-homeScore, in the order NFL.com lists them.
@@ -1543,7 +1547,21 @@
     document.getElementById('statPending').textContent = overall.p;
     document.getElementById('dataNote').textContent = currentSeason === 2025
       ? 'Final scores for all 18 weeks of last season · kickoff times and channels are not listed for 2025'
-      : 'Official results through Week ' + RESULTS_THROUGH + ' · odds leans for Weeks 6–7 · as of ' + DATA_AS_OF;
+      : dataNoteText();
+  }
+
+  // Works the note out from the data itself, so a weekly refresh only has to edit the data lists.
+  function dataNoteText() {
+    var games = sgames(2026), through = 0;
+    var weeks = weeksAvailable(2026);
+    for (var i = 0; i < weeks.length; i++) {
+      var inWeek = games.filter(function (g) { return g.week === weeks[i]; });
+      if (!inWeek.length || !inWeek.every(isOfficial)) break;
+      through = weeks[i];
+    }
+    var lw = Object.keys(LEANS_RAW).map(Number).sort(function (a, b) { return a - b; });
+    var leanTxt = lw.length ? ' · odds leans for ' + (lw.length === 1 ? 'Week ' + lw[0] : 'Weeks ' + lw[0] + '–' + lw[lw.length - 1]) : '';
+    return 'Official results through Week ' + through + leanTxt + ' · as of ' + DATA_AS_OF;
   }
 
   function renderWeekSelect() {
